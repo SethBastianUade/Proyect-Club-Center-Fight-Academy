@@ -1,1 +1,1 @@
-Está puramente (de momento) hecho en HTML y CSS con algo de JavaScript, el style está desordenado, pero tiene comentarios indicando cada cosa
+Programado principal en HTML, CSS y JavaScript, con futuro BackEnd en Java y SQL con springboot
