@@ -98,7 +98,7 @@ nav ul li a:hover {
 .hero {
     position: relative;
     height: 500px;
-    background: url('Fotos/FondoIndex.jpg') no-repeat center center/cover;
+    background: url('Fotos/bannerP.jpg') no-repeat center center/cover;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -241,9 +241,10 @@ nav ul li a:hover {
 /* Contacto */
 
 .bannerContacto {
-    background: url('Fotos/banner1.jpg');
+    background: url('Fotos/bannerContacto.jpg') no-repeat center center; /* Imagen centrada */
+    background-size: cover; /* Ocupa todo el espacio del contenedor */
     position: relative;
-    height: 200px;
+    height: 200px; /* Ajustá el tamaño del banner a tus necesidades */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -499,9 +500,22 @@ html {
   padding: 20px;
 }
 
+.bannerNosotros {
+    background: url('Fotos/bannerNosotros.jpg') no-repeat center center; /* Imagen centrada */
+    background-size: cover; /* Ocupa todo el espacio del contenedor */
+    position: relative;
+    height: 200px; /* Ajustá el tamaño del banner a tus necesidades */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff; /* Texto en blanco */
+    text-align: center;
+    overflow: hidden;
+}
+
 
 .banner {
-    background: url('Fotos/banner.jpg');
+    background: url('Fotos/bannerP.png');
     position: relative;
     height: 200px;
     display: flex;
@@ -616,7 +630,7 @@ html {
   height: 70px;
   margin: 0 auto 10px;
   border-radius: 50%;
-  background-color: black; /* Fondo circular negro */
+  background-color: white; /* Fondo circular negro */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -657,4 +671,70 @@ iframe {
     height: 350px;
     border: none;
     border-radius: 8px;
+}
+
+
+.grilla-horarios {
+    text-align: center;
+    padding: 20px;
+}
+
+.grilla-horarios h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.grilla-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.grilla-img {
+    max-width: 80%;
+    height: auto;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.grilla-img:hover {
+    transform: scale(1.05); /* Pequeño efecto de zoom al pasar el mouse */
+}
+
+.modal {
+    display: none; /* Oculto por defecto */
+    position: fixed;
+    z-index: 1000;
+    padding-top: 60px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.9); /* Fondo oscuro semi-transparente */
+}
+
+.modal-content {
+    margin: auto;
+    display: block;
+    max-width: 80%;
+    height: auto;
+}
+
+.cerrar {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #fff;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.cerrar:hover, .cerrar:focus {
+    color: #ccc;
+    text-decoration: none;
+    cursor: pointer;
 }

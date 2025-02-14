@@ -13,4 +13,3 @@ function moveSlide(direction) {
     const offset = -currentSlide * 100;
     carouselInner.style.transform = `translateX(${offset}%)`;
 }
-

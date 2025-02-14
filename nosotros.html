@@ -25,7 +25,7 @@
         </nav>
     </header>
 
-    <div class="banner">
+    <div class="bannerNosotros">
         <h1>NOSOTROS</h1>
     </div>
 
@@ -45,9 +45,11 @@
         En Club Center Fight Academy te ofrecemos múltiples clases diseñadas
         para mejorar tu condición física y mental. Con actividades como Muay
         Thai, Boxeo y Jiu-Jitsu, además de servicios adicionales para tu comodidad.
+        Además siendo miembro de Sport Club podes acceder a una clase diaria escaneando
+        el QR en recepción. 
       </p>
     </div>
-    <img src="Fotos/Nosotros1.png" alt="Foto del Club">
+    <img src="Fotos/nosotros1.jpg" alt="Foto del Club">
   </div>
 
 <div id="horarios" class="horarios"> 
@@ -73,25 +75,25 @@
   <div class="contenedor-actividades">
     <div class="actividad">
       <div class="icono">
-        <img src="Fotos/iconos/boxeo.png" alt="Boxeo">
+        <img src="Fotos/iconos/boxeo.jpg" alt="Boxeo">
       </div>
       <p>Boxeo</p>
     </div>
     <div class="actividad">
       <div class="icono">
-        <img src="Fotos/iconos/bjj.png" alt="Jiu-Jitsu">
+        <img src="Fotos/iconos/bjj.jpg" alt="Jiu-Jitsu">
       </div>
       <p>Jiu-Jitsu</p>
     </div>
     <div class="actividad">
       <div class="icono">
-        <img src="Fotos/iconos/kickboxing.png" alt="Kick-Boxing">
+        <img src="Fotos/iconos/kickBoxing.jpg" alt="Kick-Boxing">
       </div>
       <p>Kick-Boxing</p>
     </div>
     <div class="actividad">
       <div class="icono">
-        <img src="Fotos/iconos/muayThai.png" alt="Muay Thai">
+        <img src="Fotos/iconos/muayThai.jpg" alt="Muay Thai">
       </div>
       <p>Muay Thai</p>
     </div>
@@ -100,7 +102,21 @@
 </section>
 
 
-  <div id="ubicacion" class="contacto">
+<section class="grilla-horarios">
+  <h2>Grilla de Horarios</h2>
+  <div class="grilla-container">
+    <img src="Fotos/grillaHorarios.jpeg" alt="Grilla de horarios" class="grilla-img" onclick="abrirModal()">
+  </div>
+  
+  <!-- Modal para la imagen ampliada -->
+  <div id="modal" class="modal">
+    <span class="cerrar" onclick="cerrarModal()">&times;</span>
+    <img class="modal-content" id="imagenAmpliada">
+  </div>
+</section>
+
+
+  <div id="ubicacion" class="actividades">
     <h2>Ubicación</h2>
     <iframe 
       src="https://maps.google.com/maps?width=100%&amp;height=100%&amp;hl=en&amp;q=Solis 1213, CABA, Argentina&amp;t=&amp;z=17&amp;ie=UTF8&amp;iwloc=B&amp;output=embed" 
