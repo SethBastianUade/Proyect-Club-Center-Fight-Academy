@@ -5,57 +5,184 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contacto | Club Center Fight Academy</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Oswald:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="Fotos/logoClub.png">
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <a href="index.html" class="logo-club">
-            <img src="Fotos/logoClub.png" alt="Club Center Fight Academy Logo" class="logo">
-        </a>
-        <a href="https://www.sportclub.com.ar" target="_blank" class="logo-sportclub">
-            <img src="Fotos/logoSportClub.png" alt="SportClub">
-        </a>
-        <nav>
-            <ul class="nav-links">
-                <li><a href="index.html">Inicio</a></li>
-                <li><a href="nosotros.html">Nosotros</a></li>
-                <li><a href="contacto.html">Contacto</a></li>
-            </ul>
-        </nav>
+    <!-- Header igual al index -->
+    <header class="main-header">
+        <div class="header-container">
+            <div class="logo-container">
+                <a href="index.html" class="logo-link">
+                    <img src="Fotos/logoClub.png" alt="Club Center Fight Academy" class="main-logo">
+                </a>
+            </div>
+            <nav class="main-nav">
+                <ul class="nav-links">
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="disciplinas.html">Disciplinas</a></li>
+                    <li><a href="nosotros.html">Nosotros</a></li>
+                    <li><a href="contacto.html" class="active">Contacto</a></li>
+                </ul>
+                <button class="mobile-menu-btn" aria-label="Menú">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </nav>
+            <div class="header-cta">
+                <a href="https://wa.me/5491131598373" class="btn-whatsapp" target="_blank">
+                    <i class="fab fa-whatsapp"></i> ¡Inscribite ahora!
+                </a>
+            </div>
+        </div>
     </header>
 
-    <!-- Banner -->
-    <div class="bannerContacto">
-        <h1>CONTACTO</h1>
+    <div class="mobile-whatsapp-bar">
+        <a href="https://wa.me/5491131598373" class="btn-whatsapp" target="_blank">
+            <i class="fab fa-whatsapp"></i> ¡Inscribite ahora!
+        </a>
     </div>
 
-    <!-- Sección de Contacto -->
-    <div class="llamado-accion">
-      <h2>¡Empeza a entrenar hoy!</h2>
-      <p>Estamos listos para ayudarte a alcanzar tus objetivos. Contáctanos ahora y da el primer paso hacia tu mejor versión.</p>
-      <div class="botones-accion">
-          <a href="https://wa.me/5491131598373" target="_blank" class="boton-cta">Contáctanos por WhatsApp</a>
-          <a href="https://www.instagram.com/clubcenterfightacademy" target="_blank" class="boton-instagram">Seguinos en Instagram</a>
-      </div>
-  </div>
-    <div id="ubicacion" class="actividades">
-    <h2>Nos encontramos en Solis 1213, CABA</h2>
-    <iframe 
-      src="https://maps.google.com/maps?width=100%&amp;height=100%&amp;hl=en&amp;q=Solis 1213, CABA, Argentina&amp;t=&amp;z=17&amp;ie=UTF8&amp;iwloc=B&amp;output=embed" 
-      frameborder="0"
-      style="border:0;"
-      allowfullscreen=""
-      aria-hidden="false"
-      tabindex="0">
-    </iframe>
+    <main>
+        <!-- Hero Contacto -->
+        <section class="hero-section hero-contacto">
+            <div class="hero-content">
+                <h1 class="hero-title">CONTACTO</h1>
+                <p class="hero-subtitle">¡Estamos para ayudarte! Consultá horarios, ubicación o escribinos directamente</p>
+            </div>
+        </section>
 
-  </div>
+        <!-- Sección de contacto y horarios -->
+        <section class="contact-main-section">
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h2>Datos de contacto</h2>
+                    <ul class="contact-list">
+                        <li><i class="fas fa-map-marker-alt"></i> Dirección: <b>Solis 1213, CABA</b></li>
+                        <li><i class="fas fa-envelope"></i> Email: <a href="mailto:info@clubcenter.com">info@clubcenterfa.com</a></li>                        
+                        <li><i class="fab fa-instagram"></i> Instagram: <a href="https://instagram.com/clubcenterfightacademy" target="_blank">@clubcenterfightacademy</a></li>
+                        <li><i class="fab fa-whatsapp"></i> WhatsApp: <a href="https://wa.me/5491131598373" target="_blank">+54 9 11 3159-8373</a></li>
+                    </ul>
+                    <div class="contact-social">
+                        <!-- Iconos sociales eliminados -->
+                    </div>
+                </div>
+                <div class="contact-form-box">
+                    <h2>Envíanos tu consulta</h2>
+                    <form class="contact-form" id="whatsappForm">
+                        <input type="text" name="nombre" placeholder="Nombre" required>
+                        <textarea name="mensaje" placeholder="Escribí tu mensaje" required></textarea>
+                        <button type="submit" class="btn btn-primary">Enviar</button>
+                    </form>
+                </div>
+            </div>
+        </section>
 
-    <!-- Footer -->
-    <footer>
+        <!-- Grilla de horarios -->
+        <section class="schedule-section">
+            <div class="section-header">
+                <h2>Horarios de clases</h2>
+                <p>Consultá la grilla y encontrá el horario que mejor se adapte a vos</p>
+            </div>
+            <div class="schedule-img-box">
+                <img src="Fotos/grillaHorarios.jpeg" alt="Grilla de horarios" class="schedule-img" style="cursor:pointer;">
+            </div>
+        </section>
+
+        <!-- Mapa de ubicación -->
+        <section class="map-section">
+            <div class="section-header">
+                <h2>¿Dónde estamos?</h2>
+                <p>Encontranos fácilmente en el mapa</p>
+            </div>
+            <div class="map-box">
+                <iframe src="https://maps.google.com/maps?width=100%&amp;height=100%&amp;hl=en&amp;q=Solis 1213, CABA, Argentina&amp;t=&amp;z=17&amp;ie=UTF8&amp;iwloc=B&amp;output=embed" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer igual al index -->
+    <footer class="main-footer">
         <div class="footer-container">
-            <p>&copy; 2024 Club Center Fight Academy | Todos los derechos reservados</p>
+            <div class="footer-grid">
+                <div class="footer-info">
+                    <img src="Fotos/logoClub.png" alt="Club Center Fight Academy" class="footer-logo">
+                    <p>Tu camino hacia la excelencia en artes marciales</p>
+                    <div class="social-links">
+                        <a href="#" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" target="_blank" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h3>Enlaces Rápidos</h3>
+                    <ul>
+                        <li><a href="disciplinas.html">Disciplinas</a></li>
+                        <li><a href="nosotros.html">Nosotros</a></li>
+                        <li><a href="contacto.html">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h3>Contacto</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Solis 1213, CABA</p>
+                    <p><i class="fas fa-phone"></i> +54 9 11 3159-8373</p>
+                    <p><i class="fas fa-envelope"></i> administracion@clubcenterfa.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Club Center Fight Academy. Todos los derechos reservados.</p>
+            </div>
         </div>
     </footer>
+
+    <!-- Lightbox para la grilla de horarios -->
+    <div class="lightbox" id="scheduleLightbox">
+        <span class="lightbox-close" id="scheduleLightboxClose">&times;</span>
+        <img src="" alt="Grilla de horarios en grande" id="scheduleLightboxImg">
+    </div>
+
+    <!-- Botón Ir arriba -->
+    <button id="btn-up" aria-label="Ir arriba"><i class="fas fa-arrow-up"></i></button>
+    <!-- Aviso de cookies -->
+    <div id="cookie-bar" style="display:none; position:fixed; bottom:0; left:0; width:100%; background:#222; color:#fff; padding:1rem; text-align:center; z-index:99999; font-size:1rem;">
+        Usamos cookies para mejorar tu experiencia. <button id="accept-cookies" style="background:#e63946; color:#fff; border:none; border-radius:5px; padding:0.5rem 1rem; margin-left:1rem; cursor:pointer;">Aceptar</button>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('whatsappForm');
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const nombre = form.nombre.value.trim();
+            const mensaje = form.mensaje.value.trim();
+            const texto = `Hola! Mi nombre es ${nombre}. Quiero consultar: ${mensaje}`;
+            const url = `https://wa.me/5491131598373?text=${encodeURIComponent(texto)}`;
+            window.open(url, '_blank');
+        });
+
+        // Lightbox para la grilla de horarios
+        const scheduleImg = document.querySelector('.schedule-img');
+        const scheduleLightbox = document.getElementById('scheduleLightbox');
+        const scheduleLightboxImg = document.getElementById('scheduleLightboxImg');
+        const scheduleLightboxClose = document.getElementById('scheduleLightboxClose');
+        if(scheduleImg && scheduleLightbox && scheduleLightboxImg && scheduleLightboxClose) {
+            scheduleImg.addEventListener('click', function() {
+                scheduleLightboxImg.src = scheduleImg.src;
+                scheduleLightbox.classList.add('active');
+            });
+            scheduleLightboxClose.addEventListener('click', function() {
+                scheduleLightbox.classList.remove('active');
+            });
+            scheduleLightbox.addEventListener('click', function(e) {
+                if(e.target === scheduleLightbox) {
+                    scheduleLightbox.classList.remove('active');
+                }
+            });
+        }
+    });
+    </script>
 </body>
 </html>

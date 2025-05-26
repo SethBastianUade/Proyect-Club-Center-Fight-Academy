@@ -5,147 +5,153 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nosotros | Club Center Fight Academy</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Oswald:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="Fotos/logoClub.png">
 </head>
-<body >
-    <!-- Header -->
-    <header>      
-        <a href="index.html" class="logo-club">
-            <img src="Fotos/logoClub.png" alt="Club Center Fight Academy Logo" class="logo">
-        </a>   
-            <!-- Logo de SportClub en la esquina inferior izquierda -->
-        <a href="https://www.sportclub.com.ar" target="_blank" class="logo-sportclub">
-            <img src="Fotos/logoSportClub.png" alt="SportClub">
-        </a>
-        <nav>
-            <ul class="nav-links">
-                <li><a href="index.html">Inicio</a></li>
-                <li><a href="nosotros.html">Nosotros</a></li>
-                <li><a href="contacto.html">Contacto</a></li>
-            </ul>
-        </nav>
+<body>
+    <!-- Header igual al index -->
+    <header class="main-header">
+        <div class="header-container">
+            <div class="logo-container">
+                <a href="index.html" class="logo-link">
+                    <img src="Fotos/logoClub.png" alt="Club Center Fight Academy" class="main-logo">
+                </a>
+            </div>
+            <nav class="main-nav">
+                <ul class="nav-links">
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="disciplinas.html">Disciplinas</a></li>
+                    <li><a href="nosotros.html" class="active">Nosotros</a></li>
+                    <li><a href="contacto.html">Contacto</a></li>
+                </ul>
+                <button class="mobile-menu-btn" aria-label="Menú">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </nav>
+            <div class="header-cta">
+                <a href="https://wa.me/5491131598373" class="btn-whatsapp" target="_blank">
+                    <i class="fab fa-whatsapp"></i> ¡Inscribite ahora!
+                </a>
+            </div>
+        </div>
     </header>
 
-    <div class="bannerNosotros">
-        <h1>NOSOTROS</h1>
+    <div class="mobile-whatsapp-bar">
+        <a href="https://wa.me/5491131598373" class="btn-whatsapp" target="_blank">
+            <i class="fab fa-whatsapp"></i> ¡Inscribite ahora!
+        </a>
     </div>
 
-    <div class="categorias">
-    
-      <button onclick="location.href='#sede'" >La sede</button>
-      <button onclick="location.href='#horarios'" >Horarios</button>
-      <button onclick="location.href='#actividades'" >Actividades</button>
-      <button onclick="location.href='#ubicacion'" >Encontranos</button>
-    </div>
-  
+    <main>
+        <!-- Hero Nosotros -->
+        <section class="hero-section hero-nosotros" style="margin-top: 80px;">
+            <div class="hero-content">
+                <h1 class="hero-title">SOMOS CLUB CENTER FIGHT ACADEMY</h1>
+                <p class="hero-subtitle">Pasión, valores y excelencia en artes marciales</p>
+            </div>
+        </section>
 
-  <div id="sede" class="descripcion">
-    <div class="texto">
-      <h2>Entrená con nosotros</h2>
-      <p>
-        En Club Center Fight Academy te ofrecemos múltiples clases diseñadas
-        para mejorar tu condición física y mental. Con actividades como Muay
-        Thai, Boxeo y Jiu-Jitsu, además de servicios adicionales para tu comodidad.
-        Además siendo miembro de Sport Club podes acceder a una clase diaria escaneando
-        el QR en recepción. 
-      </p>
-    </div>
-    <img src="Fotos/nosotros1.jpg" alt="Foto del Club">
-  </div>
+        <!-- Historia y valores -->
+        <section class="about-section">
+            <div class="section-header">
+                <h2>Nuestra Historia</h2>
+                <p>Club Center Fight Academy nació con el sueño de crear una comunidad donde el respeto, la disciplina y la superación personal sean los pilares fundamentales.</p>
+            </div>
+            <div class="about-container">
+                <div class="about-text">
+                    <div class="section-header">
+                        <h2>Nuestros Valores</h2>
+                        <p>Los valores que nos guían día a día en cada clase y encuentro.</p>
+                    </div>
+                    <ul class="about-values">
+                        <li><i class="fas fa-handshake"></i> Respeto</li>
+                        <li><i class="fas fa-bolt"></i> Disciplina</li>
+                        <li><i class="fas fa-heart"></i> Pasión</li>
+                        <li><i class="fas fa-users"></i> Comunidad</li>
+                        <li><i class="fas fa-trophy"></i> Excelencia</li>
+                    </ul>
+                </div>
+                <div class="about-img">
+                    <img src="Fotos/nosotros1.jpg" alt="Historia Club Center">
+                </div>
+            </div>
+        </section>
 
-<div id="horarios" class="horarios"> 
-  <div class="tabla-horarios">
-    <div class="dia">
-      <p>Lunes, Miércoles y Viernes:</p>
-      <span>09:30 a 22:00 Hrs</span>
-    </div>
-    <div class="dia">
-      <p>Martes y Jueves:</p>
-      <span>15:00 a 21:00 Hrs</span>
-    </div>
-    <div class="dia">
-      <p>Sábados:</p>
-      <span>11:00 a 14:00 Hrs</span>
-    </div>
-  </div>
-</div>
+        <!-- Equipo/Alumnos -->
+        <section class="team-section">
+            <div class="section-header">
+                <h2>Nuestros Competidores Destacados</h2>
+                <p>Orgullo de nuestro equipo de Jiu-Jitsu</p>
+            </div>
+            <div class="team-grid">
+                <div class="team-card">
+                    <img src="Fotos/competidores/competidor4.jpg" alt="Sebastián Arroyo">
+                    <h3>Sebastián Arroyo</h3>
+                    <p>Competidor de Jiu-Jitsu</p>
+                </div>
+                <div class="team-card">
+                    <img src="Fotos/competidores/competidor3.jpg" alt="Diego Salizzi">
+                    <h3>Diego Salizzi</h3>
+                    <p>Competidor de Jiu-Jitsu</p>
+                </div>
+            </div>
+        </section>
 
+        <!-- Llamado a la acción -->
+        <section class="cta-section">
+            <div class="cta-content">
+                <h2>¿Querés ser parte de nuestra familia?</h2>
+                <p>Sumate a Club Center Fight Academy y viví la experiencia de entrenar con los mejores</p>
+                <a href="https://wa.me/5491131598373" class="btn btn-primary" target="_blank">
+                    <i class="fab fa-whatsapp"></i> ¡Contactanos!
+                </a>
+            </div>
+        </section>
+    </main>
 
-<section id="actividades" class="actividades">
-  <h2>Actividades</h2>
-  <div class="contenedor-actividades">
-    <div class="actividad">
-      <div class="icono">
-        <img src="Fotos/iconos/boxeo.jpg" alt="Boxeo">
-      </div>
-      <p>Boxeo</p>
-    </div>
-    <div class="actividad">
-      <div class="icono">
-        <img src="Fotos/iconos/bjj.jpg" alt="Jiu-Jitsu">
-      </div>
-      <p>Jiu-Jitsu</p>
-    </div>
-    <div class="actividad">
-      <div class="icono">
-        <img src="Fotos/iconos/kickBoxing.jpg" alt="Kick-Boxing">
-      </div>
-      <p>Kick-Boxing</p>
-    </div>
-    <div class="actividad">
-      <div class="icono">
-        <img src="Fotos/iconos/muayThai.jpg" alt="Muay Thai">
-      </div>
-      <p>Muay Thai</p>
-    </div>
-    
-  </div>
-</section>
-
-
-<section class="grilla-horarios">
-  <h2>Grilla de Horarios</h2>
-  <div class="grilla-container">
-    <img src="Fotos/grillaHorarios.jpeg" alt="Grilla de horarios" class="grilla-img" onclick="abrirModal()">
-  </div>
-  
-  <!-- Modal para la imagen ampliada -->
-  <div id="modal" class="modal">
-    <span class="cerrar" onclick="cerrarModal()">&times;</span>
-    <img class="modal-content" id="imagenAmpliada">
-  </div>
-</section>
-
-  <div class="llamado-accion">
-      <h2>¡Empeza a entrenar hoy!</h2>
-      <p>Estamos listos para ayudarte a alcanzar tus objetivos. Contáctanos ahora y da el primer paso hacia tu mejor versión.</p>
-      <div class="botones-accion">
-          <a href="https://wa.me/5491131598373" target="_blank" class="boton-cta">Contáctanos por WhatsApp</a>
-          <a href="https://www.instagram.com/clubcenterfightacademy" target="_blank" class="boton-instagram">Seguinos en Instagram</a>
-      </div>
-  </div>
-
-
-
-  <div id="ubicacion" class="actividades">
-    <h2>Ubicación</h2>
-    <iframe 
-      src="https://maps.google.com/maps?width=100%&amp;height=100%&amp;hl=en&amp;q=Solis 1213, CABA, Argentina&amp;t=&amp;z=17&amp;ie=UTF8&amp;iwloc=B&amp;output=embed" 
-      frameborder="0"
-      style="border:0;"
-      allowfullscreen=""
-      aria-hidden="false"
-      tabindex="0">
-    </iframe>
-
-  </div>
-
-
-    <!-- Footer -->
-    <footer>
+    <!-- Footer igual al index -->
+    <footer class="main-footer">
         <div class="footer-container">
-            <p>&copy; 2024 Club Center Fight Academy | Todos los derechos reservados</p>
+            <div class="footer-grid">
+                <div class="footer-info">
+                    <img src="Fotos/logoClub.png" alt="Club Center Fight Academy" class="footer-logo">
+                    <p>Tu camino hacia la excelencia en artes marciales</p>
+                    <div class="social-links">
+                        <a href="#" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h3>Enlaces Rápidos</h3>
+                    <ul>
+                        <li><a href="disciplinas.html">Disciplinas</a></li>
+                        <li><a href="nosotros.html">Nosotros</a></li>
+                        <li><a href="contacto.html">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h3>Contacto</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Solis 1213, CABA</p>
+                    <p><i class="fas fa-phone"></i> +54 9 11 3159-8373</p>
+                    <p><i class="fas fa-envelope"></i> administracion@clubcenterfa.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Club Center Fight Academy. Todos los derechos reservados.</p>
+            </div>
         </div>
     </footer>
+
+    <!-- Botón Ir arriba -->
+    <button id="btn-up" aria-label="Ir arriba"><i class="fas fa-arrow-up"></i></button>
+    <!-- Aviso de cookies -->
+    <div id="cookie-bar" style="display:none; position:fixed; bottom:0; left:0; width:100%; background:#222; color:#fff; padding:1rem; text-align:center; z-index:99999; font-size:1rem;">
+        Usamos cookies para mejorar tu experiencia. <button id="accept-cookies" style="background:#e63946; color:#fff; border:none; border-radius:5px; padding:0.5rem 1rem; margin-left:1rem; cursor:pointer;">Aceptar</button>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
 
