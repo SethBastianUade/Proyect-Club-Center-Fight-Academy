@@ -1,1 +1,1 @@
-Programado principal en HTML, CSS y JavaScript, con futuro BackEnd en Java y SQL con springboot
+Pagina web con el objetivo de aumentar la visibilidad de Club Center, y automatizar las consultas utilizando Botpress, un bot integrado con IA
