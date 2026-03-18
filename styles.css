@@ -284,9 +284,11 @@ img {
     color: var(--light-text);
     max-width: 800px;
     padding: 0 2rem;
+    padding-top: 1.25rem;	
 }
 
 .hero-title {
+    margin-top: 0.25rem;
     font-size: 4rem;
     font-weight: 700;
     margin-bottom: 1rem;
