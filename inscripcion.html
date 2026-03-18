@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscripción - Club Center Fight Academy</title>
+    <meta name="description" content="Inscríbete en Club Center Fight Academy - Tu academia de artes marciales en Buenos Aires">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Oswald:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="Fotos/logoClub.png">
+</head>
+<body>
+    <!-- Header (mismo que index.html) -->
+    <header class="main-header">
+        <div class="header-container">
+            <div class="logo-container">
+                <a href="index.html" class="logo-link">
+                    <img src="Fotos/logoClub.png" alt="Club Center Fight Academy" class="main-logo">
+                </a>
+            </div>
+            <nav class="main-nav">
+                <ul class="nav-links">
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="disciplinas.html">Disciplinas</a></li>
+                    <li><a href="nosotros.html">Nosotros</a></li>
+                    <li><a href="contacto.html">Contacto</a></li>
+                </ul>
+                <button class="mobile-menu-btn" aria-label="Menú">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </nav>
+            <div class="header-cta">
+                <a href="https://wa.me/5491139536882?text=Hola%20quiero%20hacer%20una%20clase%20de%20prueba" class="btn-whatsapp" target="_blank">
+                    <i class="fab fa-whatsapp"></i> ¡Inscribite ahora!
+                </a>
+            </div>
+        </div>
+    </header>
+    <div class="mobile-whatsapp-bar">
+        <a href="https://wa.me/5491139536882?text=Hola%20quiero%20hacer%20una%20clase%20de%20prueba" class="btn-whatsapp" target="_blank">
+            <i class="fab fa-whatsapp"></i> ¡Inscribite ahora!
+        </a>
+    </div>
+
+    <!-- Sección de Inscripción -->
+    <section class="inscription-section">
+        <div class="section-header">
+            <h2>INSCRIPCIÓN</h2>
+            <p>Completá el formulario para comenzar tu entrenamiento</p>
+        </div>
+        
+        <div class="inscription-container">
+            <form id="inscription-form" class="inscription-form">
+                <div class="form-group">
+                    <label for="nombre">Nombre completo *</label>
+                    <input type="text" id="nombre" name="nombre" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="telefono">Teléfono *</label>
+                    <input type="tel" id="telefono" name="telefono" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="disciplina">Disciplina *</label>
+                    <select id="disciplina" name="disciplina" required>
+                        <option value="">Seleccioná una disciplina</option>
+                        <option value="jiujitsu">Jiu-Jitsu</option>
+                        <option value="muaythai">Muay Thai</option>
+                        <option value="boxeo">Boxeo</option>
+                        <option value="mma">MMA</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="plan">Plan *</label>
+                    <select id="plan" name="plan" required>
+                        <option value="">Seleccioná un plan</option>
+                        <option value="mensual">Plan Mensual</option>
+                        <option value="trimestral">Plan Trimestral</option>
+                        <option value="semestral">Plan Semestral</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Completar inscripción</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Botón flotante del Chatbot -->
+    <button class="chatbot-floating-btn" id="chatbot-btn" aria-label="Abrir chat del asistente virtual">
+        <i class="fas fa-robot"></i>
+    </button>
+
+    <!-- Footer (mismo que index.html) -->
+    <footer class="main-footer">
+        <!-- ... contenido del footer ... -->
+    </footer>
+
+    <script src="chatbot.js"></script>
+    <script src="script.js"></script>
+
+    <script>
+        // Envío de inscripción sin pasarela de pago:
+        // abre WhatsApp con el mensaje prearmado para coordinar el alta.
+        const WHATSAPP_NUMBER = '5491131598373'; // +54 9 11 3159-8373
+
+        document.getElementById('inscription-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const nombre = (document.getElementById('nombre')?.value || '').trim();
+            const email = (document.getElementById('email')?.value || '').trim();
+            const telefono = (document.getElementById('telefono')?.value || '').trim();
+            const disciplina = document.getElementById('disciplina')?.value || '';
+            const plan = document.getElementById('plan')?.value || '';
+
+            const disciplinaLabel =
+                disciplina === 'jiujitsu' ? 'Jiu-Jitsu'
+                : disciplina === 'muaythai' ? 'Muay Thai'
+                : disciplina === 'boxeo' ? 'Boxeo'
+                : disciplina === 'mma' ? 'MMA'
+                : disciplina || '-';
+
+            const planLabel =
+                plan === 'mensual' ? 'Mensual'
+                : plan === 'trimestral' ? 'Trimestral'
+                : plan === 'semestral' ? 'Semestral'
+                : plan || '-';
+
+            const mensaje =
+                `Hola! Quiero inscribirme en Club Center Fight Academy.%0A%0A` +
+                `Nombre: ${encodeURIComponent(nombre || '-')}` + `%0A` +
+                `Email: ${encodeURIComponent(email || '-')}` + `%0A` +
+                `Teléfono: ${encodeURIComponent(telefono || '-')}` + `%0A` +
+                `Disciplina: ${encodeURIComponent(disciplinaLabel)}` + `%0A` +
+                `Plan: ${encodeURIComponent(planLabel)}` + `%0A%0A` +
+                `¿Me pasan info para comenzar?`;
+
+            window.location.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${mensaje}`;
+        });
+    </script>
+</body>
+</html> 
