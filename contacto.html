@@ -4,13 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contacto | Club Center Fight Academy</title>
+    <meta name="description" content="Contactá a Club Center Fight Academy. Encontranos en Solis 1213, CABA. Consultá horarios, precios y clases de prueba.">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Oswald:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="Fotos/logoClub.png">
 </head>
 <body>
-    <!-- Header igual al index -->
+
+    <!-- Header -->
     <header class="main-header">
         <div class="header-container">
             <div class="logo-container">
@@ -49,80 +51,75 @@
         <!-- Hero Contacto -->
         <section class="hero-section hero-contacto">
             <div class="hero-content">
-                <h1 class="hero-title">CONTACTO</h1>
-                <p class="hero-subtitle">¡Estamos para ayudarte! Consultá horarios, ubicación o escribinos directamente</p>
+                <span class="hero-badge">Estamos para ayudarte</span>
+                <h1 class="hero-title">PONETE EN<br><span>CONTACTO</span></h1>
+                <p class="hero-subtitle">Consultá horarios, precios o escribinos para agendar tu primera clase</p>
             </div>
         </section>
 
-        <!-- Sección de contacto y horarios -->
+        <!-- Contacto y Formulario -->
         <section class="contact-main-section">
             <div class="contact-container">
                 <div class="contact-info">
                     <h2>Datos de contacto</h2>
                     <ul class="contact-list">
-                        <li><i class="fas fa-map-marker-alt"></i> Dirección: <b>Solis 1213, CABA</b></li>
-                        <li><i class="fas fa-envelope"></i> Email: <a href="mailto:administracion@clubcenterfa.com">administracion@clubcenterfa.com</a></li>                        
-                        <li><i class="fab fa-instagram"></i> Instagram: <a href="https://instagram.com/clubcenterfightacademy" target="_blank">@clubcenterfightacademy</a></li>
-                        <li><i class="fab fa-whatsapp"></i> WhatsApp: <a href="https://wa.me/5491139536882" target="_blank">+54 9 11 3953-6882</a></li>
+                        <li><i class="fas fa-map-marker-alt"></i> <span>Dirección: <b>Solis 1213, CABA</b></span></li>
+                        <li><i class="fas fa-envelope"></i> <span>Email: <a href="mailto:administracion@clubcenterfa.com">administracion@clubcenterfa.com</a></span></li>
+                        <li><i class="fab fa-instagram"></i> <span>Instagram: <a href="https://instagram.com/clubcenterfightacademy" target="_blank">@clubcenterfightacademy</a></span></li>
+                        <li><i class="fab fa-whatsapp"></i> <span>WhatsApp: <a href="https://wa.me/5491139536882" target="_blank">+54 9 11 3953-6882</a></span></li>
                     </ul>
-                    <div class="contact-social">
-                        <!-- Iconos sociales eliminados -->
-                    </div>
                 </div>
                 <div class="contact-form-box">
-                    <h2>Envíanos tu consulta</h2>
+                    <h2>Envianos tu consulta</h2>
                     <form class="contact-form" id="whatsappForm">
-                        <input type="text" name="nombre" placeholder="Nombre" required>
-                        <textarea name="mensaje" placeholder="Escribí tu mensaje" required></textarea>
-                        <button type="submit" class="btn btn-primary">Enviar</button>
+                        <input type="text" name="nombre" placeholder="Tu nombre" required>
+                        <textarea name="mensaje" placeholder="¿En qué podemos ayudarte?" required></textarea>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fab fa-whatsapp"></i> Enviar por WhatsApp
+                        </button>
                     </form>
                 </div>
             </div>
         </section>
 
-        <!-- Grilla de horarios -->
+        <!-- Grilla de Horarios -->
         <section class="schedule-section">
             <div class="section-header">
-                <h2>Horarios de clases</h2>
-                <p>Consultá la grilla y encontrá el horario que mejor se adapte a vos</p>
+                <span class="section-label">Horarios</span>
+                <h2>GRILLA DE CLASES</h2>
+                <p>Encontrá el horario que mejor se adapte a tu rutina</p>
             </div>
             <div class="schedule-img-box">
-                <img src="Fotos/grillaHorarios.jpg" alt="Grilla de horarios" class="schedule-img" style="cursor:pointer;">
+                <img src="Fotos/grillaHorarios.jpg" alt="Grilla de horarios de clases" class="schedule-img" style="cursor:pointer;">
             </div>
         </section>
 
-        <!-- Mapa de ubicación -->
+        <!-- Mapa -->
         <section class="map-section">
             <div class="section-header">
-                <h2>¿Dónde estamos?</h2>
-                <p>Encontranos fácilmente en el mapa</p>
+                <span class="section-label">Ubicación</span>
+                <h2>¿DÓNDE ESTAMOS?</h2>
+                <p>Encontranos fácilmente en Solis 1213, CABA</p>
             </div>
             <div class="map-box">
-                <iframe src="https://maps.google.com/maps?width=100%&amp;height=100%&amp;hl=en&amp;q=Solis 1213, CABA, Argentina&amp;t=&amp;z=17&amp;ie=UTF8&amp;iwloc=B&amp;output=embed" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+                <iframe src="https://maps.google.com/maps?width=100%&height=100%&hl=en&q=Solis+1213,+CABA,+Argentina&t=&z=17&ie=UTF8&iwloc=B&output=embed" frameborder="0" allowfullscreen="" aria-label="Mapa de ubicación Club Center Fight Academy" tabindex="0"></iframe>
             </div>
         </section>
     </main>
 
-    <!-- Botón flotante del Chatbot -->
-    <button class="chatbot-floating-btn" id="chatbot-btn" aria-label="Abrir chat del asistente virtual">
-        <i class="fas fa-robot"></i>
-    </button>
-
-    <!-- Footer igual al index -->
+    <!-- Footer -->
     <footer class="main-footer">
         <div class="footer-container">
             <div class="footer-grid">
                 <div class="footer-info">
                     <img src="Fotos/logoClub.png" alt="Club Center Fight Academy" class="footer-logo">
-                    <p>Tu camino hacia la excelencia en artes marciales</p>
+                    <p>Tu camino hacia la excelencia en artes marciales. Formamos campeones dentro y fuera del tatami.</p>
                     <div class="social-links">
-                        <a href="#" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                        <a href="#" target="_blank" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
-                        <a href="#" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="https://instagram.com/clubcenterfightacademy" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                     </div>
                 </div>
                 <div class="footer-links">
-                    <h3>Enlaces Rápidos</h3>
+                    <h3>Páginas</h3>
                     <ul>
                         <li><a href="disciplinas.html">Disciplinas</a></li>
                         <li><a href="nosotros.html">Nosotros</a></li>
@@ -142,17 +139,24 @@
         </div>
     </footer>
 
-    <!-- Lightbox para la grilla de horarios -->
+    <!-- Lightbox para grilla de horarios -->
     <div class="lightbox" id="scheduleLightbox">
         <span class="lightbox-close" id="scheduleLightboxClose">&times;</span>
-        <img src="" alt="Grilla de horarios en grande" id="scheduleLightboxImg">
+        <img src="" alt="Grilla de horarios" id="scheduleLightboxImg">
     </div>
+
+    <!-- Botón flotante WhatsApp -->
+    <button class="chatbot-floating-btn" id="chatbot-btn" aria-label="Contactar por WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </button>
 
     <!-- Botón Ir arriba -->
     <button id="btn-up" aria-label="Ir arriba"><i class="fas fa-arrow-up"></i></button>
+
     <!-- Aviso de cookies -->
-    <div id="cookie-bar" style="display:none; position:fixed; bottom:0; left:0; width:100%; background:#222; color:#fff; padding:1rem; text-align:center; z-index:99999; font-size:1rem;">
-        Usamos cookies para mejorar tu experiencia. <button id="accept-cookies" style="background:#e63946; color:#fff; border:none; border-radius:5px; padding:0.5rem 1rem; margin-left:1rem; cursor:pointer;">Aceptar</button>
+    <div id="cookie-bar" style="display:none;">
+        Usamos cookies para mejorar tu experiencia.
+        <button id="accept-cookies">Aceptar</button>
     </div>
 
     <script src="script.js"></script>
@@ -165,7 +169,7 @@
             const nombre = form.nombre.value.trim();
             const mensaje = form.mensaje.value.trim();
             const texto = `Hola! Mi nombre es ${nombre}. Quiero consultar: ${mensaje}`;
-            const url = `https://wa.me/5491131598373?text=${encodeURIComponent(texto)}`;
+            const url = `https://wa.me/5491139536882?text=${encodeURIComponent(texto)}`;
             window.open(url, '_blank');
         });
 
@@ -174,7 +178,8 @@
         const scheduleLightbox = document.getElementById('scheduleLightbox');
         const scheduleLightboxImg = document.getElementById('scheduleLightboxImg');
         const scheduleLightboxClose = document.getElementById('scheduleLightboxClose');
-        if(scheduleImg && scheduleLightbox && scheduleLightboxImg && scheduleLightboxClose) {
+
+        if (scheduleImg && scheduleLightbox) {
             scheduleImg.addEventListener('click', function() {
                 scheduleLightboxImg.src = scheduleImg.src;
                 scheduleLightbox.classList.add('active');
@@ -183,9 +188,10 @@
                 scheduleLightbox.classList.remove('active');
             });
             scheduleLightbox.addEventListener('click', function(e) {
-                if(e.target === scheduleLightbox) {
-                    scheduleLightbox.classList.remove('active');
-                }
+                if (e.target === scheduleLightbox) scheduleLightbox.classList.remove('active');
+            });
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') scheduleLightbox.classList.remove('active');
             });
         }
     });

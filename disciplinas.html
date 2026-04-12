@@ -4,13 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Disciplinas | Club Center Fight Academy</title>
+    <meta name="description" content="Conocé todas las disciplinas de Club Center Fight Academy: Jiu-Jitsu, Muay Thai, Boxeo y MMA con profesores certificados en CABA.">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Oswald:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="Fotos/logoClub.png">
 </head>
 <body>
-    <!-- Header igual al index -->
+
+    <!-- Header -->
     <header class="main-header">
         <div class="header-container">
             <div class="logo-container">
@@ -38,6 +40,7 @@
             </div>
         </div>
     </header>
+
     <div class="mobile-whatsapp-bar">
         <a href="https://wa.me/5491139536882" class="btn-whatsapp" target="_blank">
             <i class="fab fa-whatsapp"></i> ¡Inscribite ahora!
@@ -48,61 +51,68 @@
         <!-- Hero Disciplinas -->
         <section class="hero-section hero-disciplinas">
             <div class="hero-content">
-                <h1 class="hero-title">NUESTRAS DISCIPLINAS</h1>
-                <p class="hero-subtitle">Descubrí tu pasión, entrená con los mejores</p>
+                <span class="hero-badge">Lo que entrenamos</span>
+                <h1 class="hero-title">NUESTRAS<br><span>DISCIPLINAS</span></h1>
+                <p class="hero-subtitle">Descubrí tu pasión y entrená con los mejores instructores</p>
             </div>
         </section>
 
         <!-- Grid de disciplinas -->
-        <section class="disciplines-section" style="background: #f8f9fa; padding: 4rem 1rem 3rem 1rem;">
-            <div class="section-header" style="text-align: center; margin-bottom: 3rem;">
-                <h2>Elegí tu disciplina</h2>
-                <p>Entrená Jiu-Jitsu, Muay Thai, Boxeo o MMA con profesores certificados</p>
+        <section class="disciplines-section" id="disciplinas">
+            <div class="section-header">
+                <span class="section-label">Elegí tu camino</span>
+                <h2>ELEGÍ TU DISCIPLINA</h2>
+                <p>Jiu-Jitsu, Muay Thai, Boxeo y MMA con profesores certificados. Clases para todos los niveles.</p>
             </div>
-            <div class="disciplines-grid" style="display: flex; flex-wrap: wrap; gap: 2.5rem; justify-content: center; max-width: 1200px; margin: 0 auto;">
-                <div class="discipline-card" style="background: white; border-radius: 16px; box-shadow: 0 2px 12px rgba(0,0,0,0.07); padding: 2.2rem 1.5rem 1.5rem 1.5rem; text-align: center; width: 100%; max-width: 340px; display: flex; flex-direction: column; align-items: center; transition: transform 0.2s, box-shadow 0.2s;">
-                    <img src="Fotos/iconos/bjj.jpg" alt="Jiu-Jitsu" style="width: 90px; height: 90px; object-fit: cover; border-radius: 50%; margin-bottom: 1.2rem; box-shadow: 0 2px 8px rgba(0,0,0,0.10); background: white; padding: 0.5rem;">
+            <div class="disciplines-grid" id="jiujitsu">
+                <div class="discipline-card" id="jiujitsu">
+                    <img src="Fotos/iconos/bjj.jpg" alt="Jiu-Jitsu" />
                     <h3>Jiu-Jitsu</h3>
-                     <p>Defensa personal, técnica y control. Ideal para todas las edades.</p>
+                    <p>Arte marcial de combate cuerpo a cuerpo que desarrolla técnica, control y defensa personal. Ideal para todas las edades y niveles, desde principiantes hasta competidores.</p>
                 </div>
-                <div class="discipline-card" style="background: white; border-radius: 16px; box-shadow: 0 2px 12px rgba(0,0,0,0.07); padding: 2.2rem 1.5rem 1.5rem 1.5rem; text-align: center; width: 100%; max-width: 340px; display: flex; flex-direction: column; align-items: center; transition: transform 0.2s, box-shadow 0.2s;">
-                    <img src="Fotos/iconos/muayThai.jpg" alt="Muay Thai" style="width: 90px; height: 90px; object-fit: cover; border-radius: 50%; margin-bottom: 1.2rem; box-shadow: 0 2px 8px rgba(0,0,0,0.10); background: white; padding: 0.5rem;">
+                <div class="discipline-card" id="muaythai">
+                    <img src="Fotos/iconos/muayThai.jpg" alt="Muay Thai" />
                     <h3>Muay Thai</h3>
-                     <p>El arte de las 8 extremidades. Potencia, resistencia y disciplina.</p>
+                    <p>El arte de las 8 extremidades. Potencia física, resistencia y disciplina mental en cada clase. Una de las artes marciales de pie más completas del mundo.</p>
                 </div>
-
-                <div class="discipline-card" style="background: white; border-radius: 16px; box-shadow: 0 2px 12px rgba(0,0,0,0.07); padding: 2.2rem 1.5rem 1.5rem 1.5rem; text-align: center; width: 100%; max-width: 340px; display: flex; flex-direction: column; align-items: center; transition: transform 0.2s, box-shadow 0.2s;">
-                    <img src="Fotos/iconos/boxeo.jpg" alt="Boxeo" style="width: 90px; height: 90px; object-fit: cover; border-radius: 50%; margin-bottom: 1.2rem; box-shadow: 0 2px 8px rgba(0,0,0,0.10); background: white; padding: 0.5rem;">
+                <div class="discipline-card" id="boxeo">
+                    <img src="Fotos/iconos/boxeo.jpg" alt="Boxeo" />
                     <h3>Boxeo</h3>
-                     <p>Mejorá tu técnica, reflejos y condición física con el deporte clásico de combate.</p>
+                    <p>Mejorá tu técnica de golpes, reflejos y condición física con el deporte de combate más clásico. Entrenamiento dinámico y progresivo para todos los niveles.</p>
                 </div>
-                <div class="discipline-card" style="background: white; border-radius: 16px; box-shadow: 0 2px 12px rgba(0,0,0,0.07); padding: 2.2rem 1.5rem 1.5rem 1.5rem; text-align: center; width: 100%; max-width: 340px; display: flex; flex-direction: column; align-items: center; transition: transform 0.2s, box-shadow 0.2s;">
-                    <img src="Fotos/iconos/MMA.jpg" alt="MMA" style="width: 90px; height: 90px; object-fit: cover; border-radius: 50%; margin-bottom: 1.2rem; box-shadow: 0 2px 8px rgba(0,0,0,0.10); background: white; padding: 0.5rem;">
+                <div class="discipline-card" id="mma">
+                    <img src="Fotos/iconos/MMA.jpg" alt="MMA" />
                     <h3>MMA</h3>
-                    <p>Artes marciales mixtas: lo mejor de cada disciplina</p>
+                    <p>Artes marciales mixtas: integrá Jiu-Jitsu, Muay Thai y Boxeo en un entrenamiento completo. Desarrollá todas las facetas del combate moderno.</p>
                 </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="cta-section">
+            <div class="cta-content">
+                <h2>¿CUÁL ES TU DISCIPLINA?</h2>
+                <p>Consultanos por WhatsApp y te ayudamos a elegir el camino perfecto para vos</p>
+                <a href="https://wa.me/5491139536882?text=Hola%20quiero%20información%20sobre%20las%20disciplinas" class="btn btn-primary" target="_blank">
+                    <i class="fab fa-whatsapp"></i> ¡Consultanos ahora!
+                </a>
             </div>
         </section>
     </main>
 
-    <!-- Botón flotante del Chatbot -->
-    <button class="chatbot-floating-btn" id="chatbot-btn" aria-label="Abrir chat del asistente virtual">
-        <i class="fas fa-robot"></i>
-    </button>
-
-    <!-- Footer igual al index -->
+    <!-- Footer -->
     <footer class="main-footer">
         <div class="footer-container">
             <div class="footer-grid">
                 <div class="footer-info">
                     <img src="Fotos/logoClub.png" alt="Club Center Fight Academy" class="footer-logo">
-                    <p>Tu camino hacia la excelencia en artes marciales</p>
+                    <p>Tu camino hacia la excelencia en artes marciales. Formamos campeones dentro y fuera del tatami.</p>
                     <div class="social-links">
-                        <a href="#" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://instagram.com/clubcenterfightacademy" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                     </div>
                 </div>
                 <div class="footer-links">
-                    <h3>Enlaces Rápidos</h3>
+                    <h3>Páginas</h3>
                     <ul>
                         <li><a href="disciplinas.html">Disciplinas</a></li>
                         <li><a href="nosotros.html">Nosotros</a></li>
@@ -121,13 +131,22 @@
             </div>
         </div>
     </footer>
-    <script src="script.js"></script>
-    <script src="chatbot.js"></script>
+
+    <!-- Botón flotante WhatsApp -->
+    <button class="chatbot-floating-btn" id="chatbot-btn" aria-label="Contactar por WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </button>
+
     <!-- Botón Ir arriba -->
     <button id="btn-up" aria-label="Ir arriba"><i class="fas fa-arrow-up"></i></button>
+
     <!-- Aviso de cookies -->
-    <div id="cookie-bar" style="display:none; position:fixed; bottom:0; left:0; width:100%; background:#222; color:#fff; padding:1rem; text-align:center; z-index:99999; font-size:1rem;">
-        Usamos cookies para mejorar tu experiencia. <button id="accept-cookies" style="background:#e63946; color:#fff; border:none; border-radius:5px; padding:0.5rem 1rem; margin-left:1rem; cursor:pointer;">Aceptar</button>
+    <div id="cookie-bar" style="display:none;">
+        Usamos cookies para mejorar tu experiencia.
+        <button id="accept-cookies">Aceptar</button>
     </div>
+
+    <script src="script.js"></script>
+    <script src="chatbot.js"></script>
 </body>
-</html> 
+</html>

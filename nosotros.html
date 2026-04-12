@@ -4,13 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nosotros | Club Center Fight Academy</title>
+    <meta name="description" content="Conocé la historia, valores y equipo de Club Center Fight Academy. Pasión, disciplina y excelencia en artes marciales desde CABA.">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Oswald:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="Fotos/logoClub.png">
 </head>
 <body>
-    <!-- Header igual al index -->
+
+    <!-- Header -->
     <header class="main-header">
         <div class="header-container">
             <div class="logo-container">
@@ -49,22 +51,24 @@
         <!-- Hero Nosotros -->
         <section class="hero-section hero-nosotros">
             <div class="hero-content">
-                <h1 class="hero-title">SOMOS CLUB CENTER FIGHT ACADEMY</h1>
-                <p class="hero-subtitle">Pasión, valores y excelencia en artes marciales</p>
+                <span class="hero-badge">Quiénes somos</span>
+                <h1 class="hero-title">CLUB CENTER<br><span>FIGHT ACADEMY</span></h1>
+                <p class="hero-subtitle">Pasión, valores y excelencia en artes marciales desde CABA</p>
             </div>
         </section>
 
-        <!-- Historia y valores -->
+        <!-- Historia y Valores -->
         <section class="about-section">
             <div class="section-header">
-                <h2>Nuestra Historia</h2>
+                <span class="section-label">Nuestra historia</span>
+                <h2>DE DÓNDE VENIMOS</h2>
                 <p>Club Center Fight Academy nació con el sueño de crear una comunidad donde el respeto, la disciplina y la superación personal sean los pilares fundamentales.</p>
             </div>
             <div class="about-container">
                 <div class="about-text">
-                    <div class="section-header">
-                        <h2>Nuestros Valores</h2>
-                        <p>Los valores que nos guían día a día en cada clase y encuentro.</p>
+                    <div class="section-header" style="text-align:left; margin-bottom:1.5rem;">
+                        <span class="section-label">Lo que nos guía</span>
+                        <h2>NUESTROS VALORES</h2>
                     </div>
                     <ul class="about-values">
                         <li><i class="fas fa-handshake"></i> Respeto</li>
@@ -75,16 +79,17 @@
                     </ul>
                 </div>
                 <div class="about-img">
-                    <img src="Fotos/nosotros1.jpg" alt="Historia Club Center">
+                    <img src="Fotos/nosotros1.jpg" alt="Historia Club Center Fight Academy">
                 </div>
             </div>
         </section>
 
-        <!-- Equipo/Alumnos -->
+        <!-- Competidores -->
         <section class="team-section">
             <div class="section-header">
-                <h2>Nuestros Competidores Destacados</h2>
-                <p>Orgullo de nuestro equipo de Jiu-Jitsu</p>
+                <span class="section-label">Orgullo del equipo</span>
+                <h2>NUESTROS COMPETIDORES DESTACADOS</h2>
+                <p>Representantes de Club Center Fight Academy en el circuito de Jiu-Jitsu</p>
             </div>
             <div class="team-grid">
                 <div class="team-card">
@@ -100,36 +105,31 @@
             </div>
         </section>
 
-        <!-- Llamado a la acción -->
+        <!-- CTA -->
         <section class="cta-section">
             <div class="cta-content">
-                <h2>¿Querés ser parte de nuestra familia?</h2>
+                <h2>¿QUERÉS SER PARTE?</h2>
                 <p>Sumate a Club Center Fight Academy y viví la experiencia de entrenar con los mejores</p>
-                <a href="https://wa.me/5491139536882" class="btn btn-primary" target="_blank">
+                <a href="https://wa.me/5491139536882?text=Hola%20quiero%20conocer%20el%20club" class="btn btn-primary" target="_blank">
                     <i class="fab fa-whatsapp"></i> ¡Contactanos!
                 </a>
             </div>
         </section>
     </main>
 
-    <!-- Botón flotante del Chatbot -->
-    <button class="chatbot-floating-btn" id="chatbot-btn" aria-label="Abrir chat del asistente virtual">
-        <i class="fas fa-robot"></i>
-    </button>
-
-    <!-- Footer igual al index -->
+    <!-- Footer -->
     <footer class="main-footer">
         <div class="footer-container">
             <div class="footer-grid">
                 <div class="footer-info">
                     <img src="Fotos/logoClub.png" alt="Club Center Fight Academy" class="footer-logo">
-                    <p>Tu camino hacia la excelencia en artes marciales</p>
+                    <p>Tu camino hacia la excelencia en artes marciales. Formamos campeones dentro y fuera del tatami.</p>
                     <div class="social-links">
-                        <a href="#" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://instagram.com/clubcenterfightacademy" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                     </div>
                 </div>
                 <div class="footer-links">
-                    <h3>Enlaces Rápidos</h3>
+                    <h3>Páginas</h3>
                     <ul>
                         <li><a href="disciplinas.html">Disciplinas</a></li>
                         <li><a href="nosotros.html">Nosotros</a></li>
@@ -149,15 +149,21 @@
         </div>
     </footer>
 
+    <!-- Botón flotante WhatsApp -->
+    <button class="chatbot-floating-btn" id="chatbot-btn" aria-label="Contactar por WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </button>
+
     <!-- Botón Ir arriba -->
     <button id="btn-up" aria-label="Ir arriba"><i class="fas fa-arrow-up"></i></button>
+
     <!-- Aviso de cookies -->
-    <div id="cookie-bar" style="display:none; position:fixed; bottom:0; left:0; width:100%; background:#222; color:#fff; padding:1rem; text-align:center; z-index:99999; font-size:1rem;">
-        Usamos cookies para mejorar tu experiencia. <button id="accept-cookies" style="background:#e63946; color:#fff; border:none; border-radius:5px; padding:0.5rem 1rem; margin-left:1rem; cursor:pointer;">Aceptar</button>
+    <div id="cookie-bar" style="display:none;">
+        Usamos cookies para mejorar tu experiencia.
+        <button id="accept-cookies">Aceptar</button>
     </div>
 
     <script src="script.js"></script>
     <script src="chatbot.js"></script>
 </body>
 </html>
-
