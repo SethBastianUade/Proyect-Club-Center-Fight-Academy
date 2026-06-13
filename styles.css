@@ -818,6 +818,7 @@ a { text-decoration: none; }
 
 .footer-logo {
     height: 56px;
+    width: auto;
     margin-bottom: 1.2rem;
 }
 
