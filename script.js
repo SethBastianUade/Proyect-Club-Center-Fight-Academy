@@ -14,12 +14,6 @@ document.addEventListener('DOMContentLoaded', function() {
     initScrollToTop();
     initCookieBar();
     initTestimonialsSlider();
-    
-    // Inicializar formulario de contacto si existe
-    const contactForm = document.getElementById('whatsappForm');
-    if (contactForm) {
-        initContactForm(contactForm);
-    }
 });
 
 // ===== FUNCIÓN MENÚ MÓVIL =====
@@ -142,25 +136,6 @@ function initCookieBar() {
             cookieBar.style.display = 'none';
         });
     }
-}
-
-// ===== FUNCIÓN FORMULARIO DE CONTACTO =====
-function initContactForm(form) {
-    form.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        const formData = new FormData(form);
-        const nombre = formData.get('nombre');
-        const mensaje = formData.get('mensaje');
-        
-        if (nombre && mensaje) {
-            const whatsappText = `Hola, soy ${nombre}. ${mensaje}`;
-            const encodedText = encodeURIComponent(whatsappText);
-            const whatsappUrl = `https://wa.me/5491131598373?text=${encodedText}`;
-            
-            window.open(whatsappUrl, '_blank');
-        }
-    });
 }
 
 // ===== FUNCIÓN ANIMACIONES AL SCROLL =====

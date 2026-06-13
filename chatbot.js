@@ -1,10 +1,14 @@
 // ===== CHATBOT FUNCTIONALITY - CLUB CENTER FIGHT ACADEMY =====
 // Sistema híbrido: Chatbot para consultas generales + WhatsApp directo para casos urgentes
 
+// Política de ruteo de WhatsApp:
+//  - Alta intención (Inscribite, clase de prueba, formularios) -> recepción (5491131598373)
+//  - Consultas / info / botón flotante -> chatbot / asistente virtual (5491139536882)
+// Los <a href> estáticos llevan el número hardcodeado según esta regla.
 // Configuración del chatbot
 const CHATBOT_CONFIG = {
     chatbotNumber: '5491139536882',
-    receptionNumber: '5491139536882', // Cambiado al mismo número del asistente virtual
+    receptionNumber: '5491131598373', // Recepción (humano) — canal de alta intención
     defaultMessage: 'Hola%20quiero%20consultar%20sobre%20las%20clases',
     heroMessage: 'Hola%20quiero%20información%20sobre%20las%20disciplinas%20y%20horarios',
     testimonialsMessage: 'Hola%20quiero%20saber%20más%20sobre%20las%20clases%20y%20precios',
