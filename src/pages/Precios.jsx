@@ -2,8 +2,9 @@ import { Link } from 'react-router';
 import { PLANES, FILAS, precio } from '../data/planes.js';
 import { wa } from '../data/site.js';
 import { Hero, Cta, useMeta } from '../components/ui.jsx';
+import Icono from '../components/Icono.jsx';
 
-const celda = (v) => (v === true ? <i className="fas fa-check" aria-label="Incluido"></i> : v === false ? <i className="fas fa-minus" aria-label="No incluido"></i> : v);
+const celda = (v) => (v === true ? <Icono n="check" label="Incluido" /> : v === false ? <Icono n="minus" label="No incluido" className="no" /> : v);
 
 export default function Precios() {
     useMeta('Precios y planes', 'Planes y precios de Club Center Fight Academy. Elegí el plan que mejor se adapta a tu rutina. Primera clase sin cargo.');
@@ -23,7 +24,7 @@ export default function Precios() {
                                     const v = p.items[k];
                                     return (
                                         <li key={k} className={v === false ? 'off' : ''}>
-                                            <i className={`fas ${v === false ? 'fa-minus' : 'fa-check'}`} aria-hidden="true"></i>
+                                            <Icono n={v === false ? 'minus' : 'check'} />
                                             {typeof v === 'string' ? v : label}
                                         </li>
                                     );
@@ -31,7 +32,7 @@ export default function Precios() {
                             </ul>
                             <Link to={`/inscripcion?plan=${p.id}`} className="btn btn-primary">Inscribirme</Link>
                             <a href={wa(`Hola, quiero info sobre el plan ${p.nombre}`)} className="plan-ask" target="_blank" rel="noopener">
-                                <i className="fab fa-whatsapp"></i> Consultar
+                                <Icono n="whatsapp" /> Consultar
                             </a>
                         </div>
                     ))}

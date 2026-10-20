@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { wa } from '../data/site.js';
+import Icono from './Icono.jsx';
 
 export function Hero({ badge, titulo, resaltado, subtitulo, fondo = 'hero-disciplinas' }) {
     return (
@@ -30,7 +31,7 @@ export function Cta({ titulo, texto, mensaje, boton = '¡Contactanos ahora!' }) 
                 <h2>{titulo}</h2>
                 <p>{texto}</p>
                 <a href={wa(mensaje)} className="btn btn-primary" target="_blank" rel="noopener">
-                    <i className="fab fa-whatsapp"></i> {boton}
+                    <Icono n="whatsapp" /> {boton}
                 </a>
             </div>
         </section>

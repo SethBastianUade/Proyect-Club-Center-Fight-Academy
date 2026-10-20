@@ -19,3 +19,17 @@ export const DIAS = { lun: 'Lunes', mar: 'Martes', mie: 'Miércoles', jue: 'Juev
 
 export const CLASES = H.map(([dia, desde, hasta, disc, nombre]) => ({ dia, desde, hasta, disc, nombre }))
     .sort((a, b) => a.desde.localeCompare(b.desde));
+
+const SEMANA = ['dom', 'lun', 'mar', 'mie', 'jue', 'vie', 'sab'];
+export const hoy = () => SEMANA[new Date().getDay()];
+
+// Las próximas clases que todavía no empezaron: hoy, o el siguiente día con clases
+export function proximasClases(n = 3, ahora = new Date()) {
+    const hhmm = ahora.toTimeString().slice(0, 5);
+    for (let i = 0; i < 7; i++) {
+        const dia = SEMANA[(ahora.getDay() + i) % 7];
+        const clases = CLASES.filter((c) => c.dia === dia && (i > 0 || c.desde > hhmm));
+        if (clases.length) return { dia, cuando: i === 0 ? 'Hoy' : i === 1 ? 'Mañana' : DIAS[dia], clases: clases.slice(0, n) };
+    }
+    return null;
+}

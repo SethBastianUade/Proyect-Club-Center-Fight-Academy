@@ -3,6 +3,7 @@ import { DISCIPLINAS, PRINCIPALES } from '../data/disciplinas.js';
 import { PLANES } from '../data/planes.js';
 import { wa } from '../data/site.js';
 import { SectionHeader, useMeta } from '../components/ui.jsx';
+import Icono from '../components/Icono.jsx';
 
 export default function Inscripcion() {
     useMeta('Inscripción', 'Inscribite en Club Center Fight Academy. Completá el formulario y te contactamos por WhatsApp.');
@@ -14,7 +15,7 @@ export default function Inscripcion() {
         const plan = PLANES.find((p) => p.id === f.plan)?.nombre;
         const texto = [
             'Hola! Quiero inscribirme en Club Center Fight Academy.', '',
-            `Nombre: ${f.nombre}`, `Email: ${f.email}`, `Teléfono: ${f.telefono}`,
+            `Nombre: ${f.nombre}`, `Teléfono: ${f.telefono}`, ...(f.email ? [`Email: ${f.email}`] : []),
             `Disciplina: ${DISCIPLINAS[f.disciplina].nombre}`, `Plan: ${plan}`, '',
             '¿Me pasan info para comenzar?',
         ].join('\n');
@@ -31,12 +32,12 @@ export default function Inscripcion() {
                         <input type="text" id="nombre" name="nombre" placeholder="Tu nombre y apellido" required />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="email">Email *</label>
-                        <input type="email" id="email" name="email" placeholder="tucorreo@email.com" required />
+                        <label htmlFor="telefono">Teléfono *</label>
+                        <input type="tel" id="telefono" name="telefono" placeholder="+54 9 11 ..." autoComplete="tel" required />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="telefono">Teléfono *</label>
-                        <input type="tel" id="telefono" name="telefono" placeholder="+54 9 11 ..." required />
+                        <label htmlFor="email">Email <small>(opcional)</small></label>
+                        <input type="email" id="email" name="email" placeholder="tucorreo@email.com" autoComplete="email" />
                     </div>
                     <div className="form-group">
                         <label htmlFor="disciplina">Disciplina *</label>
@@ -52,7 +53,7 @@ export default function Inscripcion() {
                             {PLANES.map((p) => <option key={p.id} value={p.id}>{p.nombre}</option>)}
                         </select>
                     </div>
-                    <button type="submit" className="btn btn-primary"><i className="fab fa-whatsapp"></i> Completar inscripción</button>
+                    <button type="submit" className="btn btn-primary"><Icono n="whatsapp" /> Completar inscripción</button>
                 </form>
             </div>
         </section>

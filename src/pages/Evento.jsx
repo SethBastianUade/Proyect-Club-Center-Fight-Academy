@@ -4,6 +4,7 @@ import { EVENTOS, TIPOS, fechaLarga } from '../data/eventos.js';
 import { wa } from '../data/site.js';
 import { Hero, useMeta } from '../components/ui.jsx';
 import NoEncontrado from './NoEncontrado.jsx';
+import Icono from '../components/Icono.jsx';
 
 export default function Evento() {
     const { slug } = useParams();
@@ -27,21 +28,21 @@ export default function Evento() {
         <>
             <Hero badge={TIPOS[e.tipo]} titulo={e.titulo} fondo="hero-disciplinas hero-evento" />
             <section className="event-detail">
-                <Link to="/eventos" className="back"><i className="fas fa-arrow-left"></i> Todos los eventos</Link>
+                <Link to="/eventos" className="back"><Icono n="arrow-left" /> Todos los eventos</Link>
                 <ul className="event-facts">
-                    <li><i className="far fa-calendar"></i> <span className="cap">{fechaLarga(e.fecha)}</span></li>
-                    {e.hora && <li><i className="far fa-clock"></i> {e.hora} hs</li>}
-                    {e.lugar && <li><i className="fas fa-map-marker-alt"></i> {e.lugar}</li>}
+                    <li><Icono n="calendar" /> <span className="cap">{fechaLarga(e.fecha)}</span></li>
+                    {e.hora && <li><Icono n="clock" /> {e.hora} hs</li>}
+                    {e.lugar && <li><Icono n="mapa" /> {e.lugar}</li>}
                 </ul>
                 <p className="event-text">{e.texto}</p>
                 <div className="event-actions">
                     {futuro && (
                         <a href={wa(`Hola, quiero info sobre "${e.titulo}" (${e.fecha})`)} className="btn btn-primary" target="_blank" rel="noopener">
-                            <i className="fab fa-whatsapp"></i> Quiero participar
+                            <Icono n="whatsapp" /> Quiero participar
                         </a>
                     )}
                     <button className="btn btn-outline" onClick={compartir}>
-                        <i className="fas fa-share-nodes"></i> {copiado ? '¡Link copiado!' : 'Compartir'}
+                        <Icono n="share" /> {copiado ? '¡Link copiado!' : 'Compartir'}
                     </button>
                 </div>
             </section>

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, NavLink, Outlet, useLocation } from 'react-router';
+import Icono from './Icono.jsx';
 import { wa, TELEFONO, DIRECCION, EMAIL, INSTAGRAM } from '../data/site.js';
 
 const NAV = [
@@ -18,7 +19,6 @@ export default function Layout() {
     const { pathname } = useLocation();
     const [menu, setMenu] = useState(false);
     const [arriba, setArriba] = useState(false);
-    const [cookies, setCookies] = useState(false);
 
     useEffect(() => {
         setMenu(false);
@@ -36,17 +36,8 @@ export default function Layout() {
     useEffect(() => {
         const onScroll = () => { setArriba(window.scrollY > 300); };
         window.addEventListener('scroll', onScroll, { passive: true });
-        let t;
-        try {
-            if (!localStorage.getItem('cookiesAccepted')) t = setTimeout(() => setCookies(true), 2000);
-        } catch { /* storage bloqueado: no mostramos el aviso */ }
-        return () => { window.removeEventListener('scroll', onScroll); clearTimeout(t); };
+        return () => window.removeEventListener('scroll', onScroll);
     }, []);
-
-    const aceptarCookies = () => {
-        try { localStorage.setItem('cookiesAccepted', 'true'); } catch { /* sin storage */ }
-        setCookies(false);
-    };
 
     return (
         <>
@@ -62,20 +53,20 @@ export default function Layout() {
                             ))}
                         </ul>
                         <a href={INSCRIBITE} className="nav-cta" target="_blank" rel="noopener">
-                            Inscribite <i className="fas fa-arrow-right" aria-hidden="true"></i>
+                            Inscribite <Icono n="arrow-right" />
                         </a>
                     </nav>
                     <button
                         className="menu-btn" aria-label={menu ? "Cerrar menú" : "Abrir menú"}
                         aria-expanded={menu} aria-controls="nav-menu" onClick={() => setMenu(!menu)}
                     >
-                        <i className={`fas ${menu ? "fa-xmark" : "fa-bars"}`} aria-hidden="true"></i>
+                        <Icono n={menu ? "xmark" : "bars"} />
                     </button>
                 </div>
             </header>
 
             <a href={INSCRIBITE} className="mobile-cta" target="_blank" rel="noopener">
-                <i className="fab fa-whatsapp"></i> Reservar clase de prueba gratis
+                <Icono n="whatsapp" /> Reservar clase de prueba gratis
             </a>
 
             <main><Outlet /></main>
@@ -87,7 +78,7 @@ export default function Layout() {
                             <img src="/Fotos/logoClub.png" alt="Club Center Fight Academy" className="footer-logo" width="542" height="510" loading="lazy" decoding="async" />
                             <p>Tu camino hacia la excelencia en artes marciales. Formamos campeones dentro y fuera del tatami.</p>
                             <div className="social-links">
-                                <a href={`https://instagram.com/${INSTAGRAM}`} target="_blank" rel="noopener" aria-label="Instagram"><i className="fab fa-instagram"></i></a>
+                                <a href={`https://instagram.com/${INSTAGRAM}`} target="_blank" rel="noopener" aria-label="Instagram"><Icono n="instagram" /></a>
                             </div>
                         </div>
                         <div className="footer-links">
@@ -98,9 +89,9 @@ export default function Layout() {
                         </div>
                         <div className="footer-contact">
                             <h3>Contacto</h3>
-                            <p><i className="fas fa-map-marker-alt"></i> {DIRECCION}</p>
-                            <p><i className="fas fa-phone"></i> {TELEFONO}</p>
-                            <p><i className="fas fa-envelope"></i> {EMAIL}</p>
+                            <p><Icono n="mapa" /> {DIRECCION}</p>
+                            <p><Icono n="phone" /> {TELEFONO}</p>
+                            <p><Icono n="envelope" /> {EMAIL}</p>
                         </div>
                     </div>
                     <div className="footer-bottom">
@@ -110,19 +101,12 @@ export default function Layout() {
             </footer>
 
             <a href={wa('Hola, quiero consultar sobre las clases')} className="chatbot-floating-btn" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp">
-                <i className="fab fa-whatsapp"></i>
+                <Icono n="whatsapp" />
             </a>
 
             <button id="btn-up" className={arriba ? 'visible' : ''} aria-label="Ir arriba" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-                <i className="fas fa-arrow-up"></i>
+                <Icono n="arrow-up" />
             </button>
-
-            {cookies && (
-                <div id="cookie-bar">
-                    Usamos cookies para mejorar tu experiencia.
-                    <button id="accept-cookies" onClick={aceptarCookies}>Aceptar</button>
-                </div>
-            )}
         </>
     );
 }

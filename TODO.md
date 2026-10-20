@@ -68,6 +68,9 @@ Estado al 2026-10-20. Sitio en React + Vite, deploy en Cloudflare (`clubcenter.k
 - [x] Deploy en Cloudflare con dominio propio
 - [x] Rediseño mobile first: estética oscura con vidrio y header tipo píldora
 - [x] Reseñas de Google nativas en lugar del widget pago de Elfsight
+- [x] Mejoras de UX: bloque "Próximas clases" en el inicio, horarios arrancan en "hoy" en el celu, tarjeta de clase entera clickeable, sin barra de cookies (no se usan), email opcional en la inscripción
+- [x] SEO local: JSON-LD `SportsActivityLocation`, Open Graph, `sitemap.xml` (se genera en el build) y `robots.txt`
+- [x] Performance: íconos como SVG inline y fuentes servidas desde el sitio (sin Font Awesome ni Google Fonts por CDN)
 
 ## Otros pendientes
 - [ ] Puntaje y cantidad de reseñas de Google (para mostrarlo en la sección de opiniones)

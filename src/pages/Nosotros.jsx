@@ -1,8 +1,9 @@
 import { Link } from 'react-router';
 import { EQUIPO } from '../data/equipo.js';
 import { Hero, SectionHeader, Cta, useMeta } from '../components/ui.jsx';
+import Icono from '../components/Icono.jsx';
 
-const VALORES = [['fa-handshake', 'Respeto'], ['fa-bolt', 'Disciplina'], ['fa-heart', 'Pasión'], ['fa-users', 'Comunidad'], ['fa-trophy', 'Excelencia']];
+const VALORES = [['handshake', 'Respeto'], ['bolt', 'Disciplina'], ['heart', 'Pasión'], ['users', 'Comunidad'], ['trophy', 'Excelencia']];
 
 function Grupo({ rol, label, titulo, texto }) {
     const gente = EQUIPO.filter((p) => p.rol === rol);
@@ -45,7 +46,7 @@ export default function Nosotros() {
                             <h2>Nuestros valores</h2>
                         </div>
                         <ul className="about-values">
-                            {VALORES.map(([i, v]) => <li key={v}><i className={`fas ${i}`}></i> {v}</li>)}
+                            {VALORES.map(([i, v]) => <li key={v}><Icono n={i} /> {v}</li>)}
                         </ul>
                     </div>
                     <div className="about-img">

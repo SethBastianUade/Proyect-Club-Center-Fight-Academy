@@ -5,21 +5,25 @@ import { proximos } from '../data/eventos.js';
 import { SectionHeader, Cta, useMeta } from '../components/ui.jsx';
 import { OPINIONES, GOOGLE_RESENAS } from '../data/opiniones.js';
 import EventoCard from '../components/EventoCard.jsx';
+import ClaseCard from '../components/ClaseCard.jsx';
+import Icono from '../components/Icono.jsx';
+import { proximasClases } from '../data/horarios.js';
 
 const PRUEBA = wa('Hola, quiero hacer una clase de prueba');
 
 const STATS = [['200+', 'Alumnos activos'], ['4', 'Disciplinas'], ['10+', 'Años de experiencia'], ['50+', 'Torneos disputados']];
 
 const FEATURES = [
-    ['fa-medal', 'Profesores Certificados', 'Instructores con amplia experiencia y certificaciones internacionales en cada disciplina.'],
-    ['fa-users', 'Comunidad Activa', 'Sumate a una comunidad apasionada por las artes marciales, el respeto y la superación.'],
-    ['fa-dumbbell', 'Instalaciones Modernas', 'Espacios equipados y actualizados para que alcances tu mejor rendimiento.'],
-    ['fa-trophy', 'Competencias', 'Participación y representación en torneos nacionales e internacionales.'],
+    ['medal', 'Profesores Certificados', 'Instructores con amplia experiencia y certificaciones internacionales en cada disciplina.'],
+    ['users', 'Comunidad Activa', 'Sumate a una comunidad apasionada por las artes marciales, el respeto y la superación.'],
+    ['dumbbell', 'Instalaciones Modernas', 'Espacios equipados y actualizados para que alcances tu mejor rendimiento.'],
+    ['trophy', 'Competencias', 'Participación y representación en torneos nacionales e internacionales.'],
 ];
 
 export default function Inicio() {
     useMeta();
     const eventos = proximos().slice(0, 3);
+    const proximas = proximasClases(3);
 
 
     return (
@@ -36,10 +40,10 @@ export default function Inicio() {
                     </p>
                     <div className="hero-banner-actions fade-in-4">
                         <a href={PRUEBA} className="hb-btn hb-btn-primary" target="_blank" rel="noopener">
-                            <i className="fab fa-whatsapp"></i> Reservar clase de prueba
+                            <Icono n="whatsapp" /> Reservar clase de prueba
                         </a>
                         <Link to="/horarios" className="hb-btn hb-btn-ghost">
-                            Ver horarios <i className="fas fa-arrow-right" aria-hidden="true"></i>
+                            Ver horarios <Icono n="arrow-right" />
                         </Link>
                     </div>
 
@@ -50,6 +54,22 @@ export default function Inicio() {
                     </div>
                 </div>
             </section>
+
+            {proximas && (
+                <section className="hoy-section">
+                    <div className="hoy-club">
+                        <div className="hoy-head">
+                            <span className="section-label">{proximas.cuando} en el club</span>
+                            <h2>Próximas clases</h2>
+                            <p>Tocá una clase y reservá tu prueba gratis por WhatsApp.</p>
+                        </div>
+                        <div className="hoy-list">
+                            {proximas.clases.map((c) => <ClaseCard key={c.desde + c.disc} clase={c} />)}
+                        </div>
+                        <Link to="/horarios" className="btn-discipline">Ver grilla completa</Link>
+                    </div>
+                </section>
+            )}
 
             <section className="disciplines-section">
                 <SectionHeader label="Lo que entrenamos" titulo="Nuestras disciplinas" texto="Elegí tu camino hacia la excelencia con instructores certificados" />
@@ -83,7 +103,7 @@ export default function Inicio() {
                 <div className="features-grid">
                     {FEATURES.map(([icon, t, p]) => (
                         <div className="feature-card" key={t}>
-                            <i className={`fas ${icon}`}></i>
+                            <span className="feature-icon"><Icono n={icon} /></span>
                             <h3>{t}</h3>
                             <p>{p}</p>
                         </div>
@@ -96,7 +116,7 @@ export default function Inicio() {
                 <ul className="reviews">
                     {OPINIONES.map((o) => (
                         <li className="review" key={o.autor}>
-                            <i className="fab fa-google" aria-label="Reseña de Google"></i>
+                            <Icono n="google" label="Reseña de Google" />
                             <blockquote>“{o.texto}”</blockquote>
                             <p className="review-author"><span aria-hidden="true">{o.autor[0]}</span>{o.autor}</p>
                         </li>

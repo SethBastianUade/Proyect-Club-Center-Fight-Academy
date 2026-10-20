@@ -3,6 +3,7 @@ import { EQUIPO } from '../data/equipo.js';
 import { wa } from '../data/site.js';
 import { useMeta } from '../components/ui.jsx';
 import NoEncontrado from './NoEncontrado.jsx';
+import Icono from '../components/Icono.jsx';
 
 export default function Perfil() {
     const { slug } = useParams();
@@ -13,7 +14,7 @@ export default function Perfil() {
 
     return (
         <section className="profile">
-            <Link to="/nosotros" className="back"><i className="fas fa-arrow-left"></i> Volver al equipo</Link>
+            <Link to="/nosotros" className="back"><Icono n="arrow-left" /> Volver al equipo</Link>
             <div className="profile-grid">
                 <img
                     src={p.foto || '/Fotos/logoClub.png'} alt={p.nombre}
@@ -32,11 +33,11 @@ export default function Perfil() {
                     {p.logros?.length > 0 && (
                         <>
                             <h2>Logros</h2>
-                            <ul className="logros">{p.logros.map((l) => <li key={l}><i className="fas fa-trophy"></i> {l}</li>)}</ul>
+                            <ul className="logros">{p.logros.map((l) => <li key={l}><Icono n="trophy" /> {l}</li>)}</ul>
                         </>
                     )}
                     <a href={wa(`Hola, quiero entrenar ${p.disciplina} en el club`)} className="btn btn-primary" target="_blank" rel="noopener">
-                        <i className="fab fa-whatsapp"></i> Entrená {p.disciplina}
+                        <Icono n="whatsapp" /> Entrená {p.disciplina}
                     </a>
                 </div>
             </div>
