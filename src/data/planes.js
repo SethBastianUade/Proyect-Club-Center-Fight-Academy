@@ -1,25 +1,33 @@
-// TODO(cliente): precios de EJEMPLO. Reemplazar por los reales antes de publicar.
-// precio: null muestra "Consultar".
+// Aranceles mensuales. precio: null muestra "Consultar". destacado: texto de la etiqueta.
+// Los ids quedan guardados en los leads: si se renombra uno, los leads viejos muestran el id.
 export const PLANES = [
     {
-        id: '2x', nombre: '2 veces por semana', precio: 30000,
-        items: { disciplinas: '1 disciplina', frecuencia: '2 clases semanales', sparring: false, matricula: true },
+        id: 'mar-jue', nombre: 'Martes y jueves', precio: 62900,
+        items: { actividades: '1 actividad', dias: 'Martes y jueves', clases: '8 clases por mes', prueba: true },
     },
     {
-        id: 'libre', nombre: 'Pase libre', precio: 40000, destacado: true,
-        items: { disciplinas: '1 disciplina', frecuencia: 'Ilimitada', sparring: true, matricula: true },
+        id: 'lun-mie-vie', nombre: 'Lunes, miércoles y viernes', precio: 69900,
+        items: { actividades: '1 actividad', dias: 'Lunes, miércoles y viernes', clases: '12 clases por mes', prueba: true },
     },
     {
-        id: 'combo', nombre: 'Combo full', precio: 55000,
-        items: { disciplinas: 'Todas las disciplinas', frecuencia: 'Ilimitada', sparring: true, matricula: true },
+        id: 'una-actividad', nombre: 'Una actividad', precio: 74900,
+        items: { actividades: '1 actividad', dias: 'Lunes a viernes', clases: 'Clases libres', prueba: true },
+    },
+    {
+        id: 'dos-actividades', nombre: 'Dos actividades', precio: 79900,
+        items: { actividades: '2 actividades, combiná como quieras', dias: 'Pase libre', clases: 'Clases libres', prueba: true },
+    },
+    {
+        id: 'pase-libre-total', nombre: 'Pase libre total', precio: 84900, destacado: 'Más completo',
+        items: { actividades: 'Todas las actividades', dias: 'Pase libre', clases: 'Clases libres', prueba: true },
     },
 ];
 
 export const FILAS = [
-    ['disciplinas', 'Disciplinas'],
-    ['frecuencia', 'Frecuencia'],
-    ['sparring', 'Sparring de los sábados'],
-    ['matricula', 'Clase de prueba sin cargo'],
+    ['actividades', 'Actividades'],
+    ['dias', 'Días'],
+    ['clases', 'Clases'],
+    ['prueba', 'Clase de prueba sin cargo'],
 ];
 
 export const precio = (p) => (p == null ? 'Consultar' : `$${p.toLocaleString('es-AR')}`);

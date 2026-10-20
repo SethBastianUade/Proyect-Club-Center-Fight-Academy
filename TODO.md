@@ -10,21 +10,22 @@ Estado al 2026-10-20. Sitio en React + Vite, deploy en Cloudflare (`clubcenter.k
 - [x] Marca el día de hoy
 - [x] "Reservar prueba" en cada clase abre WhatsApp con la clase precargada
 - [x] Horarios en un archivo de datos (`src/data/horarios.js`)
-- [ ] Filtro por **nivel** (principiante / avanzado): falta que el club pase qué nivel tiene cada clase
+- [x] Nivel: todas las clases son para todos los niveles (se aclara en `/horarios`, no hace falta filtro)
 - [ ] Que **recepción edite los horarios sin tocar código**: depende del panel admin (punto 5)
 
-### 2. Precios y planes con comparador — ✅ hecho, con pendientes
+### 2. Precios y planes con comparador — ✅ hecho
 - [x] Tarjetas de planes en `/precios`, con el plan destacado marcado
 - [x] Tabla comparativa (desde tablet)
 - [x] "Inscribirme" lleva a `/inscripcion` con el plan ya elegido
 - [x] "Consultar" abre WhatsApp con el nombre del plan
-- [ ] **Cargar los precios y planes reales** (hoy son de ejemplo en `src/data/planes.js`)
+- [x] Precios y planes reales cargados (5 planes, de $62.900 a $84.900)
 
 ### 3. Calendario de eventos — ✅ hecho, con pendientes
 - [x] `/eventos` con próximos y anteriores, separados según la fecha
 - [x] Página propia por evento (`/eventos/:slug`) con "Compartir" y botón de WhatsApp
 - [x] Próximos eventos en el inicio
-- [ ] **Cargar los eventos reales** (hoy son de ejemplo en `src/data/eventos.js`)
+- [x] Se sacaron los eventos de ejemplo: hoy no hay eventos y la página lo indica con link a Instagram
+- [ ] Cargar eventos cuando haya (`src/data/eventos.js`)
 - [ ] Foto o flyer por evento
 - [ ] Preview propia al compartir en WhatsApp/Instagram: necesita prerender o un Worker que reescriba los meta tags
 
@@ -76,6 +77,7 @@ Estado al 2026-10-20. Sitio en React + Vite, deploy en Cloudflare (`clubcenter.k
 - [x] Performance: íconos como SVG inline y fuentes servidas desde el sitio (sin Font Awesome ni Google Fonts por CDN)
 
 ## Otros pendientes
+- [x] Estadística del inicio: "Entrenando desde 2020" (en lugar de "10+ años")
 - [ ] Puntaje y cantidad de reseñas de Google (para mostrarlo en la sección de opiniones)
 - [ ] Auditoría de performance (Core Web Vitals) y de accesibilidad antes de entregar al cliente
 - [x] `CLAUDE.md` con la arquitectura actual (React + Vite + Worker + D1)

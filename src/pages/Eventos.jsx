@@ -1,4 +1,5 @@
 import { proximos, pasados } from '../data/eventos.js';
+import { INSTAGRAM } from '../data/site.js';
 import { Hero, SectionHeader, Cta, useMeta } from '../components/ui.jsx';
 import EventoCard from '../components/EventoCard.jsx';
 
@@ -14,7 +15,7 @@ export default function Eventos() {
                 <SectionHeader label="Lo que viene" titulo="Próximos eventos" />
                 {prox.length
                     ? <div className="events-grid">{prox.map((e) => <EventoCard key={e.slug} evento={e} />)}</div>
-                    : <p className="empty">No hay eventos programados por ahora. Seguinos en Instagram para enterarte primero.</p>}
+                    : <p className="empty">No hay eventos programados por ahora. <a href={`https://instagram.com/${INSTAGRAM}`} target="_blank" rel="noopener">Seguinos en Instagram</a> para enterarte primero.</p>}
             </section>
 
             {past.length > 0 && (

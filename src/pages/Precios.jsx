@@ -16,7 +16,7 @@ export default function Precios() {
                 <div className="plans">
                     {PLANES.map((p) => (
                         <div key={p.id} className={`plan${p.destacado ? ' featured' : ''}`}>
-                            {p.destacado && <span className="plan-tag">Más elegido</span>}
+                            {p.destacado && <span className="plan-tag">{p.destacado}</span>}
                             <h3>{p.nombre}</h3>
                             <p className="plan-price">{precio(p.precio)}{p.precio != null && <small>/mes</small>}</p>
                             <ul>

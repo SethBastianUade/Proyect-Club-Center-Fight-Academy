@@ -135,7 +135,7 @@ export default function Admin() {
                             <span className="lead-fecha">{fecha(l.creado)}</span>
                         </div>
                         <p className="lead-info">
-                            {[DISCIPLINAS[l.disciplina]?.nombre, PLANES.find((p) => p.id === l.plan)?.nombre].filter(Boolean).join(' · ')}
+                            {[DISCIPLINAS[l.disciplina]?.nombre, PLANES.find((p) => p.id === l.plan)?.nombre ?? l.plan].filter(Boolean).join(' · ')}
                         </p>
                         <p className="lead-contacto">
                             <a href={waLead(l)} target="_blank" rel="noopener" className="lead-wa"><Icono n="whatsapp" /> {l.telefono}</a>

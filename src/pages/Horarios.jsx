@@ -26,7 +26,7 @@ export default function Horarios() {
 
     return (
         <>
-            <Hero badge="Grilla de clases" titulo="Encontrá tu" resaltado="horario" subtitulo="Filtrá por disciplina y día, y reservá tu clase de prueba sin cargo" fondo="hero-contacto" />
+            <Hero badge="Grilla de clases" titulo="Encontrá tu" resaltado="horario" subtitulo="Todas las clases son para todos los niveles. Filtrá por disciplina y día, y reservá tu prueba sin cargo" fondo="hero-contacto" />
 
             <section className="schedule-section horarios">
                 <div className="filters" role="group" aria-label="Filtrar por disciplina">

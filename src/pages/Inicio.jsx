@@ -11,7 +11,7 @@ import { proximasClases } from '../data/horarios.js';
 
 const PRUEBA = wa('Hola, quiero hacer una clase de prueba');
 
-const STATS = [['200+', 'Alumnos activos'], ['4', 'Disciplinas'], ['10+', 'Años de experiencia'], ['50+', 'Torneos disputados']];
+const STATS = [['200+', 'Alumnos activos'], ['4', 'Disciplinas'], ['2020', 'Entrenando desde'], ['50+', 'Torneos disputados']];
 
 const FEATURES = [
     ['medal', 'Profesores Certificados', 'Instructores con amplia experiencia y certificaciones internacionales en cada disciplina.'],
