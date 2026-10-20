@@ -2,7 +2,7 @@
   "name": "ccfa",
   "main": "worker/index.js",
   "compatibility_date": "2026-10-01",
-  // Solo el dominio propio: la URL *.workers.dev quedaría fuera de Cloudflare Access
+  // Solo el dominio propio (la cookie del panel es del dominio)
   "workers_dev": false,
   "preview_urls": false,
   // Cloudflare Builds corre solo `wrangler deploy`: esto compila antes
@@ -17,10 +17,6 @@
   },
   "d1_databases": [
     { "binding": "DB", "database_name": "ccfa", "database_id": "248df70e-9aaf-47d8-9b2b-b93ef5683403" }
-  ],
-  // Datos de Cloudflare Access (Zero Trust → Access → Applications). Vacíos = /api/admin bloqueado
-  "vars": {
-    "ACCESS_TEAM_DOMAIN": "",
-    "ACCESS_AUD": ""
-  }
+  ]
+  // Contraseña del panel /admin (secret, no va acá): npx wrangler secret put ADMIN_PASSWORD
 }

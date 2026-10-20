@@ -33,6 +33,38 @@ async function api(path, opciones) {
     return r.json();
 }
 
+function Login({ onEntrar }) {
+    const [error, setError] = useState(null);
+    const [enviando, setEnviando] = useState(false);
+
+    const entrar = async (e) => {
+        e.preventDefault();
+        const password = e.currentTarget.password.value;
+        setEnviando(true);
+        const r = await fetch('/api/admin/login', {
+            method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ password }),
+        }).catch(() => null);
+        setEnviando(false);
+        if (r?.ok) return onEntrar();
+        setError((await r?.json().catch(() => null))?.error || 'No se pudo conectar con el servidor');
+    };
+
+    return (
+        <div className="admin admin-login">
+            <form className="inscription-form" onSubmit={entrar}>
+                <img src="/Fotos/logoClub.png" alt="Club Center Fight Academy" width="542" height="510" />
+                <h1>Panel del club</h1>
+                <div className="form-group">
+                    <label htmlFor="password">Contraseña</label>
+                    <input type="password" id="password" name="password" autoComplete="current-password" required autoFocus />
+                </div>
+                {error && <p className="admin-error" role="alert">{error}</p>}
+                <button type="submit" className="btn btn-primary" disabled={enviando}>{enviando ? 'Entrando…' : 'Entrar'}</button>
+            </form>
+        </div>
+    );
+}
+
 export default function Admin() {
     useMeta('Panel');
     const [filtro, setFiltro] = useState('');
@@ -57,6 +89,14 @@ export default function Admin() {
         }
     };
 
+    const salir = async () => {
+        await fetch('/api/admin/logout', { method: 'POST' }).catch(() => {});
+        setDatos(null);
+        setError('sesion');
+    };
+
+    if (error === 'sesion') return <Login onEntrar={() => { setError(null); cargar(); }} />;
+
     const conteo = datos?.conteo || {};
     const total = Object.values(conteo).reduce((a, b) => a + b, 0);
 
@@ -65,11 +105,12 @@ export default function Admin() {
             <header className="admin-header">
                 <Link to="/" className="brand" aria-label="Volver al sitio"><img src="/Fotos/logoClub.png" alt="" width="542" height="510" /></Link>
                 <h1>Interesados</h1>
+                <button className="chip admin-salir" onClick={salir}>Salir</button>
             </header>
 
             {error && (
                 <p className="admin-error">
-                    {error === 'sesion' ? 'Tu sesión venció. ' : 'No se pudo conectar con el servidor. '}
+                    No se pudo conectar con el servidor.
                     <button onClick={() => window.location.reload()}>Recargar</button>
                 </p>
             )}

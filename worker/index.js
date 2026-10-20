@@ -1,12 +1,14 @@
 // API del sitio. Solo corre para /api/* (ver run_worker_first en wrangler.jsonc).
 // POST /api/leads              → público: guarda un interesado del formulario de inscripción
+// POST /api/admin/login        → panel: contraseña → cookie de sesión
+// POST /api/admin/logout       → panel: borra la cookie
 // GET  /api/admin/leads        → panel: lista de interesados + conteo por estado
 // PATCH /api/admin/leads/:id   → panel: cambia estado o notas
-// /api/admin/* lo protege Cloudflare Access y además se verifica el token acá.
+// El resto de /api/admin/* exige la cookie de sesión. La contraseña es el secret ADMIN_PASSWORD.
 
 export const ESTADOS = ['nuevo', 'contactado', 'prueba', 'inscripto', 'descartado'];
 
-const json = (data, status = 200) => Response.json(data, { status, headers: { 'Cache-Control': 'no-store' } });
+const json = (data, status = 200, headers = {}) => Response.json(data, { status, headers: { 'Cache-Control': 'no-store', ...headers } });
 const txt = (v, max) => (typeof v === 'string' ? v.trim().slice(0, max) : '');
 
 export default {
@@ -22,9 +24,11 @@ export default {
 
         if (pathname === '/api/leads' && request.method === 'POST') return crearLead(request, env);
 
+        if (pathname === '/api/admin/login' && request.method === 'POST') return login(request, env);
+        if (pathname === '/api/admin/logout' && request.method === 'POST') return json({ ok: true }, 200, cookie('', 0));
+
         if (pathname.startsWith('/api/admin/')) {
-            const usuario = await verificarAccess(request, env);
-            if (!usuario) return json({ error: 'No autorizado' }, 401);
+            if (!(await sesionValida(request, env))) return json({ error: 'No autorizado' }, 401);
 
             if (pathname === '/api/admin/leads' && request.method === 'GET') return listarLeads(url, env);
             const m = pathname.match(/^\/api\/admin\/leads\/(\d+)$/);
@@ -79,39 +83,57 @@ async function actualizarLead(id, request, env) {
     return json({ ok: true });
 }
 
-// ---------- Cloudflare Access ----------
-// Valida el JWT que Access agrega en cada request autenticado (firma RS256, audiencia, emisor y vencimiento).
-// Sin ACCESS_TEAM_DOMAIN / ACCESS_AUD configurados no deja pasar a nadie.
+// ---------- Login del panel ----------
+// Sesión = cookie "<vencimiento>.<firma HMAC>" firmada con ADMIN_PASSWORD: cambiar la contraseña cierra todas las sesiones.
+// Sin ADMIN_PASSWORD configurada nadie puede entrar.
 
-const b64 = (s) => Uint8Array.from(atob(s.replace(/-/g, '+').replace(/_/g, '/')), (c) => c.charCodeAt(0));
-const b64json = (s) => JSON.parse(new TextDecoder().decode(b64(s)));
-let certs; // claves públicas de Access, cacheadas mientras viva el isolate
+const SESION_DIAS = 7;
+const MAX_FALLIDOS = 5; // por IP cada 15 minutos
+const VENTANA_MS = 15 * 60 * 1000;
+const enc = new TextEncoder();
 
-async function clavesAccess(iss, refrescar) {
-    if (!certs || refrescar) certs = (await (await fetch(`${iss}/cdn-cgi/access/certs`)).json()).keys;
-    return certs;
+const cookie = (valor, maxAge) => ({
+    'Set-Cookie': `__Host-sesion=${valor}; Path=/; Max-Age=${maxAge}; HttpOnly; Secure; SameSite=Strict`,
+});
+
+async function firmar(texto, env) {
+    const key = await crypto.subtle.importKey('raw', enc.encode(env.ADMIN_PASSWORD), { name: 'HMAC', hash: 'SHA-256' }, false, ['sign']);
+    return new Uint8Array(await crypto.subtle.sign('HMAC', key, enc.encode(texto)));
+}
+const hex = (bytes) => [...bytes].map((b) => b.toString(16).padStart(2, '0')).join('');
+const iguales = (a, b) => a.byteLength === b.byteLength && crypto.subtle.timingSafeEqual(a, b);
+
+async function sesionValida(request, env) {
+    if (!env.ADMIN_PASSWORD) return false;
+    const valor = request.headers.get('Cookie')?.match(/(?:^|;\s*)__Host-sesion=([^;]+)/)?.[1];
+    const [vence, firma] = valor?.split('.') ?? [];
+    if (!firma || !(Number(vence) > Date.now())) return false;
+    return iguales(enc.encode(firma), enc.encode(hex(await firmar(vence, env))));
 }
 
-async function verificarAccess(request, env) {
-    if (env.DEV_SIN_ACCESS === '1') return { email: 'dev@local' }; // solo en .dev.vars, nunca en producción
-    const token = request.headers.get('Cf-Access-Jwt-Assertion');
-    if (!token || !env.ACCESS_TEAM_DOMAIN || !env.ACCESS_AUD) return null;
-    try {
-        const [h, p, firma] = token.split('.');
-        const header = b64json(h);
-        const payload = b64json(p);
-        const iss = `https://${env.ACCESS_TEAM_DOMAIN}`;
-        if (header.alg !== 'RS256' || payload.iss !== iss || ![].concat(payload.aud).includes(env.ACCESS_AUD)) return null;
-        if (!payload.exp || payload.exp * 1000 < Date.now()) return null;
+async function login(request, env) {
+    if (!env.ADMIN_PASSWORD) return json({ error: 'Panel sin contraseña configurada' }, 503);
+    const ip = request.headers.get('CF-Connecting-IP') || 'local';
+    const ahora = Date.now();
 
-        let jwk = (await clavesAccess(iss)).find((k) => k.kid === header.kid);
-        jwk ??= (await clavesAccess(iss, true)).find((k) => k.kid === header.kid); // Access rota las claves
-        if (!jwk) return null;
+    const { n } = await env.DB.prepare('SELECT COUNT(*) AS n FROM login_fallidos WHERE ip = ? AND creado > ?')
+        .bind(ip, ahora - VENTANA_MS).first();
+    if (n >= MAX_FALLIDOS) return json({ error: 'Demasiados intentos. Probá de nuevo en 15 minutos.' }, 429);
 
-        const key = await crypto.subtle.importKey('jwk', jwk, { name: 'RSASSA-PKCS1-v1_5', hash: 'SHA-256' }, false, ['verify']);
-        const ok = await crypto.subtle.verify('RSASSA-PKCS1-v1_5', key, b64(firma), new TextEncoder().encode(`${h}.${p}`));
-        return ok ? payload : null;
-    } catch {
-        return null;
+    let d;
+    try { d = await request.json(); } catch { return json({ error: 'JSON inválido' }, 400); }
+    // Se comparan las firmas (mismo largo) para que el tiempo de respuesta no revele nada de la contraseña
+    const ok = typeof d.password === 'string' && iguales(await firmar(d.password, env), await firmar(env.ADMIN_PASSWORD, env));
+
+    if (!ok) {
+        await env.DB.batch([
+            env.DB.prepare('INSERT INTO login_fallidos (ip, creado) VALUES (?, ?)').bind(ip, ahora),
+            env.DB.prepare('DELETE FROM login_fallidos WHERE creado < ?').bind(ahora - 24 * 60 * 60 * 1000),
+        ]);
+        return json({ error: 'Contraseña incorrecta' }, 401);
     }
+
+    await env.DB.prepare('DELETE FROM login_fallidos WHERE ip = ?').bind(ip).run();
+    const vence = String(ahora + SESION_DIAS * 24 * 60 * 60 * 1000);
+    return json({ ok: true }, 200, cookie(`${vence}.${hex(await firmar(vence, env))}`, SESION_DIAS * 24 * 60 * 60));
 }

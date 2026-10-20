@@ -33,19 +33,20 @@ Estado al 2026-10-20. Sitio en React + Vite, deploy en Cloudflare (`clubcenter.k
 - [x] Perfil individual (`/equipo/:slug`) con récord, logros y galería si se cargan
 - [ ] Récord, logros y fotos de cada competidor (`src/data/equipo.js`)
 
-## Con panel admin (Workers + D1 + Cloudflare Access)
+## Con panel admin (Workers + D1 + login propio)
 
 ### 5. Mini CMS — ⏳ pendiente
 - [ ] Tablas en D1 para horarios, eventos, precios y competidores
-- [ ] Panel con login (Cloudflare Access) para cargar y editar
+- [ ] Pantallas del panel para cargar y editar (el login ya existe)
 - [ ] Pasar el sitio a leer de D1 en vez de `src/data/`
 
-### 6. Leads — ✅ hecho, falta configurar Access
+### 6. Leads — ✅ hecho, falta cargar la contraseña
 - [x] La inscripción guarda en D1 (`POST /api/leads`) además de abrir WhatsApp
 - [x] Panel `/admin` con los interesados, filtro y conteo por estado (nuevo / contactado / vino a la prueba / se inscribió / descartado), notas y botón de WhatsApp
 - [x] Anti-spam básico: campo trampa + solo acepta envíos desde el propio sitio
-- [ ] Aplicar la migración en producción (`npm run db:migrate`)
-- [ ] Configurar Cloudflare Access para `/admin*` y `/api/admin*` y completar `ACCESS_TEAM_DOMAIN` / `ACCESS_AUD` en `wrangler.jsonc`
+- [x] Login del panel con contraseña propia (sin Cloudflare Access, que pide tarjeta): sesión de 7 días y bloqueo tras 5 intentos fallidos
+- [x] Migraciones aplicadas en producción
+- [ ] Cargar la contraseña: `npx wrangler secret put ADMIN_PASSWORD`
 - [ ] Anti-spam fuerte con Turnstile si empieza a entrar basura
 
 ## Para alumnos
