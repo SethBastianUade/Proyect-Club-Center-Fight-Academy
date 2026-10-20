@@ -1,9 +1,9 @@
-import { useEffect } from 'react';
 import { Link } from 'react-router';
 import { wa } from '../data/site.js';
 import { DISCIPLINAS, PRINCIPALES } from '../data/disciplinas.js';
 import { proximos } from '../data/eventos.js';
 import { SectionHeader, Cta, useMeta } from '../components/ui.jsx';
+import { OPINIONES, GOOGLE_RESENAS } from '../data/opiniones.js';
 import EventoCard from '../components/EventoCard.jsx';
 
 const PRUEBA = wa('Hola, quiero hacer una clase de prueba');
@@ -21,14 +21,6 @@ export default function Inicio() {
     useMeta();
     const eventos = proximos().slice(0, 3);
 
-    // Widget de reseñas de Google (Elfsight)
-    useEffect(() => {
-        if (document.querySelector('script[src*="elfsight"]')) return;
-        const s = document.createElement('script');
-        s.src = 'https://static.elfsight.com/platform/platform.js';
-        s.async = true;
-        document.body.appendChild(s);
-    }, []);
 
     return (
         <>
@@ -101,7 +93,18 @@ export default function Inicio() {
 
             <section className="testimonials-section">
                 <SectionHeader label="Opiniones" titulo="Lo que dicen nuestros alumnos" texto="Experiencias reales de nuestra comunidad" />
-                <div className="elfsight-app-14b65929-b170-4f67-a161-ebc540e7ea4a" data-elfsight-app-lazy></div>
+                <ul className="reviews">
+                    {OPINIONES.map((o) => (
+                        <li className="review" key={o.autor}>
+                            <i className="fab fa-google" aria-label="Reseña de Google"></i>
+                            <blockquote>“{o.texto}”</blockquote>
+                            <p className="review-author"><span aria-hidden="true">{o.autor[0]}</span>{o.autor}</p>
+                        </li>
+                    ))}
+                </ul>
+                <p className="section-more">
+                    <a href={GOOGLE_RESENAS} className="btn-discipline" target="_blank" rel="noopener">Ver todas en Google</a>
+                </p>
             </section>
 
             <Cta
