@@ -40,13 +40,13 @@ Estado al 2026-10-20. Sitio en React + Vite, deploy en Cloudflare (`clubcenter.k
 - [ ] Pantallas del panel para cargar y editar (el login ya existe)
 - [ ] Pasar el sitio a leer de D1 en vez de `src/data/`
 
-### 6. Leads — ✅ hecho, falta cargar la contraseña
+### 6. Leads — ✅ hecho
 - [x] La inscripción guarda en D1 (`POST /api/leads`) además de abrir WhatsApp
 - [x] Panel `/admin` con los interesados, filtro y conteo por estado (nuevo / contactado / vino a la prueba / se inscribió / descartado), notas y botón de WhatsApp
 - [x] Anti-spam básico: campo trampa + solo acepta envíos desde el propio sitio
 - [x] Login del panel con contraseña propia (sin Cloudflare Access, que pide tarjeta): sesión de 7 días y bloqueo tras 5 intentos fallidos
 - [x] Migraciones aplicadas en producción
-- [ ] Cargar la contraseña: `npx wrangler secret put ADMIN_PASSWORD`
+- [x] Contraseña cargada como secret del Worker `clubcenter-web` (cambiarla: `npx wrangler secret put ADMIN_PASSWORD`)
 - [ ] Anti-spam fuerte con Turnstile si empieza a entrar basura
 
 ## Para alumnos
@@ -78,4 +78,4 @@ Estado al 2026-10-20. Sitio en React + Vite, deploy en Cloudflare (`clubcenter.k
 ## Otros pendientes
 - [ ] Puntaje y cantidad de reseñas de Google (para mostrarlo en la sección de opiniones)
 - [ ] Auditoría de performance (Core Web Vitals) y de accesibilidad antes de entregar al cliente
-- [ ] Anotar en `AGENTS.md` que este proyecto ya no es vanilla
+- [x] `CLAUDE.md` con la arquitectura actual (React + Vite + Worker + D1)
