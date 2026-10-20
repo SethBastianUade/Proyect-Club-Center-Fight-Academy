@@ -19,6 +19,10 @@ export default function Inscripcion() {
             `Disciplina: ${DISCIPLINAS[f.disciplina].nombre}`, `Plan: ${plan}`, '',
             '¿Me pasan info para comenzar?',
         ].join('\n');
+        // Queda guardado para el panel de leads. keepalive: el request sigue aunque el navegador ya se fue a WhatsApp
+        fetch('/api/leads', {
+            method: 'POST', keepalive: true, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(f),
+        }).catch(() => { /* si falla, igual llega por WhatsApp */ });
         window.location.href = wa(texto);
     };
 
@@ -27,6 +31,8 @@ export default function Inscripcion() {
             <SectionHeader label="Empezá hoy" titulo="Inscripción" texto="Completá el formulario y te contactamos por WhatsApp para coordinar tu inicio" />
             <div className="inscription-container">
                 <form className="inscription-form" onSubmit={enviar}>
+                    {/* Trampa para bots: invisible para personas */}
+                    <input type="text" name="web" className="trampa" tabIndex="-1" autoComplete="off" aria-hidden="true" />
                     <div className="form-group">
                         <label htmlFor="nombre">Nombre completo *</label>
                         <input type="text" id="nombre" name="nombre" placeholder="Tu nombre y apellido" required />

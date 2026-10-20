@@ -11,10 +11,13 @@ import Perfil from './pages/Perfil.jsx';
 import Contacto from './pages/Contacto.jsx';
 import Inscripcion from './pages/Inscripcion.jsx';
 import NoEncontrado from './pages/NoEncontrado.jsx';
+import Admin from './pages/Admin.jsx';
 
 export default function App() {
     return (
         <Routes>
+            {/* Panel interno, sin el layout del sitio. Lo protege Cloudflare Access */}
+            <Route path="admin" element={<Admin />} />
             <Route element={<Layout />}>
                 <Route index element={<Inicio />} />
                 <Route path="disciplinas" element={<Disciplinas />} />

@@ -1,5 +1,5 @@
 import { Link, useParams } from 'react-router';
-import { EQUIPO } from '../data/equipo.js';
+import { COMPETIDORES } from '../data/equipo.js';
 import { wa } from '../data/site.js';
 import { useMeta } from '../components/ui.jsx';
 import NoEncontrado from './NoEncontrado.jsx';
@@ -7,9 +7,8 @@ import Icono from '../components/Icono.jsx';
 
 export default function Perfil() {
     const { slug } = useParams();
-    const p = EQUIPO.find((x) => x.slug === slug);
-    const rol = p?.rol === 'profesor' ? 'Profesor' : 'Competidor';
-    useMeta(p?.nombre, p && `${p.nombre}, ${rol.toLowerCase()} de ${p.disciplina} en Club Center Fight Academy.`);
+    const p = COMPETIDORES.find((x) => x.slug === slug);
+    useMeta(p?.nombre, p && `${p.nombre}, competidor de ${p.disciplina} en Club Center Fight Academy.`);
     if (!p) return <NoEncontrado />;
 
     return (
@@ -22,7 +21,7 @@ export default function Perfil() {
                     className={`profile-photo${p.foto ? '' : ' no-photo'}`}
                 />
                 <div>
-                    <span className="section-label">{rol} · {p.disciplina}</span>
+                    <span className="section-label">Competidor · {p.disciplina}</span>
                     <h1>{p.nombre}</h1>
                     {p.record && (
                         <p className="record" aria-label="Récord">

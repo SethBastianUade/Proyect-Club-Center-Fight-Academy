@@ -1,18 +1,17 @@
 import { Link } from 'react-router';
-import { EQUIPO } from '../data/equipo.js';
+import { COMPETIDORES } from '../data/equipo.js';
 import { Hero, SectionHeader, Cta, useMeta } from '../components/ui.jsx';
 import Icono from '../components/Icono.jsx';
 
 const VALORES = [['handshake', 'Respeto'], ['bolt', 'Disciplina'], ['heart', 'Pasión'], ['users', 'Comunidad'], ['trophy', 'Excelencia']];
 
-function Grupo({ rol, label, titulo, texto }) {
-    const gente = EQUIPO.filter((p) => p.rol === rol);
-    if (!gente.length) return null;
+function Competidores() {
+    if (!COMPETIDORES.length) return null;
     return (
-        <section className={`team-section team-${rol}`}>
-            <SectionHeader label={label} titulo={titulo} texto={texto} />
+        <section className="team-section">
+            <SectionHeader label="Orgullo del equipo" titulo="Competidores destacados" texto="Representantes de Club Center Fight Academy" />
             <div className="team-grid">
-                {gente.map((p) => (
+                {COMPETIDORES.map((p) => (
                     <Link to={`/equipo/${p.slug}`} className="team-card" key={p.slug}>
                         <img
                             src={p.foto || '/Fotos/logoClub.png'} alt={p.nombre}
@@ -20,7 +19,7 @@ function Grupo({ rol, label, titulo, texto }) {
                             className={p.foto ? '' : 'no-photo'} loading="lazy" decoding="async"
                         />
                         <h3>{p.nombre}</h3>
-                        <p>{rol === 'profesor' ? 'Profesor' : 'Competidor'} de {p.disciplina}</p>
+                        <p>Competidor de {p.disciplina}</p>
                     </Link>
                 ))}
             </div>
@@ -29,7 +28,7 @@ function Grupo({ rol, label, titulo, texto }) {
 }
 
 export default function Nosotros() {
-    useMeta('Nosotros', 'Conocé la historia, valores, profesores y competidores de Club Center Fight Academy.');
+    useMeta('Nosotros', 'Conocé la historia, los valores y los competidores de Club Center Fight Academy.');
     return (
         <>
             <Hero badge="Quiénes somos" titulo="Club Center" resaltado="Fight Academy" subtitulo="Pasión, valores y excelencia en artes marciales desde CABA" fondo="hero-nosotros" />
@@ -55,8 +54,7 @@ export default function Nosotros() {
                 </div>
             </section>
 
-            <Grupo rol="profesor" label="Staff" titulo="Nuestros profesores" texto="Instructores certificados en cada disciplina" />
-            <Grupo rol="competidor" label="Orgullo del equipo" titulo="Competidores destacados" texto="Representantes de Club Center Fight Academy" />
+            <Competidores />
 
             <Cta
                 titulo="¿Querés ser parte?"

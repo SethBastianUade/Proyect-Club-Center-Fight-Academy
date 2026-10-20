@@ -28,23 +28,25 @@ Estado al 2026-10-20. Sitio en React + Vite, deploy en Cloudflare (`clubcenter.k
 - [ ] Foto o flyer por evento
 - [ ] Preview propia al compartir en WhatsApp/Instagram: necesita prerender o un Worker que reescriba los meta tags
 
-### 4. Perfiles de profesores y competidores — ✅ hecho, con pendientes
-- [x] Profesores y competidores en `/nosotros`
+### 4. Competidores destacados — ✅ hecho, con pendientes
+- [x] Competidores destacados en `/nosotros` (la sección de profesores se sacó)
 - [x] Perfil individual (`/equipo/:slug`) con récord, logros y galería si se cargan
-- [ ] **Cargar los profesores reales** con foto (hoy son de ejemplo en `src/data/equipo.js`)
-- [ ] Récord, logros y fotos de cada competidor
+- [ ] Récord, logros y fotos de cada competidor (`src/data/equipo.js`)
 
 ## Con panel admin (Workers + D1 + Cloudflare Access)
 
 ### 5. Mini CMS — ⏳ pendiente
-- [ ] Base D1 con horarios, eventos, precios y equipo
+- [ ] Tablas en D1 para horarios, eventos, precios y competidores
 - [ ] Panel con login (Cloudflare Access) para cargar y editar
 - [ ] Pasar el sitio a leer de D1 en vez de `src/data/`
 
-### 6. Leads — ⏳ pendiente
-- [ ] La inscripción guarda en D1 además de abrir WhatsApp
-- [ ] Tabla de interesados con estado: contactado / vino a la prueba / se inscribió
-- [ ] Anti-spam en el formulario (Turnstile)
+### 6. Leads — ✅ hecho, falta configurar Access
+- [x] La inscripción guarda en D1 (`POST /api/leads`) además de abrir WhatsApp
+- [x] Panel `/admin` con los interesados, filtro y conteo por estado (nuevo / contactado / vino a la prueba / se inscribió / descartado), notas y botón de WhatsApp
+- [x] Anti-spam básico: campo trampa + solo acepta envíos desde el propio sitio
+- [ ] Aplicar la migración en producción (`npm run db:migrate`)
+- [ ] Configurar Cloudflare Access para `/admin*` y `/api/admin*` y completar `ACCESS_TEAM_DOMAIN` / `ACCESS_AUD` en `wrangler.jsonc`
+- [ ] Anti-spam fuerte con Turnstile si empieza a entrar basura
 
 ## Para alumnos
 
