@@ -1,5 +1,5 @@
 import { useSearchParams } from 'react-router';
-import { DISCIPLINAS, PRINCIPALES } from '../data/disciplinas.js';
+import { DISCIPLINAS, INSCRIBIBLES } from '../data/disciplinas.js';
 import { useContenido } from '../contenido.jsx';
 import { wa } from '../data/site.js';
 import { SectionHeader, useMeta } from '../components/ui.jsx';
@@ -17,7 +17,7 @@ export default function Inscripcion() {
         const texto = [
             'Hola! Quiero inscribirme en Club Center Fight Academy.', '',
             `Nombre: ${f.nombre}`, `Teléfono: ${f.telefono}`, ...(f.email ? [`Email: ${f.email}`] : []),
-            `Disciplina: ${DISCIPLINAS[f.disciplina].nombre}`, `Plan: ${plan}`, '',
+            `Disciplina: ${DISCIPLINAS[f.disciplina].nombre}`, `Plan: ${plan ?? 'todavía no sé, quiero que me asesoren'}`, '',
             '¿Me pasan info para comenzar?',
         ].join('\n');
         // Queda guardado para el panel de leads. keepalive: el request sigue aunque el navegador ya se fue a WhatsApp
@@ -50,13 +50,13 @@ export default function Inscripcion() {
                         <label htmlFor="disciplina">Disciplina *</label>
                         <select id="disciplina" name="disciplina" defaultValue={params.get('d') || ''} required>
                             <option value="">Seleccioná una disciplina</option>
-                            {PRINCIPALES.map((id) => <option key={id} value={id}>{DISCIPLINAS[id].nombre}</option>)}
+                            {INSCRIBIBLES.map((id) => <option key={id} value={id}>{DISCIPLINAS[id].nombre}</option>)}
                         </select>
                     </div>
                     <div className="form-group">
-                        <label htmlFor="plan">Plan *</label>
-                        <select id="plan" name="plan" defaultValue={params.get('plan') || ''} required>
-                            <option value="">Seleccioná un plan</option>
+                        <label htmlFor="plan">Plan</label>
+                        <select id="plan" name="plan" defaultValue={params.get('plan') || ''}>
+                            <option value="">Todavía no sé, quiero que me asesoren</option>
                             {planes.map((p) => <option key={p.id} value={p.id}>{p.nombre}</option>)}
                         </select>
                     </div>

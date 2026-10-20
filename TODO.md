@@ -76,7 +76,11 @@ Estado al 2026-10-20. Sitio en React + Vite, deploy en Cloudflare (`clubcenter.k
 - [x] SEO local: JSON-LD `SportsActivityLocation`, Open Graph, `sitemap.xml` (se genera en el build) y `robots.txt`
 - [x] Performance: íconos como SVG inline y fuentes servidas desde el sitio (sin Font Awesome ni Google Fonts por CDN)
 
+- [x] Revisión de UX/UI: barra de WhatsApp que no tapa formularios ni duplica el botón del hero, "Inscribite" al formulario (queda en el panel), Eventos fuera del menú si no hay próximos, heros internos más bajos en el celu, sin "¿Por qué elegirnos?" genérico, sin repetir "clase de prueba" en cada plan, `/disciplinas` con días y horarios de cada una (+ Grappling y Sparring), tarjetas con el color de cada disciplina en lugar de íconos, "Planes desde" en el inicio, bloque de ubicación con "Cómo llegar", sparring de los sábados sin reserva, plan opcional en la inscripción
+
 ## Otros pendientes
+- [ ] **Fotos reales del club** (cuando haya suficientes): llevar fotos al inicio y sumar una sección "Galería" editable desde el panel
+- [ ] **Historia real del club** para Nosotros (hoy el texto es genérico): desde 2020, quién lo fundó, logros
 - [x] Estadística del inicio: "Entrenando desde 2020" (en lugar de "10+ años")
 - [ ] Puntaje y cantidad de reseñas de Google (para mostrarlo en la sección de opiniones)
 - [ ] Auditoría de performance (Core Web Vitals) y de accesibilidad antes de entregar al cliente

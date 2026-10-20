@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { Link, NavLink, Outlet, useLocation } from 'react-router';
 import Icono from './Icono.jsx';
 import { wa, TELEFONO, DIRECCION, EMAIL, INSTAGRAM } from '../data/site.js';
+import { proximos } from '../data/eventos.js';
+import { useContenido } from '../contenido.jsx';
 
 const NAV = [
     ['/', 'Inicio'],
@@ -13,12 +15,20 @@ const NAV = [
     ['/contacto', 'Contacto'],
 ];
 
-const INSCRIBITE = wa('Hola, quiero hacer una clase de prueba');
+const PRUEBA = wa('Hola, quiero hacer una clase de prueba');
+// Páginas con su propio formulario: la barra de WhatsApp competiría con su botón
+const SIN_BARRA = ['/inscripcion', '/contacto'];
 
 export default function Layout() {
     const { pathname } = useLocation();
     const [menu, setMenu] = useState(false);
     const [arriba, setArriba] = useState(false);
+    const [pasoHero, setPasoHero] = useState(false);
+    const { eventos } = useContenido();
+    // Eventos solo en el menú cuando hay alguno por venir
+    const nav = proximos(eventos).length ? NAV : NAV.filter(([to]) => to !== '/eventos');
+    // En el inicio el hero ya tiene su botón de reservar: la barra aparece recién al pasarlo
+    const barra = !SIN_BARRA.includes(pathname) && (pathname !== '/' || pasoHero);
 
     useEffect(() => {
         setMenu(false);
@@ -34,7 +44,10 @@ export default function Layout() {
     }, [menu]);
 
     useEffect(() => {
-        const onScroll = () => { setArriba(window.scrollY > 300); };
+        const onScroll = () => {
+            setArriba(window.scrollY > 300);
+            setPasoHero(window.scrollY > window.innerHeight * 0.7);
+        };
         window.addEventListener('scroll', onScroll, { passive: true });
         return () => window.removeEventListener('scroll', onScroll);
     }, []);
@@ -48,13 +61,13 @@ export default function Layout() {
                     </Link>
                     <nav className={`nav-pill${menu ? " open" : ""}`} id="nav-menu" aria-label="Principal">
                         <ul>
-                            {NAV.map(([to, label]) => (
+                            {nav.map(([to, label]) => (
                                 <li key={to}><NavLink to={to} end={to === "/"}>{label}</NavLink></li>
                             ))}
                         </ul>
-                        <a href={INSCRIBITE} className="nav-cta" target="_blank" rel="noopener">
+                        <Link to="/inscripcion" className="nav-cta">
                             Inscribite <Icono n="arrow-right" />
-                        </a>
+                        </Link>
                     </nav>
                     <button
                         className="menu-btn" aria-label={menu ? "Cerrar menú" : "Abrir menú"}
@@ -65,7 +78,7 @@ export default function Layout() {
                 </div>
             </header>
 
-            <a href={INSCRIBITE} className="mobile-cta" target="_blank" rel="noopener">
+            <a href={PRUEBA} className={`mobile-cta${barra ? '' : ' oculta'}`} target="_blank" rel="noopener" aria-hidden={!barra} tabIndex={barra ? undefined : -1}>
                 <Icono n="whatsapp" /> Reservar clase de prueba gratis
             </a>
 
@@ -84,7 +97,7 @@ export default function Layout() {
                         <div className="footer-links">
                             <h3>Páginas</h3>
                             <ul>
-                                {NAV.slice(1).map(([to, label]) => <li key={to}><Link to={to}>{label}</Link></li>)}
+                                {nav.slice(1).map(([to, label]) => <li key={to}><Link to={to}>{label}</Link></li>)}
                             </ul>
                         </div>
                         <div className="footer-contact">

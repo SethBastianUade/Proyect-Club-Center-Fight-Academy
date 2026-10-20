@@ -12,7 +12,7 @@ const record = (r) => {
 };
 
 const normalizar = (c) => ({
-    planes: c.planes.map((p) => ({ ...p, items: { actividades: p.actividades, dias: p.dias, clases: p.clases, prueba: true } })),
+    planes: c.planes.map((p) => ({ ...p, items: { actividades: p.actividades, dias: p.dias, clases: p.clases } })),
     clases: c.clases,
     eventos: c.eventos,
     competidores: c.competidores.map((p) => ({

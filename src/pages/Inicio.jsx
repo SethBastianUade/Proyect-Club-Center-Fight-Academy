@@ -1,5 +1,6 @@
 import { Link } from 'react-router';
-import { wa } from '../data/site.js';
+import { wa, DIRECCION, MAPA } from '../data/site.js';
+import { precio } from '../data/planes.js';
 import { DISCIPLINAS, PRINCIPALES } from '../data/disciplinas.js';
 import { proximos } from '../data/eventos.js';
 import { SectionHeader, Cta, useMeta } from '../components/ui.jsx';
@@ -14,18 +15,12 @@ const PRUEBA = wa('Hola, quiero hacer una clase de prueba');
 
 const STATS = [['200+', 'Alumnos activos'], ['4', 'Disciplinas'], ['2020', 'Entrenando desde'], ['50+', 'Torneos disputados']];
 
-const FEATURES = [
-    ['medal', 'Profesores Certificados', 'Instructores con amplia experiencia y certificaciones internacionales en cada disciplina.'],
-    ['users', 'Comunidad Activa', 'Sumate a una comunidad apasionada por las artes marciales, el respeto y la superación.'],
-    ['dumbbell', 'Instalaciones Modernas', 'Espacios equipados y actualizados para que alcances tu mejor rendimiento.'],
-    ['trophy', 'Competencias', 'Participación y representación en torneos nacionales e internacionales.'],
-];
-
 export default function Inicio() {
     useMeta();
     const contenido = useContenido();
     const eventos = proximos(contenido.eventos).slice(0, 3);
     const proximas = proximasClases(contenido.clases, 3);
+    const precios = contenido.planes.map((p) => p.precio).filter((p) => p != null);
 
 
     return (
@@ -48,6 +43,11 @@ export default function Inicio() {
                             Ver horarios <Icono n="arrow-right" />
                         </Link>
                     </div>
+                    {precios.length > 0 && (
+                        <Link to="/precios" className="hero-precio fade-in-4">
+                            Planes desde <b>{precio(Math.min(...precios))}</b>/mes · Ver precios
+                        </Link>
+                    )}
 
                     <div className="hero-stats fade-in-4">
                         {STATS.map(([n, l]) => (
@@ -79,8 +79,7 @@ export default function Inicio() {
                     {PRINCIPALES.map((id) => {
                         const d = DISCIPLINAS[id];
                         return (
-                            <div className="discipline-card" key={id}>
-                                <img src={d.img} alt={d.nombre} width={d.w} height={d.h} loading="lazy" decoding="async" />
+                            <div className="discipline-card" key={id} style={{ '--c': d.color }}>
                                 <h3>{d.nombre}</h3>
                                 <p>{d.corta}</p>
                                 <Link to={`/horarios?d=${id}`} className="btn-discipline">Ver horarios</Link>
@@ -100,19 +99,6 @@ export default function Inicio() {
                 </section>
             )}
 
-            <section className="why-us-section">
-                <SectionHeader label="Nuestra diferencia" titulo="¿Por qué elegirnos?" texto="Somos más que una academia de artes marciales" />
-                <div className="features-grid">
-                    {FEATURES.map(([icon, t, p]) => (
-                        <div className="feature-card" key={t}>
-                            <span className="feature-icon"><Icono n={icon} /></span>
-                            <h3>{t}</h3>
-                            <p>{p}</p>
-                        </div>
-                    ))}
-                </div>
-            </section>
-
             <section className="testimonials-section">
                 <SectionHeader label="Opiniones" titulo="Lo que dicen nuestros alumnos" texto="Experiencias reales de nuestra comunidad" />
                 <ul className="reviews">
@@ -127,6 +113,17 @@ export default function Inicio() {
                 <p className="section-more">
                     <a href={GOOGLE_RESENAS} className="btn-discipline" target="_blank" rel="noopener">Ver todas en Google</a>
                 </p>
+            </section>
+
+            <section className="ubicacion-section">
+                <div className="ubicacion">
+                    <div>
+                        <span className="section-label">Dónde estamos</span>
+                        <h2>{DIRECCION}</h2>
+                        <p>Clases de lunes a sábado. <Link to="/horarios">Ver horarios</Link></p>
+                    </div>
+                    <a href={MAPA} className="btn btn-outline" target="_blank" rel="noopener"><Icono n="mapa" /> Cómo llegar</a>
+                </div>
             </section>
 
             <Cta

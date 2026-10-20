@@ -1,22 +1,35 @@
-import { DIAS } from '../data/horarios.js';
+import { DIAS, hs } from '../data/horarios.js';
 import { DISCIPLINAS } from '../data/disciplinas.js';
 import { wa } from '../data/site.js';
 import Icono from './Icono.jsx';
 
-const hs = (t) => t.replace(/^0/, '').replace(':00', '');
-
-// Toda la tarjeta abre WhatsApp con la clase precargada
+// Toda la tarjeta abre WhatsApp con la clase precargada, salvo las que no se reservan (sparring)
 export default function ClaseCard({ clase: c }) {
-    const nombre = c.nombre || DISCIPLINAS[c.disc].nombre;
+    const d = DISCIPLINAS[c.disc] ?? { nombre: c.disc };
+    const nombre = c.nombre || d.nombre;
     const cuando = `el ${DIAS[c.dia].toLowerCase()} de ${hs(c.desde)} a ${hs(c.hasta)} hs`;
+    const contenido = (
+        <>
+            <span className="clase-hora">{hs(c.desde)} a {hs(c.hasta)} hs</span>
+            <strong>{nombre}</strong>
+        </>
+    );
+
+    if (d.sinReserva) {
+        return (
+            <div className="clase" style={{ '--c': d.color }}>
+                {contenido}
+                <span className="clase-libre">Sin reserva</span>
+            </div>
+        );
+    }
     return (
         <a
             href={wa(`Hola, quiero hacer una clase de prueba de ${nombre} ${cuando}`)}
-            className="clase" style={{ '--c': DISCIPLINAS[c.disc].color }} target="_blank" rel="noopener"
+            className="clase" style={{ '--c': d.color }} target="_blank" rel="noopener"
             aria-label={`Reservar clase de prueba de ${nombre} ${cuando}`}
         >
-            <span className="clase-hora">{hs(c.desde)} a {hs(c.hasta)} hs</span>
-            <strong>{nombre}</strong>
+            {contenido}
             <span className="clase-wa"><Icono n="whatsapp" /><span>Reservar</span></span>
         </a>
     );

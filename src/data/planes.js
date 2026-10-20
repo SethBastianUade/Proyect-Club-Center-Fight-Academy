@@ -3,7 +3,6 @@ export const FILAS = [
     ['actividades', 'Actividades'],
     ['dias', 'Días'],
     ['clases', 'Clases'],
-    ['prueba', 'Clase de prueba sin cargo'],
 ];
 
 export const precio = (p) => (p == null ? 'Consultar' : `$${p.toLocaleString('es-AR')}`);

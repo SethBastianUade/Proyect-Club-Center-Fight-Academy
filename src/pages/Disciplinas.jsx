@@ -1,24 +1,40 @@
 import { Link } from 'react-router';
-import { DISCIPLINAS, PRINCIPALES } from '../data/disciplinas.js';
-import { Hero, SectionHeader, Cta, useMeta } from '../components/ui.jsx';
+import { DISCIPLINAS, FICHAS } from '../data/disciplinas.js';
+import { resumenHorarios } from '../data/horarios.js';
+import { wa } from '../data/site.js';
+import { useContenido } from '../contenido.jsx';
+import { Hero, Cta, useMeta } from '../components/ui.jsx';
+import Icono from '../components/Icono.jsx';
 
 export default function Disciplinas() {
-    useMeta('Disciplinas', 'Conocé todas las disciplinas de Club Center Fight Academy: Jiu-Jitsu, Muay Thai, Boxeo y MMA con profesores certificados en CABA.');
+    useMeta('Disciplinas', 'Jiu-Jitsu, Muay Thai, Boxeo, MMA, Grappling y Sparring en Club Center Fight Academy, CABA. Días y horarios de cada disciplina.');
+    const { clases } = useContenido();
     return (
         <>
-            <Hero badge="Lo que entrenamos" titulo="Nuestras" resaltado="disciplinas" subtitulo="Descubrí tu pasión y entrená con los mejores instructores" />
+            <Hero badge="Lo que entrenamos" titulo="Nuestras" resaltado="disciplinas" subtitulo="Todas las clases son para todos los niveles" />
             <section className="disciplines-section">
-                <SectionHeader label="Elegí tu camino" titulo="Elegí tu disciplina" texto="Jiu-Jitsu, Muay Thai, Boxeo y MMA con profesores certificados. Clases para todos los niveles." />
-                <div className="disciplines-grid">
-                    {PRINCIPALES.map((id) => {
+                <div className="fichas">
+                    {FICHAS.map((id) => {
                         const d = DISCIPLINAS[id];
+                        const horarios = resumenHorarios(clases.filter((c) => c.disc === id));
                         return (
-                            <div className="discipline-card" id={id} key={id}>
-                                <img src={d.img} alt={d.nombre} width={d.w} height={d.h} loading="lazy" decoding="async" />
-                                <h3>{d.nombre}</h3>
+                            <article className="ficha" id={id} key={id} style={{ '--c': d.color }}>
+                                <h2>{d.nombre}</h2>
                                 <p>{d.larga}</p>
-                                <Link to={`/horarios?d=${id}`} className="btn-discipline">Ver horarios</Link>
-                            </div>
+                                {horarios.length > 0 && (
+                                    <ul className="ficha-horarios" aria-label={`Horarios de ${d.nombre}`}>
+                                        {horarios.map((h) => <li key={h}><Icono n="clock" /> {h}</li>)}
+                                    </ul>
+                                )}
+                                <div className="ficha-acciones">
+                                    {!d.sinReserva && (
+                                        <a href={wa(`Hola, quiero hacer una clase de prueba de ${d.nombre}`)} className="btn btn-primary" target="_blank" rel="noopener">
+                                            <Icono n="whatsapp" /> Reservar prueba
+                                        </a>
+                                    )}
+                                    <Link to={`/horarios?d=${id}`} className="btn-discipline">Ver horarios</Link>
+                                </div>
+                            </article>
                         );
                     })}
                 </div>

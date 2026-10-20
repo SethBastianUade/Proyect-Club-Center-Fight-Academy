@@ -1,16 +1,16 @@
 // Íconos de Font Awesome como SVG inline: solo se bundlean los que están acá (antes era todo el CSS del CDN)
 import {
-    faArrowLeft, faArrowRight, faArrowUp, faBars, faBolt, faCheck, faDumbbell, faEnvelope, faHandshake,
-    faHeart, faLocationDot, faMedal, faMinus, faPhone, faShareNodes, faTrophy, faUsers, faXmark,
+    faArrowLeft, faArrowRight, faArrowUp, faBars, faBolt, faCheck, faEnvelope, faHandshake,
+    faHeart, faLocationDot, faMinus, faPhone, faShareNodes, faTrophy, faUsers, faXmark,
 } from '@fortawesome/free-solid-svg-icons';
 import { faCalendar, faClock } from '@fortawesome/free-regular-svg-icons';
 import { faGoogle, faInstagram, faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 
 const ICONOS = {
     'arrow-left': faArrowLeft, 'arrow-right': faArrowRight, 'arrow-up': faArrowUp, bars: faBars, bolt: faBolt,
-    calendar: faCalendar, check: faCheck, clock: faClock, dumbbell: faDumbbell, envelope: faEnvelope,
+    calendar: faCalendar, check: faCheck, clock: faClock, envelope: faEnvelope,
     google: faGoogle, handshake: faHandshake, heart: faHeart, instagram: faInstagram, mapa: faLocationDot,
-    medal: faMedal, minus: faMinus, phone: faPhone, share: faShareNodes, trophy: faTrophy, users: faUsers,
+    minus: faMinus, phone: faPhone, share: faShareNodes, trophy: faTrophy, users: faUsers,
     whatsapp: faWhatsapp, xmark: faXmark,
 };
 

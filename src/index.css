@@ -156,7 +156,7 @@ main section:nth-of-type(even) { background: linear-gradient(180deg, var(--bg-0)
     font-size: 0.95rem;
     transition: background 0.2s;
 }
-.nav-cta .icono { font-size: 0.75rem; transform: rotate(-45deg); }
+.nav-cta .icono { font-size: 0.75rem; }
 .nav-cta:hover { background: var(--text-200); }
 
 @media (min-width: 1024px) {
@@ -202,7 +202,9 @@ main section:nth-of-type(even) { background: linear-gradient(180deg, var(--bg-0)
     font-weight: 700;
     font-size: 0.95rem;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+    transition: transform 0.3s var(--ease), opacity 0.3s;
 }
+.mobile-cta.oculta { transform: translateY(150%); opacity: 0; pointer-events: none; }
 @media (min-width: 768px) { .mobile-cta { display: none; } }
 
 /* Botón flotante de WhatsApp (tablet y desktop) */
@@ -384,6 +386,9 @@ main section.hero-banner {
 .hero-banner h1 span { font-style: italic; color: var(--accent); }
 .hero-banner-desc { max-width: 620px; margin: 1.25rem auto 0; color: rgba(250, 250, 250, 0.78); font-size: 1rem; line-height: 1.7; }
 .hero-banner-actions { display: grid; gap: 0.75rem; max-width: 340px; margin: 2rem auto 0; }
+.hero-precio { display: inline-block; margin-top: 1rem; color: var(--text-300); font-size: 0.9rem; text-decoration: underline; text-decoration-color: var(--ring-strong); text-underline-offset: 4px; }
+.hero-precio b { color: var(--text-100); font-weight: 600; }
+.hero-precio:hover { color: var(--text-100); }
 .hero-stats {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -415,8 +420,9 @@ main section.hero-section {
     overflow: hidden;
     display: flex;
     align-items: flex-end;
-    min-height: 58svh;
-    padding: calc(var(--header-h) + 2.5rem) var(--gutter) 3rem;
+    /* Bajo a propósito: en el celu el contenido (horarios, precios) tiene que verse sin scrollear */
+    min-height: 0;
+    padding: calc(var(--header-h) + 1.5rem) var(--gutter) 2rem;
     background: var(--bg-0);
     text-align: center;
 }
@@ -445,17 +451,17 @@ main section.hero-section {
     font-weight: 500;
     color: var(--text-200);
 }
-.hero-title { font-size: clamp(2.6rem, 11vw, 4.75rem); line-height: 1.02; }
+.hero-title { font-size: clamp(2.4rem, 10vw, 4.75rem); line-height: 1.02; }
 .hero-title span { font-style: italic; color: var(--accent); }
 .hero-evento .hero-title { font-size: clamp(2.2rem, 8vw, 3.75rem); }
 .hero-subtitle { max-width: 560px; margin: 1rem auto 0; color: rgba(250, 250, 250, 0.75); font-size: 1rem; }
 @media (min-width: 768px) {
-    main section.hero-section { min-height: 52vh; padding: calc(var(--header-h) + 5rem) 2rem 4rem; }
+    main section.hero-section { min-height: 40vh; padding: calc(var(--header-h) + 4rem) 2rem 3.5rem; }
     .hero-subtitle { font-size: 1.1rem; }
 }
 
 /* ---------- Tarjetas base ---------- */
-.discipline-card, .feature-card, .team-card, .event-card, .plan, .contact-info, .contact-form-box, .inscription-form, .clase, .compare {
+.discipline-card, .ficha, .team-card, .event-card, .plan, .contact-info, .contact-form-box, .inscription-form, .clase, .compare {
     background: var(--bg-100);
     border: 1px solid var(--ring);
     border-radius: var(--radius-lg);
@@ -485,53 +491,38 @@ main section.hoy-section { padding-bottom: 0; background: none; }
 
 /* ---------- Disciplinas ---------- */
 .disciplines-grid { display: grid; gap: 1rem; max-width: 1200px; margin: 0 auto; }
-.discipline-card {
+.discipline-card, .ficha {
+    --c: var(--accent);
+    position: relative;
+    overflow: hidden;
     display: grid;
-    grid-template-columns: 72px 1fr;
-    gap: 0.5rem 1.1rem;
-    align-items: start;
-    padding: 1.25rem;
+    align-content: start;
+    gap: 0.5rem;
+    padding: 1.25rem 1.25rem 1.25rem 1.5rem;
     transition: border-color 0.25s, transform 0.25s var(--ease);
 }
+.discipline-card::before, .ficha::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--c); }
 .discipline-card:hover { border-color: var(--ring-strong); transform: translateY(-3px); }
-.discipline-card img {
-    grid-row: span 3;
-    width: 72px;
-    height: 72px;
-    padding: 0.6rem;
-    object-fit: contain;
-    border-radius: 18px;
-    background: var(--text-100);
-}
-.discipline-card h3 { font-family: var(--serif); font-weight: 400; font-size: 1.75rem; line-height: 1; }
-.discipline-card p { color: var(--text-300); font-size: 0.92rem; line-height: 1.6; }
+.discipline-card h3, .ficha h2 { font-family: var(--serif); font-weight: 400; font-size: 1.75rem; line-height: 1; color: var(--text-100); }
+.discipline-card p, .ficha p { color: var(--text-300); font-size: 0.92rem; line-height: 1.6; }
 .discipline-card .btn-discipline { justify-self: start; margin-top: 0.4rem; }
 @media (min-width: 640px) { .disciplines-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (min-width: 1024px) {
     .disciplines-grid { grid-template-columns: repeat(4, 1fr); }
-    .discipline-card { grid-template-columns: 1fr; padding: 1.75rem; }
-    .discipline-card img { grid-row: auto; width: 84px; height: 84px; margin-bottom: 0.75rem; }
+    .discipline-card { padding: 1.75rem 1.5rem 1.75rem 1.75rem; }
 }
 
-/* ---------- Por qué elegirnos ---------- */
-.features-grid { display: grid; gap: 1rem; max-width: 1200px; margin: 0 auto; }
-.feature-card { padding: 1.5rem; }
-.feature-icon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 44px;
-    height: 44px;
-    margin-bottom: 1rem;
-    border-radius: 12px;
-    background: rgba(229, 90, 27, 0.12);
-    color: var(--accent);
-    font-size: 1.1rem;
-}
-.feature-card h3 { font-size: 1.05rem; margin-bottom: 0.4rem; }
-.feature-card p { color: var(--text-300); font-size: 0.92rem; }
-@media (min-width: 640px) { .features-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (min-width: 1024px) { .features-grid { grid-template-columns: repeat(4, 1fr); } }
+/* Fichas de /disciplinas: descripción, horarios resumidos y reservar */
+.fichas { display: grid; gap: 1rem; max-width: 1200px; margin: 0 auto; }
+.ficha { gap: 0.75rem; padding: 1.5rem 1.5rem 1.5rem 1.75rem; }
+.ficha h2 { font-size: 2rem; }
+.ficha-horarios { display: grid; gap: 0.35rem; padding: 0.85rem 0; border-top: 1px solid var(--ring); border-bottom: 1px solid var(--ring); }
+.ficha-horarios li { display: flex; align-items: baseline; gap: 0.55rem; color: var(--text-200); font-size: 0.9rem; font-variant-numeric: tabular-nums; }
+.ficha-horarios .icono { color: var(--c); font-size: 0.8rem; }
+.ficha-acciones { display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem; margin-top: auto; padding-top: 0.25rem; }
+.ficha-acciones .btn { padding: 0.7rem 1.2rem; font-size: 0.9rem; }
+@media (min-width: 768px) { .fichas { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1100px) { .fichas { grid-template-columns: repeat(3, 1fr); } }
 
 /* Reseñas: carrusel con scroll-snap en móvil (sin JS), grilla desde tablet */
 .reviews {
@@ -574,6 +565,26 @@ main section.hoy-section { padding-bottom: 0; background: none; }
 @media (min-width: 640px) { .review { flex-basis: 46%; } }
 @media (min-width: 1024px) {
     .reviews { display: grid; grid-template-columns: repeat(3, 1fr); margin: 0 auto; padding: 0; overflow: visible; }
+}
+
+/* ---------- Ubicación (inicio) ---------- */
+main section.ubicacion-section { padding-bottom: 0; background: none; }
+.ubicacion {
+    display: grid;
+    gap: 1.25rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 1.5rem;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--ring);
+    background: var(--bg-100);
+}
+.ubicacion h2 { margin: 0.5rem 0 0.35rem; font-size: clamp(2rem, 7vw, 2.75rem); }
+.ubicacion p { color: var(--text-300); font-size: 0.95rem; }
+.ubicacion p a { color: var(--text-100); text-decoration: underline; text-underline-offset: 3px; }
+.ubicacion .btn { justify-self: start; }
+@media (min-width: 768px) {
+    .ubicacion { grid-template-columns: 1fr auto; align-items: center; padding: 2rem 2.25rem; }
 }
 
 /* ---------- CTA ---------- */
@@ -674,6 +685,8 @@ main section.cta-section { padding: 2rem var(--gutter) 4rem; background: none; }
     font-weight: 600;
     white-space: nowrap;
 }
+.clase-libre { grid-column: 2; grid-row: 1 / span 2; padding: 0.35rem 0.7rem; border-radius: 50px; border: 1px solid var(--ring); color: var(--text-300); font-size: 0.72rem; font-weight: 600; white-space: nowrap; }
+div.clase:hover { border-color: var(--ring); }
 .clase:hover .clase-wa { background: rgba(37, 211, 102, 0.2); }
 /* En el celu solo el ícono: toda la tarjeta es el botón */
 .clase-wa span { display: none; }
@@ -688,7 +701,7 @@ main section.cta-section { padding: 2rem var(--gutter) 4rem; background: none; }
     .day h3 { justify-content: center; font-size: 1.4rem; padding-bottom: 0.6rem; border-bottom: 1px solid var(--ring); }
     .day.today h3 { border-color: var(--accent); }
     .clase { grid-template-columns: 1fr; padding: 0.85rem 0.9rem 0.85rem 1.1rem; }
-    .clase-wa { grid-column: 1; grid-row: auto; justify-self: start; margin-top: 0.45rem; padding: 0.35rem 0.7rem; font-size: 0.72rem; }
+    .clase-wa, .clase-libre { grid-column: 1; grid-row: auto; justify-self: start; margin-top: 0.45rem; padding: 0.35rem 0.7rem; font-size: 0.72rem; }
 }
 
 /* ---------- Precios ---------- */
