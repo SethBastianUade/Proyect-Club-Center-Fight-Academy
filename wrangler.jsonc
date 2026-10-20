@@ -1,5 +1,5 @@
 {
-  "name": "ccfa",
+  "name": "clubcenter-web",
   "main": "worker/index.js",
   "compatibility_date": "2026-10-01",
   // Solo el dominio propio (la cookie del panel es del dominio)
