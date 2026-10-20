@@ -259,7 +259,7 @@ a { text-decoration: none; }
     content: '';
     position: absolute;
     inset: 0;
-    background: url('Fotos/bannerD.webp') center / cover no-repeat;
+    background: url('/Fotos/bannerD.webp') center / cover no-repeat;
     opacity: 0.32;
     z-index: 1;
 }
@@ -1029,13 +1029,13 @@ a { text-decoration: none; }
 
 /* ===== HÉROE SUBPÁGINAS ===== */
 .hero-section.hero-disciplinas::before {
-    background: url('Fotos/bannerD.webp') center / cover no-repeat;
+    background: url('/Fotos/bannerD.webp') center / cover no-repeat;
 }
 .hero-section.hero-nosotros::before {
-    background: url('Fotos/bannerNosotros.webp') center / cover no-repeat;
+    background: url('/Fotos/bannerNosotros.webp') center / cover no-repeat;
 }
 .hero-section.hero-contacto::before {
-    background: url('Fotos/bannerContacto.webp') center / cover no-repeat;
+    background: url('/Fotos/bannerContacto.webp') center / cover no-repeat;
 }
 
 .hero-section.hero-disciplinas,

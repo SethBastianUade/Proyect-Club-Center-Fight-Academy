@@ -1,0 +1,9 @@
+{
+  "name": "ccfa",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": "./dist",
+    // Rutas de React Router (/horarios, /eventos/x) caen en index.html
+    "not_found_handling": "single-page-application"
+  }
+}

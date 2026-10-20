@@ -2,3 +2,10 @@
 README.md
 skills-lock.json
 .agents
+# Sitio vanilla anterior (backup local)
+legacy/
+
+# Vite
+node_modules/
+dist/
+.wrangler/
