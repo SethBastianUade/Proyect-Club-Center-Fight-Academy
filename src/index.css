@@ -950,3 +950,60 @@ select {
     .lead select { grid-column: 2; grid-row: 1 / span 2; }
     .lead textarea { grid-column: 2; grid-row: 3; }
 }
+
+/* Panel: menú de secciones y editor de contenido */
+.admin-menu {
+    display: flex;
+    gap: 0.5rem;
+    margin: 0 calc(var(--gutter) * -1) 1.25rem;
+    padding: 0 var(--gutter) 0.25rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+.admin-menu::-webkit-scrollbar { display: none; }
+.admin-menu .chip { padding: 0.6rem 1.1rem; font-size: 0.9rem; }
+.editor-agregar { width: 100%; margin-bottom: 1.25rem; }
+.editor-lista { display: grid; gap: 0.5rem; }
+.editor-grupo { margin: 1.25rem 0 0.5rem; font-size: 1.5rem; }
+.editor-lista li:first-child .editor-grupo { margin-top: 0; }
+.editor-item {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    align-items: center;
+    gap: 0.5rem 0.75rem;
+    padding: 0.85rem 1rem;
+    border-radius: var(--radius);
+    border: 1px solid var(--ring);
+    background: var(--bg-100);
+}
+.editor-item:has(img) { grid-template-columns: 48px 1fr auto auto; }
+.editor-item img { width: 48px; height: 48px; object-fit: cover; border-radius: 10px; }
+.editor-item strong { display: block; color: var(--text-100); font-size: 0.98rem; }
+.editor-item span { color: var(--text-300); font-size: 0.85rem; }
+.editor-item .chip { padding: 0.4rem 0.8rem; font-size: 0.8rem; }
+.chip-borrar:hover { color: #f87171; border-color: rgba(248, 113, 113, 0.5); }
+.editor-form {
+    display: grid;
+    gap: 0.9rem;
+    margin-bottom: 1rem;
+    padding: 1.25rem;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--accent);
+    background: var(--bg-100);
+}
+.editor-form small { color: var(--text-400); font-size: 0.8rem; }
+.editor-form textarea { min-height: 110px; }
+.editor-acciones { display: flex; align-items: center; gap: 0.75rem; }
+.editor-acciones .btn { flex: 1; }
+.campo-foto { display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem; }
+.campo-foto img { width: 96px; height: 96px; object-fit: cover; border-radius: var(--radius); border: 1px solid var(--ring); }
+.campo-foto label.chip { cursor: pointer; }
+@media (min-width: 768px) {
+    .editor-agregar { width: auto; }
+    .editor-form { grid-template-columns: repeat(2, 1fr); padding: 1.75rem; }
+    .editor-form .campo-largo, .editor-form .campo-foto, .editor-form .admin-error, .editor-acciones { grid-column: 1 / -1; }
+    .editor-acciones .btn { flex: 0 0 auto; }
+}
+
+/* Flyer en la página del evento */
+.event-flyer { width: 100%; max-width: 520px; height: auto; margin-bottom: 1.5rem; border-radius: var(--radius-lg); border: 1px solid var(--ring); }

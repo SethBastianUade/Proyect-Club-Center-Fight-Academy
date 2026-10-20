@@ -1,17 +1,18 @@
 import { Link } from 'react-router';
-import { COMPETIDORES } from '../data/equipo.js';
+import { useContenido } from '../contenido.jsx';
 import { Hero, SectionHeader, Cta, useMeta } from '../components/ui.jsx';
 import Icono from '../components/Icono.jsx';
 
 const VALORES = [['handshake', 'Respeto'], ['bolt', 'Disciplina'], ['heart', 'Pasión'], ['users', 'Comunidad'], ['trophy', 'Excelencia']];
 
 function Competidores() {
-    if (!COMPETIDORES.length) return null;
+    const { competidores } = useContenido();
+    if (!competidores.length) return null;
     return (
         <section className="team-section">
             <SectionHeader label="Orgullo del equipo" titulo="Competidores destacados" texto="Representantes de Club Center Fight Academy" />
             <div className="team-grid">
-                {COMPETIDORES.map((p) => (
+                {competidores.map((p) => (
                     <Link to={`/equipo/${p.slug}`} className="team-card" key={p.slug}>
                         <img
                             src={p.foto || '/Fotos/logoClub.png'} alt={p.nombre}

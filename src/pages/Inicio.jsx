@@ -8,6 +8,7 @@ import EventoCard from '../components/EventoCard.jsx';
 import ClaseCard from '../components/ClaseCard.jsx';
 import Icono from '../components/Icono.jsx';
 import { proximasClases } from '../data/horarios.js';
+import { useContenido } from '../contenido.jsx';
 
 const PRUEBA = wa('Hola, quiero hacer una clase de prueba');
 
@@ -22,8 +23,9 @@ const FEATURES = [
 
 export default function Inicio() {
     useMeta();
-    const eventos = proximos().slice(0, 3);
-    const proximas = proximasClases(3);
+    const contenido = useContenido();
+    const eventos = proximos(contenido.eventos).slice(0, 3);
+    const proximas = proximasClases(contenido.clases, 3);
 
 
     return (

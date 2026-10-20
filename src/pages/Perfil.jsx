@@ -1,5 +1,5 @@
 import { Link, useParams } from 'react-router';
-import { COMPETIDORES } from '../data/equipo.js';
+import { useContenido } from '../contenido.jsx';
 import { wa } from '../data/site.js';
 import { useMeta } from '../components/ui.jsx';
 import NoEncontrado from './NoEncontrado.jsx';
@@ -7,8 +7,10 @@ import Icono from '../components/Icono.jsx';
 
 export default function Perfil() {
     const { slug } = useParams();
-    const p = COMPETIDORES.find((x) => x.slug === slug);
+    const { competidores, cargando } = useContenido();
+    const p = competidores.find((x) => x.slug === slug);
     useMeta(p?.nombre, p && `${p.nombre}, competidor de ${p.disciplina} en Club Center Fight Academy.`);
+    if (cargando) return null;
     if (!p) return <NoEncontrado />;
 
     return (

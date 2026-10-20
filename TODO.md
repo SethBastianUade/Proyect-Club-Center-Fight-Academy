@@ -11,7 +11,7 @@ Estado al 2026-10-20. Sitio en React + Vite, deploy en Cloudflare (`clubcenter.k
 - [x] "Reservar prueba" en cada clase abre WhatsApp con la clase precargada
 - [x] Horarios en un archivo de datos (`src/data/horarios.js`)
 - [x] Nivel: todas las clases son para todos los niveles (se aclara en `/horarios`, no hace falta filtro)
-- [ ] Que **recepción edite los horarios sin tocar código**: depende del panel admin (punto 5)
+- [x] Recepción edita los horarios desde el panel (`/admin?s=horarios`)
 
 ### 2. Precios y planes con comparador — ✅ hecho
 - [x] Tarjetas de planes en `/precios`, con el plan destacado marcado
@@ -25,21 +25,21 @@ Estado al 2026-10-20. Sitio en React + Vite, deploy en Cloudflare (`clubcenter.k
 - [x] Página propia por evento (`/eventos/:slug`) con "Compartir" y botón de WhatsApp
 - [x] Próximos eventos en el inicio
 - [x] Se sacaron los eventos de ejemplo: hoy no hay eventos y la página lo indica con link a Instagram
-- [ ] Cargar eventos cuando haya (`src/data/eventos.js`)
-- [ ] Foto o flyer por evento
-- [ ] Preview propia al compartir en WhatsApp/Instagram: necesita prerender o un Worker que reescriba los meta tags
+- [ ] Cargar eventos cuando haya (desde el panel)
+- [x] Flyer por evento (se sube desde el panel)
+- [x] Preview propia al compartir en WhatsApp/Instagram: el Worker reescribe título, descripción e imagen
 
 ### 4. Competidores destacados — ✅ hecho, con pendientes
 - [x] Competidores destacados en `/nosotros` (la sección de profesores se sacó)
 - [x] Perfil individual (`/equipo/:slug`) con récord, logros y galería si se cargan
-- [ ] Récord, logros y fotos de cada competidor (`src/data/equipo.js`)
+- [ ] Récord, logros y fotos de cada competidor (se cargan desde el panel)
 
 ## Con panel admin (Workers + D1 + login propio)
 
-### 5. Mini CMS — ⏳ pendiente
-- [ ] Tablas en D1 para horarios, eventos, precios y competidores
-- [ ] Pantallas del panel para cargar y editar (el login ya existe)
-- [ ] Pasar el sitio a leer de D1 en vez de `src/data/`
+### 5. Mini CMS — ✅ hecho
+- [x] Tablas en D1 para precios, horarios, eventos y competidores (migración `0003_contenido`)
+- [x] Panel `/admin` con una sección por cada uno: agregar, editar, borrar y subir fotos
+- [x] El sitio lee de D1: el Worker inserta el contenido en el HTML (sin parpadeos) y arma `sitemap.xml` y la ficha para Google con los horarios y precios reales
 
 ### 6. Leads — ✅ hecho
 - [x] La inscripción guarda en D1 (`POST /api/leads`) además de abrir WhatsApp

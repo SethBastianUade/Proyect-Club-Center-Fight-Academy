@@ -1,16 +1,18 @@
 import { useSearchParams } from 'react-router';
-import { CLASES, DIAS, hoy } from '../data/horarios.js';
+import { DIAS, hoy } from '../data/horarios.js';
+import { useContenido } from '../contenido.jsx';
 import { DISCIPLINAS } from '../data/disciplinas.js';
 import { Hero, Cta, useMeta } from '../components/ui.jsx';
 import ClaseCard from '../components/ClaseCard.jsx';
 
 const HOY = hoy();
-const DISCS = [...new Set(CLASES.map((c) => c.disc))];
 // En el celu la semana entera es una lista larguísima: sin filtros arrancamos en hoy
 const DIA_INICIAL = HOY in DIAS && window.matchMedia('(max-width: 767px)').matches ? HOY : 'todos';
 
 export default function Horarios() {
     useMeta('Horarios', 'Grilla de horarios de Club Center Fight Academy: Muay Thai, Boxeo, Jiu-Jitsu, MMA, Grappling y Sparring. Reservá tu clase de prueba gratis.');
+    const { clases: todas } = useContenido();
+    const discs = Object.keys(DISCIPLINAS).filter((d) => todas.some((c) => c.disc === d));
     const [params, setParams] = useSearchParams();
     const disc = params.get('d');
     const dia = params.get('dia') || (disc ? 'todos' : DIA_INICIAL);
@@ -21,7 +23,7 @@ export default function Horarios() {
         setParams(p, { replace: true, preventScrollReset: true });
     };
 
-    const clases = CLASES.filter((c) => (!disc || c.disc === disc) && (dia === 'todos' || c.dia === dia));
+    const clases = todas.filter((c) => (!disc || c.disc === disc) && (dia === 'todos' || c.dia === dia));
     const dias = Object.keys(DIAS).filter((d) => clases.some((c) => c.dia === d));
 
     return (
@@ -31,7 +33,7 @@ export default function Horarios() {
             <section className="schedule-section horarios">
                 <div className="filters" role="group" aria-label="Filtrar por disciplina">
                     <button className={`chip${!disc ? ' on' : ''}`} onClick={() => set('d')}>Todas</button>
-                    {DISCS.map((d) => (
+                    {discs.map((d) => (
                         <button key={d} className={`chip${disc === d ? ' on' : ''}`} style={{ '--c': DISCIPLINAS[d].color }} onClick={() => set('d', d)}>
                             {DISCIPLINAS[d].nombre}
                         </button>

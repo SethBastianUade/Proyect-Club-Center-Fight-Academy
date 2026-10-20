@@ -1,12 +1,14 @@
 import { proximos, pasados } from '../data/eventos.js';
+import { useContenido } from '../contenido.jsx';
 import { INSTAGRAM } from '../data/site.js';
 import { Hero, SectionHeader, Cta, useMeta } from '../components/ui.jsx';
 import EventoCard from '../components/EventoCard.jsx';
 
 export default function Eventos() {
     useMeta('Eventos', 'Torneos, seminarios y exámenes de graduación de Club Center Fight Academy.');
-    const prox = proximos();
-    const past = pasados();
+    const { eventos } = useContenido();
+    const prox = proximos(eventos);
+    const past = pasados(eventos);
     return (
         <>
             <Hero badge="Agenda del club" titulo="Torneos y" resaltado="eventos" subtitulo="Torneos, seminarios y exámenes de graduación" fondo="hero-disciplinas" />

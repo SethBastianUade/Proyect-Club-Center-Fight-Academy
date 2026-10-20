@@ -1,6 +1,6 @@
 import { useSearchParams } from 'react-router';
 import { DISCIPLINAS, PRINCIPALES } from '../data/disciplinas.js';
-import { PLANES } from '../data/planes.js';
+import { useContenido } from '../contenido.jsx';
 import { wa } from '../data/site.js';
 import { SectionHeader, useMeta } from '../components/ui.jsx';
 import Icono from '../components/Icono.jsx';
@@ -8,11 +8,12 @@ import Icono from '../components/Icono.jsx';
 export default function Inscripcion() {
     useMeta('Inscripción', 'Inscribite en Club Center Fight Academy. Completá el formulario y te contactamos por WhatsApp.');
     const [params] = useSearchParams();
+    const { planes } = useContenido();
 
     const enviar = (e) => {
         e.preventDefault();
         const f = Object.fromEntries(new FormData(e.currentTarget));
-        const plan = PLANES.find((p) => p.id === f.plan)?.nombre;
+        const plan = planes.find((p) => p.id === f.plan)?.nombre;
         const texto = [
             'Hola! Quiero inscribirme en Club Center Fight Academy.', '',
             `Nombre: ${f.nombre}`, `Teléfono: ${f.telefono}`, ...(f.email ? [`Email: ${f.email}`] : []),
@@ -56,7 +57,7 @@ export default function Inscripcion() {
                         <label htmlFor="plan">Plan *</label>
                         <select id="plan" name="plan" defaultValue={params.get('plan') || ''} required>
                             <option value="">Seleccioná un plan</option>
-                            {PLANES.map((p) => <option key={p.id} value={p.id}>{p.nombre}</option>)}
+                            {planes.map((p) => <option key={p.id} value={p.id}>{p.nombre}</option>)}
                         </select>
                     </div>
                     <button type="submit" className="btn btn-primary"><Icono n="whatsapp" /> Completar inscripción</button>

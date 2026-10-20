@@ -12,8 +12,9 @@
     "binding": "ASSETS",
     // Rutas de React Router (/horarios, /eventos/x) caen en index.html
     "not_found_handling": "single-page-application",
-    // El Worker solo corre para la API; el resto lo sirve Cloudflare directo
-    "run_worker_first": ["/api/*"]
+    // El Worker corre para la API y las páginas (les inserta el contenido de D1).
+    // JS, CSS e imágenes los sirve Cloudflare directo, sin pasar por el Worker
+    "run_worker_first": ["/*", "!/assets/*", "!/Fotos/*", "!/robots.txt"]
   },
   "d1_databases": [
     { "binding": "DB", "database_name": "ccfa", "database_id": "248df70e-9aaf-47d8-9b2b-b93ef5683403" }

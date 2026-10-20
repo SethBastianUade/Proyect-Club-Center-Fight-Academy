@@ -1,9 +1,8 @@
 import { useCallback, useEffect, useState } from 'react';
-import { Link } from 'react-router';
-import { DISCIPLINAS } from '../data/disciplinas.js';
-import { PLANES } from '../data/planes.js';
-import { useMeta } from '../components/ui.jsx';
-import Icono from '../components/Icono.jsx';
+import { DISCIPLINAS } from '../../data/disciplinas.js';
+import { useContenido } from '../../contenido.jsx';
+import Icono from '../../components/Icono.jsx';
+import { api } from './api.js';
 
 // Mismos estados que el CHECK de migrations/0001_leads.sql y ESTADOS en worker/index.js
 const ESTADOS = {
@@ -27,94 +26,32 @@ const waLead = (l) => {
     return `https://wa.me/${n.startsWith('54') ? n : '549' + n}?text=${encodeURIComponent(texto)}`;
 };
 
-async function api(path, opciones) {
-    const r = await fetch(`/api/admin/${path}`, { ...opciones, headers: { 'Content-Type': 'application/json' } });
-    if (!r.ok) throw new Error(r.status === 401 ? 'sesion' : 'error');
-    return r.json();
-}
-
-function Login({ onEntrar }) {
-    const [error, setError] = useState(null);
-    const [enviando, setEnviando] = useState(false);
-
-    const entrar = async (e) => {
-        e.preventDefault();
-        const password = e.currentTarget.password.value;
-        setEnviando(true);
-        const r = await fetch('/api/admin/login', {
-            method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ password }),
-        }).catch(() => null);
-        setEnviando(false);
-        if (r?.ok) return onEntrar();
-        setError((await r?.json().catch(() => null))?.error || 'No se pudo conectar con el servidor');
-    };
-
-    return (
-        <div className="admin admin-login">
-            <form className="inscription-form" onSubmit={entrar}>
-                <img src="/Fotos/logoClub.png" alt="Club Center Fight Academy" width="542" height="510" />
-                <h1>Panel del club</h1>
-                <div className="form-group">
-                    <label htmlFor="password">Contraseña</label>
-                    <input type="password" id="password" name="password" autoComplete="current-password" required autoFocus />
-                </div>
-                {error && <p className="admin-error" role="alert">{error}</p>}
-                <button type="submit" className="btn btn-primary" disabled={enviando}>{enviando ? 'Entrando…' : 'Entrar'}</button>
-            </form>
-        </div>
-    );
-}
-
-export default function Admin() {
-    useMeta('Panel');
+export default function Leads({ onError }) {
+    const { planes } = useContenido();
     const [filtro, setFiltro] = useState('');
     const [datos, setDatos] = useState(null);
-    const [error, setError] = useState(null);
 
     const cargar = useCallback(() => {
-        api(`leads${filtro ? `?estado=${filtro}` : ''}`)
-            .then((d) => { setDatos(d); setError(null); })
-            .catch((e) => setError(e.message));
-    }, [filtro]);
+        api(`leads${filtro ? `?estado=${filtro}` : ''}`).then(setDatos).catch(onError);
+    }, [filtro, onError]);
     useEffect(cargar, [cargar]);
 
     const guardar = async (id, cambios) => {
         setDatos((d) => ({ ...d, leads: d.leads.map((l) => (l.id === id ? { ...l, ...cambios } : l)) }));
         try {
-            await api(`leads/${id}`, { method: 'PATCH', body: JSON.stringify(cambios) });
+            await api(`leads/${id}`, { method: 'PATCH', body: cambios });
             if (cambios.estado) cargar(); // actualiza el conteo (y saca el lead si ya no entra en el filtro)
         } catch (e) {
-            setError(e.message);
+            onError(e);
             cargar();
         }
     };
-
-    const salir = async () => {
-        await fetch('/api/admin/logout', { method: 'POST' }).catch(() => {});
-        setDatos(null);
-        setError('sesion');
-    };
-
-    if (error === 'sesion') return <Login onEntrar={() => { setError(null); cargar(); }} />;
 
     const conteo = datos?.conteo || {};
     const total = Object.values(conteo).reduce((a, b) => a + b, 0);
 
     return (
-        <div className="admin">
-            <header className="admin-header">
-                <Link to="/" className="brand" aria-label="Volver al sitio"><img src="/Fotos/logoClub.png" alt="" width="542" height="510" /></Link>
-                <h1>Interesados</h1>
-                <button className="chip admin-salir" onClick={salir}>Salir</button>
-            </header>
-
-            {error && (
-                <p className="admin-error">
-                    No se pudo conectar con el servidor.
-                    <button onClick={() => window.location.reload()}>Recargar</button>
-                </p>
-            )}
-
+        <>
             <div className="admin-filtros" role="group" aria-label="Filtrar por estado">
                 <button className={`chip${!filtro ? ' on' : ''}`} onClick={() => setFiltro('')}>Todos · {total}</button>
                 {Object.entries(ESTADOS).map(([k, v]) => (
@@ -124,7 +61,7 @@ export default function Admin() {
                 ))}
             </div>
 
-            {!datos && !error && <p className="empty">Cargando…</p>}
+            {!datos && <p className="empty">Cargando…</p>}
             {datos?.leads.length === 0 && <p className="empty">No hay interesados{filtro && ' con ese estado'}.</p>}
 
             <ul className="leads">
@@ -135,7 +72,7 @@ export default function Admin() {
                             <span className="lead-fecha">{fecha(l.creado)}</span>
                         </div>
                         <p className="lead-info">
-                            {[DISCIPLINAS[l.disciplina]?.nombre, PLANES.find((p) => p.id === l.plan)?.nombre ?? l.plan].filter(Boolean).join(' · ')}
+                            {[DISCIPLINAS[l.disciplina]?.nombre, planes.find((p) => p.id === l.plan)?.nombre ?? l.plan].filter(Boolean).join(' · ')}
                         </p>
                         <p className="lead-contacto">
                             <a href={waLead(l)} target="_blank" rel="noopener" className="lead-wa"><Icono n="whatsapp" /> {l.telefono}</a>
@@ -154,6 +91,6 @@ export default function Admin() {
                     </li>
                 ))}
             </ul>
-        </div>
+        </>
     );
 }

@@ -1,5 +1,6 @@
 import { Link } from 'react-router';
-import { PLANES, FILAS, precio } from '../data/planes.js';
+import { FILAS, precio } from '../data/planes.js';
+import { useContenido } from '../contenido.jsx';
 import { wa } from '../data/site.js';
 import { Hero, Cta, useMeta } from '../components/ui.jsx';
 import Icono from '../components/Icono.jsx';
@@ -7,6 +8,7 @@ import Icono from '../components/Icono.jsx';
 const celda = (v) => (v === true ? <Icono n="check" label="Incluido" /> : v === false ? <Icono n="minus" label="No incluido" className="no" /> : v);
 
 export default function Precios() {
+    const { planes } = useContenido();
     useMeta('Precios y planes', 'Planes y precios de Club Center Fight Academy. Elegí el plan que mejor se adapta a tu rutina. Primera clase sin cargo.');
     return (
         <>
@@ -14,13 +16,13 @@ export default function Precios() {
 
             <section className="pricing-section">
                 <div className="plans">
-                    {PLANES.map((p) => (
+                    {planes.map((p) => (
                         <div key={p.id} className={`plan${p.destacado ? ' featured' : ''}`}>
                             {p.destacado && <span className="plan-tag">{p.destacado}</span>}
                             <h3>{p.nombre}</h3>
                             <p className="plan-price">{precio(p.precio)}{p.precio != null && <small>/mes</small>}</p>
                             <ul>
-                                {FILAS.map(([k, label]) => {
+                                {FILAS.filter(([k]) => p.items[k] != null).map(([k, label]) => {
                                     const v = p.items[k];
                                     return (
                                         <li key={k} className={v === false ? 'off' : ''}>
@@ -42,12 +44,12 @@ export default function Precios() {
                     <table className="compare">
                         <caption>Compará los planes</caption>
                         <thead>
-                            <tr><th scope="col"></th>{PLANES.map((p) => <th scope="col" key={p.id}>{p.nombre}</th>)}</tr>
+                            <tr><th scope="col"></th>{planes.map((p) => <th scope="col" key={p.id}>{p.nombre}</th>)}</tr>
                         </thead>
                         <tbody>
-                            <tr><th scope="row">Precio mensual</th>{PLANES.map((p) => <td key={p.id}>{precio(p.precio)}</td>)}</tr>
+                            <tr><th scope="row">Precio mensual</th>{planes.map((p) => <td key={p.id}>{precio(p.precio)}</td>)}</tr>
                             {FILAS.map(([k, label]) => (
-                                <tr key={k}><th scope="row">{label}</th>{PLANES.map((p) => <td key={p.id}>{celda(p.items[k])}</td>)}</tr>
+                                <tr key={k}><th scope="row">{label}</th>{planes.map((p) => <td key={p.id}>{celda(p.items[k])}</td>)}</tr>
                             ))}
                         </tbody>
                     </table>

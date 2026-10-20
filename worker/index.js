@@ -1,18 +1,25 @@
-// API del sitio. Solo corre para /api/* (ver run_worker_first en wrangler.jsonc).
-// POST /api/leads              → público: guarda un interesado del formulario de inscripción
-// POST /api/admin/login        → panel: contraseña → cookie de sesión
-// POST /api/admin/logout       → panel: borra la cookie
-// GET  /api/admin/leads        → panel: lista de interesados + conteo por estado
-// PATCH /api/admin/leads/:id   → panel: cambia estado o notas
+// Worker del sitio. Corre para todo menos /assets/* y /Fotos/* (ver run_worker_first en wrangler.jsonc).
+// Páginas HTML                        → se les inserta el contenido de D1 (paginas.js)
+// GET  /sitemap.xml                   → armado con los eventos y competidores de D1
+// GET  /api/contenido                 → público: planes, clases, eventos y competidores
+// GET  /api/fotos/:id                 → público: fotos subidas desde el panel
+// POST /api/leads                     → público: guarda un interesado del formulario de inscripción
+// POST /api/admin/login               → panel: contraseña → cookie de sesión
+// POST /api/admin/logout              → panel: borra la cookie
+// GET  /api/admin/leads               → panel: lista de interesados + conteo por estado
+// PATCH /api/admin/leads/:id          → panel: cambia estado o notas
+// GET|POST /api/admin/contenido/:tabla, PUT|DELETE /api/admin/contenido/:tabla/:clave → panel: editar contenido
+// POST /api/admin/fotos               → panel: sube una foto
 // El resto de /api/admin/* exige la cookie de sesión. La contraseña es el secret ADMIN_PASSWORD.
+
+import { json, txt } from './util.js';
+import { leerContenido, editarContenido, subirFoto, servirFoto } from './contenido.js';
+import { pagina, sitemap } from './paginas.js';
 
 export const ESTADOS = ['nuevo', 'contactado', 'prueba', 'inscripto', 'descartado'];
 
-const json = (data, status = 200, headers = {}) => Response.json(data, { status, headers: { 'Cache-Control': 'no-store', ...headers } });
-const txt = (v, max) => (typeof v === 'string' ? v.trim().slice(0, max) : '');
-
 export default {
-    async fetch(request, env) {
+    async fetch(request, env, ctx) {
         const url = new URL(request.url);
         const { pathname } = url;
 
@@ -22,6 +29,13 @@ export default {
             return json({ error: 'Origen no permitido' }, 403);
         }
 
+        if (!pathname.startsWith('/api/')) {
+            return pathname === '/sitemap.xml' ? sitemap(url, env) : pagina(request, env);
+        }
+
+        if (pathname === '/api/contenido' && request.method === 'GET') return json(await leerContenido(env), 200, { 'Cache-Control': 'no-cache' });
+        const foto = pathname.match(/^\/api\/fotos\/(\d+)$/);
+        if (foto && request.method === 'GET') return servirFoto(Number(foto[1]), request, env, ctx);
         if (pathname === '/api/leads' && request.method === 'POST') return crearLead(request, env);
 
         if (pathname === '/api/admin/login' && request.method === 'POST') return login(request, env);
@@ -33,10 +47,13 @@ export default {
             if (pathname === '/api/admin/leads' && request.method === 'GET') return listarLeads(url, env);
             const m = pathname.match(/^\/api\/admin\/leads\/(\d+)$/);
             if (m && request.method === 'PATCH') return actualizarLead(Number(m[1]), request, env);
+
+            const c = pathname.match(/^\/api\/admin\/contenido\/(\w+)(?:\/([\w-]+))?$/);
+            if (c) return editarContenido(c[1], c[2], request, env);
+            if (pathname === '/api/admin/fotos' && request.method === 'POST') return subirFoto(request, env);
         }
 
-        if (pathname.startsWith('/api/')) return json({ error: 'No encontrado' }, 404);
-        return env.ASSETS.fetch(request);
+        return json({ error: 'No encontrado' }, 404);
     },
 };
 

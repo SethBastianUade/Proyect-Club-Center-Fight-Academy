@@ -11,7 +11,7 @@ import Perfil from './pages/Perfil.jsx';
 import Contacto from './pages/Contacto.jsx';
 import Inscripcion from './pages/Inscripcion.jsx';
 import NoEncontrado from './pages/NoEncontrado.jsx';
-import Admin from './pages/Admin.jsx';
+import Admin from './pages/admin/Admin.jsx';
 
 export default function App() {
     return (

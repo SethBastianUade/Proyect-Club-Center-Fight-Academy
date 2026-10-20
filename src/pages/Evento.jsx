@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useParams } from 'react-router';
-import { EVENTOS, TIPOS, fechaLarga } from '../data/eventos.js';
+import { TIPOS, fechaLarga } from '../data/eventos.js';
+import { useContenido } from '../contenido.jsx';
 import { wa } from '../data/site.js';
 import { Hero, useMeta } from '../components/ui.jsx';
 import NoEncontrado from './NoEncontrado.jsx';
@@ -8,9 +9,11 @@ import Icono from '../components/Icono.jsx';
 
 export default function Evento() {
     const { slug } = useParams();
-    const e = EVENTOS.find((x) => x.slug === slug);
+    const { eventos, cargando } = useContenido();
+    const e = eventos.find((x) => x.slug === slug);
     const [copiado, setCopiado] = useState(false);
     useMeta(e?.titulo, e?.resumen);
+    if (cargando) return null;
     if (!e) return <NoEncontrado />;
 
     const futuro = e.fecha >= new Date().toISOString().slice(0, 10);
@@ -34,7 +37,8 @@ export default function Evento() {
                     {e.hora && <li><Icono n="clock" /> {e.hora} hs</li>}
                     {e.lugar && <li><Icono n="mapa" /> {e.lugar}</li>}
                 </ul>
-                <p className="event-text">{e.texto}</p>
+                {e.foto && <img src={e.foto} alt={`Flyer de ${e.titulo}`} className="event-flyer" />}
+                {e.texto && <p className="event-text">{e.texto}</p>}
                 <div className="event-actions">
                     {futuro && (
                         <a href={wa(`Hola, quiero info sobre "${e.titulo}" (${e.fecha})`)} className="btn btn-primary" target="_blank" rel="noopener">
