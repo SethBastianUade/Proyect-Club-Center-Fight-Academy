@@ -18,6 +18,7 @@ export default function Layout() {
     const { pathname } = useLocation();
     const [menu, setMenu] = useState(false);
     const [arriba, setArriba] = useState(false);
+    const [scrolled, setScrolled] = useState(false);
     const [cookies, setCookies] = useState(false);
 
     useEffect(() => {
@@ -30,7 +31,7 @@ export default function Layout() {
     }, [menu]);
 
     useEffect(() => {
-        const onScroll = () => setArriba(window.scrollY > 300);
+        const onScroll = () => { setArriba(window.scrollY > 300); setScrolled(window.scrollY > 40); };
         window.addEventListener('scroll', onScroll, { passive: true });
         let t;
         try {
@@ -46,7 +47,8 @@ export default function Layout() {
 
     return (
         <>
-            <header className="main-header">
+            {/* En el inicio el header arranca transparente sobre el hero y se vuelve sólido al scrollear */}
+            <header className={`main-header${pathname === '/' && !scrolled ? ' over-hero' : ''}`}>
                 <div className="header-container">
                     <div className="logo-container">
                         <Link to="/" className="logo-link">
@@ -70,6 +72,7 @@ export default function Layout() {
                     <div className="header-cta">
                         <a href={INSCRIBITE} className="btn-whatsapp" target="_blank" rel="noopener">
                             <i className="fab fa-whatsapp"></i> ¡Inscribite ahora!
+                            <i className="fas fa-arrow-right cta-arrow" aria-hidden="true"></i>
                         </a>
                     </div>
                 </div>

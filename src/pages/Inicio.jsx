@@ -32,29 +32,30 @@ export default function Inicio() {
 
     return (
         <>
-            <section className="hero-section">
-                <div className="hero-overlay"></div>
-                <div className="hero-content">
-                    <span className="hero-badge">Academia de Artes Marciales · Buenos Aires</span>
-                    <h1 className="hero-title">ENTRENÁ COMO<br />UN <span>CAMPEÓN</span></h1>
-                    <p className="hero-subtitle">Descubrí tu potencial en la mejor academia de artes marciales de CABA. Clases para todos los niveles.</p>
-                    <div className="hero-buttons">
-                        <Link to="/horarios" className="btn btn-primary">Ver horarios</Link>
-                        <a href={PRUEBA} className="btn btn-secondary" target="_blank" rel="noopener">
-                            <i className="fab fa-whatsapp"></i> Clase de prueba gratis
-                        </a>
+            <section className="hero-banner">
+                <img src="/Fotos/bannerD.webp" alt="" className="hero-banner-bg" fetchPriority="high" />
+                <div className="hero-banner-inner">
+                    <div className="hero-pill fade-in-1">
+                        <span>Gratis</span> Primera clase de prueba sin cargo
                     </div>
-                </div>
-            </section>
+                    <h1 className="fade-in-2">Entrená como<br /><span>un campeón</span></h1>
+                    <p className="hero-banner-desc fade-in-3">
+                        Jiu-Jitsu, Muay Thai, Boxeo y MMA en el corazón de CABA. Profesores certificados y clases para todos los niveles, desde tu primer día hasta tu primera pelea.
+                    </p>
+                    <div className="hero-banner-actions fade-in-4">
+                        <a href={PRUEBA} className="hb-btn hb-btn-primary" target="_blank" rel="noopener">
+                            <i className="fab fa-whatsapp"></i> Reservar clase de prueba
+                        </a>
+                        <Link to="/horarios" className="hb-btn hb-btn-ghost">
+                            Ver horarios <i className="fas fa-arrow-right" aria-hidden="true"></i>
+                        </Link>
+                    </div>
 
-            <section className="stats-strip">
-                <div className="stats-grid">
-                    {STATS.map(([n, l]) => (
-                        <div className="stat-item" key={l}>
-                            <span className="stat-number">{n}</span>
-                            <span className="stat-label">{l}</span>
-                        </div>
-                    ))}
+                    <div className="hero-stats fade-in-4">
+                        {STATS.map(([n, l]) => (
+                            <div key={l}><strong>{n}</strong><span>{l}</span></div>
+                        ))}
+                    </div>
                 </div>
             </section>
 

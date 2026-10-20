@@ -179,3 +179,161 @@ a.team-card { display: block; color: inherit; }
 }
 
 .hero-evento .hero-title { font-size: clamp(2rem, 5vw, 3.4rem); }
+
+/* ----- Hero del inicio (adaptado de "Responsive Hero Banner") ----- */
+.hero-banner {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    padding: calc(var(--header-height) + 3rem) 1.5rem 3rem;
+    color: var(--white);
+    background: var(--dark);
+}
+.hero-banner-bg { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; object-fit: cover; }
+.hero-banner::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+        radial-gradient(ellipse at 50% 35%, rgba(11, 22, 41, 0.35), transparent 70%),
+        linear-gradient(180deg, rgba(11, 22, 41, 0.75) 0%, rgba(11, 22, 41, 0.45) 45%, rgba(11, 22, 41, 0.92) 100%);
+}
+.hero-banner-inner { width: 100%; max-width: 1100px; margin: 0 auto; text-align: center; }
+
+.hero-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.4rem 1rem 0.4rem 0.45rem;
+    border-radius: 50px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 1.75rem;
+}
+.hero-pill span {
+    background: var(--primary);
+    color: var(--white);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 0.2rem 0.65rem;
+    border-radius: 50px;
+}
+
+.hero-banner h1 {
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(2.8rem, 8vw, 5.8rem);
+    font-weight: 700;
+    line-height: 1.02;
+    text-transform: uppercase;
+    letter-spacing: -0.5px;
+    color: var(--white);
+}
+.hero-banner h1 span { color: var(--primary); }
+.hero-banner-desc {
+    max-width: 640px;
+    margin: 1.5rem auto 0;
+    font-size: clamp(1rem, 1.6vw, 1.15rem);
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.hero-banner-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.9rem; margin-top: 2.5rem; }
+.hb-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.95rem 1.6rem;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 0.92rem;
+    transition: var(--transition);
+}
+.hb-btn-primary { background: var(--primary); color: var(--white); box-shadow: var(--shadow-primary); }
+.hb-btn-primary:hover { background: var(--primary-dark); transform: translateY(-2px); }
+.hb-btn-ghost {
+    color: var(--white);
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+.hb-btn-ghost:hover { background: rgba(255, 255, 255, 0.18); }
+.hb-btn-ghost i { transition: transform 0.2s ease; }
+.hb-btn-ghost:hover i { transform: translateX(3px); }
+
+.hero-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    max-width: 860px;
+    margin: 4.5rem auto 0;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.14);
+}
+.hero-stats strong { display: block; font-family: 'Oswald', sans-serif; font-size: clamp(1.8rem, 3.5vw, 2.5rem); line-height: 1; color: var(--white); }
+.hero-stats span { display: block; margin-top: 0.4rem; font-size: 0.72rem; font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase; color: rgba(255, 255, 255, 0.65); }
+
+@keyframes fadeSlideIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
+.fade-in-1, .fade-in-2, .fade-in-3, .fade-in-4 { animation: fadeSlideIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) both; }
+.fade-in-2 { animation-delay: 0.12s; }
+.fade-in-3 { animation-delay: 0.24s; }
+.fade-in-4 { animation-delay: 0.36s; }
+@media (prefers-reduced-motion: reduce) {
+    .fade-in-1, .fade-in-2, .fade-in-3, .fade-in-4 { animation: none; }
+}
+
+/* Header transparente con nav en "píldora" de vidrio, solo arriba del hero del inicio */
+.cta-arrow { display: none; }
+.main-header.over-hero {
+    background: transparent;
+    border-bottom-color: transparent;
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+.over-hero .mobile-menu-btn span { background: var(--white); }
+.over-hero .mobile-menu-btn.active span { background: var(--secondary); }
+
+@media (min-width: 769px) {
+    .over-hero .nav-links {
+        gap: 0.15rem;
+        padding: 0.3rem;
+        border-radius: 50px;
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+    }
+    .over-hero .nav-links a {
+        height: auto;
+        padding: 0.55rem 0.95rem;
+        border-radius: 50px;
+        color: rgba(255, 255, 255, 0.8);
+    }
+    .over-hero .nav-links a::after { display: none; }
+    .over-hero .nav-links a:hover { color: var(--white); }
+    .over-hero .nav-links a.active { color: var(--white); background: rgba(255, 255, 255, 0.12); }
+    .over-hero .header-cta .btn-whatsapp { background: var(--white); color: var(--dark); box-shadow: none; }
+    .over-hero .header-cta .btn-whatsapp .fa-whatsapp { color: #1a9e4b; }
+    .over-hero .header-cta .btn-whatsapp:hover { background: rgba(255, 255, 255, 0.9); }
+    .over-hero .cta-arrow { display: inline; font-size: 0.75rem; transform: rotate(-45deg); }
+}
+
+@media (max-width: 768px) {
+    .hero-banner { padding: calc(var(--header-height) + 2rem) 1.25rem 6rem; }
+    .hero-pill { font-size: 0.78rem; }
+    .hero-banner-actions { flex-direction: column; align-items: stretch; max-width: 320px; margin-inline: auto; }
+    .hb-btn { justify-content: center; }
+    .hero-stats { grid-template-columns: repeat(2, 1fr); row-gap: 1.75rem; margin-top: 3rem; }
+}
