@@ -52,6 +52,8 @@ Estado al 2026-10-20. Sitio en React + Vite, deploy en Cloudflare (`clubcenter.k
 
 ## Para alumnos
 
+> Plan detallado en [`plan.md`](plan.md): socios, cuotas y asistencias viven en **BiFrost** (reemplazo de Mis Actividades); la web hace el check-in y "Mi cuenta" consultándolo.
+
 ### 7. Área de alumno — ⏳ pendiente
 - [ ] Login de alumnos
 - [ ] Cuota al día o vencida
