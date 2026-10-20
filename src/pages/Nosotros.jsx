@@ -31,18 +31,18 @@ export default function Nosotros() {
     useMeta('Nosotros', 'Conocé la historia, valores, profesores y competidores de Club Center Fight Academy.');
     return (
         <>
-            <Hero badge="Quiénes somos" titulo="CLUB CENTER" resaltado="FIGHT ACADEMY" subtitulo="Pasión, valores y excelencia en artes marciales desde CABA" fondo="hero-nosotros" />
+            <Hero badge="Quiénes somos" titulo="Club Center" resaltado="Fight Academy" subtitulo="Pasión, valores y excelencia en artes marciales desde CABA" fondo="hero-nosotros" />
 
             <section className="about-section">
                 <SectionHeader
-                    label="Nuestra historia" titulo="DE DÓNDE VENIMOS"
+                    label="Nuestra historia" titulo="De dónde venimos"
                     texto="Club Center Fight Academy nació con el sueño de crear una comunidad donde el respeto, la disciplina y la superación personal sean los pilares fundamentales."
                 />
                 <div className="about-container">
                     <div className="about-text">
-                        <div className="section-header" style={{ textAlign: 'left', marginBottom: '1.5rem' }}>
+                        <div className="section-header align-left">
                             <span className="section-label">Lo que nos guía</span>
-                            <h2>NUESTROS VALORES</h2>
+                            <h2>Nuestros valores</h2>
                         </div>
                         <ul className="about-values">
                             {VALORES.map(([i, v]) => <li key={v}><i className={`fas ${i}`}></i> {v}</li>)}
@@ -54,11 +54,11 @@ export default function Nosotros() {
                 </div>
             </section>
 
-            <Grupo rol="profesor" label="Staff" titulo="NUESTROS PROFESORES" texto="Instructores certificados en cada disciplina" />
-            <Grupo rol="competidor" label="Orgullo del equipo" titulo="COMPETIDORES DESTACADOS" texto="Representantes de Club Center Fight Academy" />
+            <Grupo rol="profesor" label="Staff" titulo="Nuestros profesores" texto="Instructores certificados en cada disciplina" />
+            <Grupo rol="competidor" label="Orgullo del equipo" titulo="Competidores destacados" texto="Representantes de Club Center Fight Academy" />
 
             <Cta
-                titulo="¿QUERÉS SER PARTE?"
+                titulo="¿Querés ser parte?"
                 texto="Sumate a Club Center Fight Academy y viví la experiencia de entrenar con los mejores"
                 mensaje="Hola, quiero conocer el club"
                 boton="¡Contactanos!"

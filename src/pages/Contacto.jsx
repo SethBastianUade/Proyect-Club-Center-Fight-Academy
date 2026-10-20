@@ -14,7 +14,7 @@ export default function Contacto() {
 
     return (
         <>
-            <Hero badge="Estamos para ayudarte" titulo="PONETE EN" resaltado="CONTACTO" subtitulo="Consultá horarios, precios o escribinos para agendar tu primera clase" fondo="hero-contacto" />
+            <Hero badge="Estamos para ayudarte" titulo="Ponete en" resaltado="contacto" subtitulo="Consultá horarios, precios o escribinos para agendar tu primera clase" fondo="hero-contacto" />
 
             <section className="contact-main-section">
                 <div className="contact-container">
@@ -40,7 +40,7 @@ export default function Contacto() {
             </section>
 
             <section className="map-section">
-                <SectionHeader label="Ubicación" titulo="¿DÓNDE ESTAMOS?" texto={`Encontranos fácilmente en ${DIRECCION}`} />
+                <SectionHeader label="Ubicación" titulo="¿Dónde estamos?" texto={`Encontranos fácilmente en ${DIRECCION}`} />
                 <div className="map-box">
                     <iframe
                         src="https://maps.google.com/maps?width=100%&height=100%&hl=es&q=Solis+1213,+CABA,+Argentina&t=&z=17&ie=UTF8&iwloc=B&output=embed"

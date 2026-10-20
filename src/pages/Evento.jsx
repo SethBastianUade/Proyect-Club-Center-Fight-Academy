@@ -25,7 +25,7 @@ export default function Evento() {
 
     return (
         <>
-            <Hero badge={TIPOS[e.tipo]} titulo={e.titulo.toUpperCase()} fondo="hero-disciplinas hero-evento" />
+            <Hero badge={TIPOS[e.tipo]} titulo={e.titulo} fondo="hero-disciplinas hero-evento" />
             <section className="event-detail">
                 <Link to="/eventos" className="back"><i className="fas fa-arrow-left"></i> Todos los eventos</Link>
                 <ul className="event-facts">

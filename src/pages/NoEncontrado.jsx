@@ -6,7 +6,7 @@ export default function NoEncontrado() {
     return (
         <section className="profile" style={{ textAlign: 'center' }}>
             <span className="section-label">Error 404</span>
-            <h1>NO ENCONTRAMOS ESA PÁGINA</h1>
+            <h1>No encontramos esa página</h1>
             <p className="profile-bio">Puede que el link esté mal o que la página ya no exista.</p>
             <Link to="/" className="btn btn-primary">Volver al inicio</Link>
         </section>

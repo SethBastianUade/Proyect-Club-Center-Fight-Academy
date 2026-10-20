@@ -8,7 +8,7 @@ import EventoCard from '../components/EventoCard.jsx';
 
 const PRUEBA = wa('Hola, quiero hacer una clase de prueba');
 
-const STATS = [['200+', 'Alumnos Activos'], ['4', 'Disciplinas'], ['10+', 'Años de Experiencia'], ['50+', 'Torneos Participados']];
+const STATS = [['200+', 'Alumnos activos'], ['4', 'Disciplinas'], ['10+', 'Años de experiencia'], ['50+', 'Torneos disputados']];
 
 const FEATURES = [
     ['fa-medal', 'Profesores Certificados', 'Instructores con amplia experiencia y certificaciones internacionales en cada disciplina.'],
@@ -60,7 +60,7 @@ export default function Inicio() {
             </section>
 
             <section className="disciplines-section">
-                <SectionHeader label="Lo que entrenamos" titulo="NUESTRAS DISCIPLINAS" texto="Elegí tu camino hacia la excelencia con instructores certificados" />
+                <SectionHeader label="Lo que entrenamos" titulo="Nuestras disciplinas" texto="Elegí tu camino hacia la excelencia con instructores certificados" />
                 <div className="disciplines-grid">
                     {PRINCIPALES.map((id) => {
                         const d = DISCIPLINAS[id];
@@ -78,7 +78,7 @@ export default function Inicio() {
 
             {eventos.length > 0 && (
                 <section className="events-section">
-                    <SectionHeader label="Agenda" titulo="PRÓXIMOS EVENTOS" texto="Torneos, seminarios y exámenes de graduación" />
+                    <SectionHeader label="Agenda" titulo="Próximos eventos" texto="Torneos, seminarios y exámenes de graduación" />
                     <div className="events-grid">
                         {eventos.map((e) => <EventoCard key={e.slug} evento={e} />)}
                     </div>
@@ -87,7 +87,7 @@ export default function Inicio() {
             )}
 
             <section className="why-us-section">
-                <SectionHeader label="Nuestra diferencia" titulo="¿POR QUÉ ELEGIRNOS?" texto="Somos más que una academia de artes marciales" />
+                <SectionHeader label="Nuestra diferencia" titulo="¿Por qué elegirnos?" texto="Somos más que una academia de artes marciales" />
                 <div className="features-grid">
                     {FEATURES.map(([icon, t, p]) => (
                         <div className="feature-card" key={t}>
@@ -100,12 +100,12 @@ export default function Inicio() {
             </section>
 
             <section className="testimonials-section">
-                <SectionHeader label="Opiniones" titulo="LO QUE DICEN NUESTROS ALUMNOS" texto="Experiencias reales de nuestra comunidad" />
+                <SectionHeader label="Opiniones" titulo="Lo que dicen nuestros alumnos" texto="Experiencias reales de nuestra comunidad" />
                 <div className="elfsight-app-14b65929-b170-4f67-a161-ebc540e7ea4a" data-elfsight-app-lazy></div>
             </section>
 
             <Cta
-                titulo="¿LISTO PARA COMENZAR?"
+                titulo="¿Listo para empezar?"
                 texto="Agendá tu primera clase de prueba gratuita hoy mismo y sentí la diferencia"
                 mensaje="Hola, quiero hacer una clase de prueba"
             />

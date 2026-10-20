@@ -18,7 +18,6 @@ export default function Layout() {
     const { pathname } = useLocation();
     const [menu, setMenu] = useState(false);
     const [arriba, setArriba] = useState(false);
-    const [scrolled, setScrolled] = useState(false);
     const [cookies, setCookies] = useState(false);
 
     useEffect(() => {
@@ -28,10 +27,14 @@ export default function Layout() {
 
     useEffect(() => {
         document.body.style.overflow = menu ? 'hidden' : '';
+        if (!menu) return;
+        const onKey = (e) => e.key === 'Escape' && setMenu(false);
+        document.addEventListener('keydown', onKey);
+        return () => document.removeEventListener('keydown', onKey);
     }, [menu]);
 
     useEffect(() => {
-        const onScroll = () => { setArriba(window.scrollY > 300); setScrolled(window.scrollY > 40); };
+        const onScroll = () => { setArriba(window.scrollY > 300); };
         window.addEventListener('scroll', onScroll, { passive: true });
         let t;
         try {
@@ -47,42 +50,33 @@ export default function Layout() {
 
     return (
         <>
-            {/* En el inicio el header arranca transparente sobre el hero y se vuelve sólido al scrollear */}
-            <header className={`main-header${pathname === '/' && !scrolled ? ' over-hero' : ''}`}>
-                <div className="header-container">
-                    <div className="logo-container">
-                        <Link to="/" className="logo-link">
-                            <img src="/Fotos/logoClub.png" alt="Club Center Fight Academy" className="main-logo" width="542" height="510" />
-                        </Link>
-                    </div>
-                    <nav className="main-nav">
-                        <ul className={`nav-links${menu ? ' active' : ''}`} id="nav-links">
+            <header className="site-header">
+                <div className="header-inner">
+                    <Link to="/" className="brand" aria-label="Club Center Fight Academy, inicio">
+                        <img src="/Fotos/logoClub.png" alt="" width="542" height="510" />
+                    </Link>
+                    <nav className={`nav-pill${menu ? " open" : ""}`} id="nav-menu" aria-label="Principal">
+                        <ul>
                             {NAV.map(([to, label]) => (
-                                <li key={to}><NavLink to={to} end={to === '/'}>{label}</NavLink></li>
+                                <li key={to}><NavLink to={to} end={to === "/"}>{label}</NavLink></li>
                             ))}
                         </ul>
-                        <button
-                            className={`mobile-menu-btn${menu ? ' active' : ''}`}
-                            aria-label="Menú" aria-expanded={menu} aria-controls="nav-links"
-                            onClick={() => setMenu(!menu)}
-                        >
-                            <span></span><span></span><span></span>
-                        </button>
-                    </nav>
-                    <div className="header-cta">
-                        <a href={INSCRIBITE} className="btn-whatsapp" target="_blank" rel="noopener">
-                            <i className="fab fa-whatsapp"></i> ¡Inscribite ahora!
-                            <i className="fas fa-arrow-right cta-arrow" aria-hidden="true"></i>
+                        <a href={INSCRIBITE} className="nav-cta" target="_blank" rel="noopener">
+                            Inscribite <i className="fas fa-arrow-right" aria-hidden="true"></i>
                         </a>
-                    </div>
+                    </nav>
+                    <button
+                        className="menu-btn" aria-label={menu ? "Cerrar menú" : "Abrir menú"}
+                        aria-expanded={menu} aria-controls="nav-menu" onClick={() => setMenu(!menu)}
+                    >
+                        <i className={`fas ${menu ? "fa-xmark" : "fa-bars"}`} aria-hidden="true"></i>
+                    </button>
                 </div>
             </header>
 
-            <div className="mobile-whatsapp-bar">
-                <a href={INSCRIBITE} className="btn-whatsapp" target="_blank" rel="noopener">
-                    <i className="fab fa-whatsapp"></i> ¡Inscribite ahora!
-                </a>
-            </div>
+            <a href={INSCRIBITE} className="mobile-cta" target="_blank" rel="noopener">
+                <i className="fab fa-whatsapp"></i> Reservar clase de prueba gratis
+            </a>
 
             <main><Outlet /></main>
 

@@ -9,7 +9,7 @@ export default function Precios() {
     useMeta('Precios y planes', 'Planes y precios de Club Center Fight Academy. Elegí el plan que mejor se adapta a tu rutina. Primera clase sin cargo.');
     return (
         <>
-            <Hero badge="Planes" titulo="ELEGÍ TU" resaltado="PLAN" subtitulo="Primera clase de prueba sin cargo en cualquier plan" fondo="hero-nosotros" />
+            <Hero badge="Planes" titulo="Elegí tu" resaltado="plan" subtitulo="Primera clase de prueba sin cargo en cualquier plan" fondo="hero-nosotros" />
 
             <section className="pricing-section">
                 <div className="plans">
@@ -54,7 +54,7 @@ export default function Precios() {
             </section>
 
             <Cta
-                titulo="¿DUDAS CON LOS PLANES?"
+                titulo="¿Dudas con los planes?"
                 texto="Te ayudamos a elegir según tus objetivos y disponibilidad"
                 mensaje="Hola, quería consultar por los precios y planes"
                 boton="Consultar por WhatsApp"

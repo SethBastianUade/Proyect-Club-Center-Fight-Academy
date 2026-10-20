@@ -23,7 +23,7 @@ export default function Inscripcion() {
 
     return (
         <section className="inscription-section">
-            <SectionHeader label="Empezá hoy" titulo="INSCRIPCIÓN" texto="Completá el formulario y te contactamos por WhatsApp para coordinar tu inicio" />
+            <SectionHeader label="Empezá hoy" titulo="Inscripción" texto="Completá el formulario y te contactamos por WhatsApp para coordinar tu inicio" />
             <div className="inscription-container">
                 <form className="inscription-form" onSubmit={enviar}>
                     <div className="form-group">
