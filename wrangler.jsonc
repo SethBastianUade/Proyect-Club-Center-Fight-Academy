@@ -1,6 +1,8 @@
 {
   "name": "ccfa",
   "compatibility_date": "2026-10-01",
+  // Cloudflare Builds corre solo `wrangler deploy`: esto compila antes
+  "build": { "command": "npm run build" },
   "assets": {
     "directory": "./dist",
     // Rutas de React Router (/horarios, /eventos/x) caen en index.html
