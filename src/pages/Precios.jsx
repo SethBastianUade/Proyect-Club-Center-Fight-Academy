@@ -19,7 +19,7 @@ export default function Precios() {
                     {planes.map((p) => (
                         <div key={p.id} className={`plan${p.destacado ? ' featured' : ''}`}>
                             {p.destacado && <span className="plan-tag">{p.destacado}</span>}
-                            <h3>{p.nombre}</h3>
+                            <h2>{p.nombre}</h2>
                             <p className="plan-price">{precio(p.precio)}{p.precio != null && <small>/mes</small>}</p>
                             <ul>
                                 {FILAS.filter(([k]) => p.items[k] != null).map(([k, label]) => {

@@ -729,9 +729,9 @@ div.clase:hover { border-color: var(--ring); }
     font-size: 0.7rem;
     font-weight: 600;
 }
-.plan h3 { font-size: 1.05rem; color: var(--text-200); }
+.plan h2 { font-family: var(--sans); font-weight: 600; font-size: 1.05rem; line-height: 1.3; color: var(--text-200); }
 .plan-price { margin: 0.5rem 0 1.25rem; font-family: var(--serif); font-size: 3rem; line-height: 1; color: var(--text-100); }
-.plan-price small { font-family: var(--sans); font-size: 0.9rem; color: var(--text-400); }
+.plan-price small { font-family: var(--sans); font-size: 0.9rem; color: var(--text-300); }
 .plan ul { flex: 1; align-content: start; display: grid; gap: 0.65rem; margin-bottom: 1.5rem; padding-top: 1.25rem; border-top: 1px solid var(--ring); }
 .plan li { display: flex; align-items: baseline; gap: 0.65rem; font-size: 0.92rem; }
 .plan li .icono { color: var(--accent); font-size: 0.8rem; }
@@ -923,13 +923,13 @@ main section.legal { max-width: 760px; margin: 0 auto; padding-top: calc(var(--h
     transition: background 0.2s;
 }
 .social-links a:hover { background: var(--glass-strong); }
-.footer-links h3, .footer-contact h3 { margin-bottom: 1rem; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-400); }
+.footer-links h3, .footer-contact h3 { margin-bottom: 1rem; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-300); }
 .footer-links ul { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.6rem 1rem; }
 .footer-links a { color: var(--text-300); font-size: 0.92rem; }
 .footer-links a:hover { color: var(--text-100); }
 .footer-contact p { display: flex; gap: 0.75rem; align-items: baseline; margin-bottom: 0.65rem; color: var(--text-300); font-size: 0.92rem; word-break: break-word; }
 .footer-contact .icono { width: 1rem; color: var(--text-400); }
-.footer-bottom { margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--ring); color: var(--text-400); font-size: 0.8rem; }
+.footer-bottom { margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--ring); color: var(--text-300); font-size: 0.8rem; }
 @media (min-width: 768px) {
     .main-footer { padding: 4.5rem 2rem 2.5rem; }
     .footer-grid { grid-template-columns: 1.4fr 1fr 1fr; gap: 3rem; }
