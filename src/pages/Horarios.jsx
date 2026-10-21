@@ -2,7 +2,8 @@ import { useSearchParams } from 'react-router';
 import { DIAS, hoy } from '../data/horarios.js';
 import { useContenido } from '../contenido.jsx';
 import { DISCIPLINAS } from '../data/disciplinas.js';
-import { Hero, Cta, usePagina } from '../components/ui.jsx';
+import { Hero, Siguiente, usePagina } from '../components/ui.jsx';
+import { wa } from '../data/site.js';
 import ClaseCard from '../components/ClaseCard.jsx';
 
 const HOY = hoy();
@@ -65,12 +66,9 @@ export default function Horarios() {
                 )}
             </section>
 
-            <Cta
-                titulo="¿No encontrás tu horario?"
-                texto="Escribinos y te ayudamos a armar tu semana de entrenamiento"
-                mensaje="Hola, quería consultar por los horarios"
-                boton="Consultar horarios"
-            />
+            <Siguiente>
+                ¿Ningún horario te sirve? <a href={wa('Hola, quería consultar por los horarios')} target="_blank" rel="noopener">Escribinos</a> y armamos tu semana.
+            </Siguiente>
         </>
     );
 }

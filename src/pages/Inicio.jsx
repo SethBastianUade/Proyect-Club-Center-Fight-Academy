@@ -1,6 +1,6 @@
 import { Link } from 'react-router';
 import { wa, DIRECCION, MAPA } from '../data/site.js';
-import { precio } from '../data/planes.js';
+import { precio, desde } from '../data/planes.js';
 import { DISCIPLINAS, PRINCIPALES } from '../data/disciplinas.js';
 import { proximos } from '../data/eventos.js';
 import { SectionHeader, Cta, usePagina } from '../components/ui.jsx';
@@ -20,7 +20,7 @@ export default function Inicio() {
     const contenido = useContenido();
     const eventos = proximos(contenido.eventos).slice(0, 3);
     const proximas = proximasClases(contenido.clases, 3);
-    const precios = contenido.planes.map((p) => p.precio).filter((p) => p != null);
+    const minimo = desde(contenido.planes);
 
 
     return (
@@ -46,9 +46,9 @@ export default function Inicio() {
                             Ver horarios <Icono n="arrow-right" />
                         </Link>
                     </div>
-                    {precios.length > 0 && (
+                    {minimo != null && (
                         <Link to="/precios" className="hero-precio fade-in-4">
-                            Planes desde <b>{precio(Math.min(...precios))}</b>/mes · Ver precios
+                            Planes desde <b>{precio(minimo)}</b>/mes · Ver precios
                         </Link>
                     )}
 
@@ -130,9 +130,11 @@ export default function Inicio() {
             </section>
 
             <Cta
-                titulo="¿Listo para empezar?"
-                texto="Agendá tu primera clase de prueba gratuita hoy mismo y sentí la diferencia"
+                titulo="Tu primera clase es gratis"
+                texto="Vení a probar cualquier disciplina, sin compromiso y sin experiencia previa."
                 mensaje="Hola, quiero hacer una clase de prueba"
+                boton="Reservar por WhatsApp"
+                secundario={['/horarios', 'Ver horarios']}
             />
         </>
     );

@@ -2,7 +2,7 @@ import { Link } from 'react-router';
 import { FILAS, precio } from '../data/planes.js';
 import { useContenido } from '../contenido.jsx';
 import { wa } from '../data/site.js';
-import { Hero, Cta, usePagina } from '../components/ui.jsx';
+import { Hero, Siguiente, usePagina } from '../components/ui.jsx';
 import Icono from '../components/Icono.jsx';
 
 const celda = (v) => (v === true ? <Icono n="check" label="Incluido" /> : v === false ? <Icono n="minus" label="No incluido" className="no" /> : v);
@@ -56,12 +56,10 @@ export default function Precios() {
                 </div>
             </section>
 
-            <Cta
-                titulo="¿Dudas con los planes?"
-                texto="Te ayudamos a elegir según tus objetivos y disponibilidad"
-                mensaje="Hola, quería consultar por los precios y planes"
-                boton="Consultar por WhatsApp"
-            />
+            <Siguiente>
+                ¿No sabés qué plan elegir? <a href={wa('Hola, quería consultar qué plan me conviene')} target="_blank" rel="noopener">Te asesoramos por WhatsApp</a>
+                {' · '}<Link to="/inscripcion">Inscribirme</Link>
+            </Siguiente>
         </>
     );
 }

@@ -1,6 +1,7 @@
 import { Link } from 'react-router';
 import { useContenido } from '../contenido.jsx';
-import { Hero, SectionHeader, Cta, usePagina } from '../components/ui.jsx';
+import { Hero, SectionHeader, Siguiente, usePagina } from '../components/ui.jsx';
+import { wa } from '../data/site.js';
 import Icono from '../components/Icono.jsx';
 
 const VALORES = [['handshake', 'Respeto'], ['bolt', 'Disciplina'], ['heart', 'Pasión'], ['users', 'Comunidad'], ['trophy', 'Excelencia']];
@@ -57,12 +58,9 @@ export default function Nosotros() {
 
             <Competidores />
 
-            <Cta
-                titulo="¿Querés ser parte?"
-                texto="Sumate a Club Center Fight Academy y viví la experiencia de entrenar con los mejores"
-                mensaje="Hola, quiero conocer el club"
-                boton="¡Contactanos!"
-            />
+            <Siguiente>
+                Conocé las <Link to="/disciplinas">disciplinas</Link> o <a href={wa('Hola, quiero hacer una clase de prueba')} target="_blank" rel="noopener">reservá tu clase de prueba</a>.
+            </Siguiente>
         </>
     );
 }

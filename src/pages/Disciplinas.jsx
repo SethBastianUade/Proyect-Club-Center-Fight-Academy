@@ -1,14 +1,16 @@
 import { Link } from 'react-router';
 import { DISCIPLINAS, FICHAS } from '../data/disciplinas.js';
 import { resumenHorarios } from '../data/horarios.js';
+import { precio, desde } from '../data/planes.js';
 import { wa } from '../data/site.js';
 import { useContenido } from '../contenido.jsx';
-import { Hero, Cta, usePagina } from '../components/ui.jsx';
+import { Hero, Siguiente, usePagina } from '../components/ui.jsx';
 import Icono from '../components/Icono.jsx';
 
 export default function Disciplinas() {
     usePagina('/disciplinas');
-    const { clases } = useContenido();
+    const { clases, planes } = useContenido();
+    const minimo = desde(planes);
     return (
         <>
             <Hero badge="Lo que entrenamos" titulo="Nuestras" resaltado="disciplinas" subtitulo="Todas las clases son para todos los niveles" />
@@ -39,12 +41,10 @@ export default function Disciplinas() {
                     })}
                 </div>
             </section>
-            <Cta
-                titulo="¿Cuál es tu disciplina?"
-                texto="Consultanos por WhatsApp y te ayudamos a elegir el camino perfecto para vos"
-                mensaje="Hola, quiero información sobre las disciplinas"
-                boton="¡Consultanos ahora!"
-            />
+            <Siguiente>
+                ¿Ya elegiste? <Link to="/horarios">Ver todos los horarios</Link>
+                {minimo != null && <> · <Link to="/precios">Planes desde {precio(minimo)}</Link></>}
+            </Siguiente>
         </>
     );
 }

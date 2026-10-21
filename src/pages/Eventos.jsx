@@ -1,7 +1,7 @@
 import { proximos, pasados } from '../data/eventos.js';
 import { useContenido } from '../contenido.jsx';
 import { INSTAGRAM } from '../data/site.js';
-import { Hero, SectionHeader, Cta, usePagina } from '../components/ui.jsx';
+import { Hero, SectionHeader, usePagina } from '../components/ui.jsx';
 import EventoCard from '../components/EventoCard.jsx';
 
 export default function Eventos() {
@@ -26,12 +26,6 @@ export default function Eventos() {
                     <div className="events-grid">{past.map((e) => <EventoCard key={e.slug} evento={e} />)}</div>
                 </section>
             )}
-
-            <Cta
-                titulo="¿Querés participar?"
-                texto="Consultanos por los próximos torneos y seminarios"
-                mensaje="Hola, quería consultar por los próximos eventos"
-            />
         </>
     );
 }

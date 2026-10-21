@@ -89,6 +89,7 @@ Estado al 2026-10-20. Sitio en React + Vite, deploy en Cloudflare (`clubcenter.k
 - [x] Política de privacidad (`/privacidad`, Ley 25.326) enlazada desde el formulario y el pie
 - [x] Métricas: clics a WhatsApp por botón y por página en el panel (`/admin?s=metricas`)
 - [x] Limpieza: README nuevo, sin `plans/` ni `.vscode/` del sitio viejo, `npm run deploy` sin doble build, `npm run db:backup`
+- [x] Cierres de página: la caja grande queda solo en el inicio ("Tu primera clase es gratis"); el resto termina con una línea que lleva al paso siguiente
 - [ ] Aviso por mail cuando entra un interesado (con Resend, la misma cuenta que usa BiFrost)
 - [ ] Contacto más simple: botones directos en lugar del formulario que abre WhatsApp
 - [x] `CLAUDE.md` con la arquitectura actual (React + Vite + Worker + D1)

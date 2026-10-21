@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { Link } from 'react-router';
 import { wa } from '../data/site.js';
 import { MARCA, TITULO_INICIO, PAGINAS } from '../data/paginas.js';
 import Icono from './Icono.jsx';
@@ -27,16 +28,29 @@ export function SectionHeader({ label, titulo, texto, principal = false }) {
     );
 }
 
-export function Cta({ titulo, texto, mensaje, boton = '¡Contactanos ahora!' }) {
+// Cierre grande: solo en el inicio. secundario = [ruta, texto] para un segundo botón interno
+export function Cta({ titulo, texto, mensaje, boton, secundario }) {
     return (
         <section className="cta-section" data-lugar="cta">
             <div className="cta-content">
                 <h2>{titulo}</h2>
                 <p>{texto}</p>
-                <a href={wa(mensaje)} className="btn btn-primary" target="_blank" rel="noopener">
-                    <Icono n="whatsapp" /> {boton}
-                </a>
+                <div className="cta-acciones">
+                    <a href={wa(mensaje)} className="btn btn-primary" target="_blank" rel="noopener">
+                        <Icono n="whatsapp" /> {boton}
+                    </a>
+                    {secundario && <Link to={secundario[0]} className="btn btn-outline">{secundario[1]}</Link>}
+                </div>
             </div>
+        </section>
+    );
+}
+
+// Cierre corto del resto de las páginas: una línea que lleva al paso siguiente (otra página o WhatsApp)
+export function Siguiente({ children }) {
+    return (
+        <section className="siguiente" data-lugar="cta">
+            <p>{children}</p>
         </section>
     );
 }
