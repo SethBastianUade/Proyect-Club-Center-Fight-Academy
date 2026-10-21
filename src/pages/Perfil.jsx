@@ -18,8 +18,8 @@ export default function Perfil() {
             <Link to="/nosotros" className="back"><Icono n="arrow-left" /> Volver al equipo</Link>
             <div className="profile-grid">
                 <img
-                    src={p.foto || '/Fotos/logoClub.png'} alt={p.nombre}
-                    width={p.w || 542} height={p.h || 510}
+                    src={p.foto || '/Fotos/logo.webp'} alt={p.nombre}
+                    width={p.w || 192} height={p.h || 181}
                     className={`profile-photo${p.foto ? '' : ' no-photo'}`}
                 />
                 <div>
@@ -37,7 +37,7 @@ export default function Perfil() {
                             <ul className="logros">{p.logros.map((l) => <li key={l}><Icono n="trophy" /> {l}</li>)}</ul>
                         </>
                     )}
-                    <a href={wa(`Hola, quiero entrenar ${p.disciplina} en el club`)} className="btn btn-primary" target="_blank" rel="noopener">
+                    <a href={wa(`Hola, quiero entrenar ${p.disciplina} en el club`)} className="btn btn-primary" target="_blank" rel="noopener" data-lugar="perfil">
                         <Icono n="whatsapp" /> Entrená {p.disciplina}
                     </a>
                 </div>

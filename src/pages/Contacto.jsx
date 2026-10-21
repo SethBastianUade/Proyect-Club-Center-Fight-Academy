@@ -1,10 +1,10 @@
 import { Link } from 'react-router';
 import { wa, TELEFONO, DIRECCION, EMAIL, INSTAGRAM } from '../data/site.js';
-import { Hero, SectionHeader, useMeta } from '../components/ui.jsx';
+import { Hero, SectionHeader, usePagina } from '../components/ui.jsx';
 import Icono from '../components/Icono.jsx';
 
 export default function Contacto() {
-    useMeta('Contacto', 'Contactá a Club Center Fight Academy en Solis 1213, CABA. Escribinos por WhatsApp para consultas y clases de prueba.');
+    usePagina('/contacto');
 
     const enviar = (e) => {
         e.preventDefault();
@@ -25,7 +25,7 @@ export default function Contacto() {
                             <li><Icono n="mapa" /> <span>Dirección: <b>{DIRECCION}</b></span></li>
                             <li><Icono n="envelope" /> <span>Email: <a href={`mailto:${EMAIL}`}>{EMAIL}</a></span></li>
                             <li><Icono n="instagram" /> <span>Instagram: <a href={`https://instagram.com/${INSTAGRAM}`} target="_blank" rel="noopener">@{INSTAGRAM}</a></span></li>
-                            <li><Icono n="whatsapp" /> <span>WhatsApp: <a href={wa()} target="_blank" rel="noopener">{TELEFONO}</a></span></li>
+                            <li><Icono n="whatsapp" /> <span>WhatsApp: <a href={wa()} target="_blank" rel="noopener" data-lugar="contacto">{TELEFONO}</a></span></li>
                             <li><Icono n="clock" /> <span>Horarios: <Link to="/horarios">ver grilla de clases</Link></span></li>
                         </ul>
                     </div>

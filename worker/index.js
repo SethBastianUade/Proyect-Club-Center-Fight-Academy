@@ -4,17 +4,20 @@
 // GET  /api/contenido                 → público: planes, clases, eventos y competidores
 // GET  /api/fotos/:id                 → público: fotos subidas desde el panel
 // POST /api/leads                     → público: guarda un interesado del formulario de inscripción
+// POST /api/clic                      → público: suma un clic a WhatsApp (métricas anónimas)
 // POST /api/admin/login               → panel: contraseña → cookie de sesión
 // POST /api/admin/logout              → panel: borra la cookie
 // GET  /api/admin/leads               → panel: lista de interesados + conteo por estado
 // PATCH /api/admin/leads/:id          → panel: cambia estado o notas
 // GET|POST /api/admin/contenido/:tabla, PUT|DELETE /api/admin/contenido/:tabla/:clave → panel: editar contenido
 // POST /api/admin/fotos               → panel: sube una foto
+// GET  /api/admin/metricas?dias=30     → panel: clics por lugar y página, y cantidad de interesados
 // El resto de /api/admin/* exige la cookie de sesión. La contraseña es el secret ADMIN_PASSWORD.
 
 import { json, txt } from './util.js';
 import { leerContenido, editarContenido, subirFoto, servirFoto } from './contenido.js';
 import { pagina, sitemap } from './paginas.js';
+import { sumarClic, verMetricas } from './metricas.js';
 
 export const ESTADOS = ['nuevo', 'contactado', 'prueba', 'inscripto', 'descartado'];
 
@@ -37,6 +40,7 @@ export default {
         const foto = pathname.match(/^\/api\/fotos\/(\d+)$/);
         if (foto && request.method === 'GET') return servirFoto(Number(foto[1]), request, env, ctx);
         if (pathname === '/api/leads' && request.method === 'POST') return crearLead(request, env);
+        if (pathname === '/api/clic' && request.method === 'POST') return sumarClic(request, env);
 
         if (pathname === '/api/admin/login' && request.method === 'POST') return login(request, env);
         if (pathname === '/api/admin/logout' && request.method === 'POST') return json({ ok: true }, 200, cookie('', 0));
@@ -51,6 +55,7 @@ export default {
             const c = pathname.match(/^\/api\/admin\/contenido\/(\w+)(?:\/([\w-]+))?$/);
             if (c) return editarContenido(c[1], c[2], request, env);
             if (pathname === '/api/admin/fotos' && request.method === 'POST') return subirFoto(request, env);
+            if (pathname === '/api/admin/metricas' && request.method === 'GET') return verMetricas(url, env);
         }
 
         return json({ error: 'No encontrado' }, 404);

@@ -26,11 +26,12 @@ export default function ClaseCard({ clase: c }) {
     return (
         <a
             href={wa(`Hola, quiero hacer una clase de prueba de ${nombre} ${cuando}`)}
-            className="clase" style={{ '--c': d.color }} target="_blank" rel="noopener"
-            aria-label={`Reservar clase de prueba de ${nombre} ${cuando}`}
+            className="clase" style={{ '--c': d.color }} target="_blank" rel="noopener" data-lugar="clase"
         >
             {contenido}
-            <span className="clase-wa"><Icono n="whatsapp" /><span>Reservar</span></span>
+            {/* Lo que lee un lector de pantalla arranca igual que lo visible: "19 a 20 hs Muay Thai Reservar…" */}
+            <span className="clase-wa"><Icono n="whatsapp" /><span className="clase-wa-texto">Reservar</span></span>
+            <span className="sr-only"> clase de prueba {cuando}</span>
         </a>
     );
 }

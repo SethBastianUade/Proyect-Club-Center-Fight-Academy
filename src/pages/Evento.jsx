@@ -41,7 +41,7 @@ export default function Evento() {
                 {e.texto && <p className="event-text">{e.texto}</p>}
                 <div className="event-actions">
                     {futuro && (
-                        <a href={wa(`Hola, quiero info sobre "${e.titulo}" (${e.fecha})`)} className="btn btn-primary" target="_blank" rel="noopener">
+                        <a href={wa(`Hola, quiero info sobre "${e.titulo}" (${e.fecha})`)} className="btn btn-primary" target="_blank" rel="noopener" data-lugar="evento">
                             <Icono n="whatsapp" /> Quiero participar
                         </a>
                     )}

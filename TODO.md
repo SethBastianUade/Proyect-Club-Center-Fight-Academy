@@ -85,5 +85,10 @@ Estado al 2026-10-20. Sitio en React + Vite, deploy en Cloudflare (`clubcenter.k
 - [ ] **Historia real del club** para Nosotros (hoy el texto es genérico): desde 2020, quién lo fundó, logros
 - [x] Estadística del inicio: "Entrenando desde 2020" (en lugar de "10+ años")
 - [ ] Puntaje y cantidad de reseñas de Google (para mostrarlo en la sección de opiniones)
-- [ ] Auditoría de performance (Core Web Vitals) y de accesibilidad antes de entregar al cliente
+- [x] Auditoría con Lighthouse: SEO por página (título, descripción y `canonical` propios, 404 reales), accesibilidad (contraste, nombres de botones, títulos), logo e imágenes livianas, panel fuera del bundle público, Inter variable, animación del hero sin retrasar la carga
+- [x] Política de privacidad (`/privacidad`, Ley 25.326) enlazada desde el formulario y el pie
+- [x] Métricas: clics a WhatsApp por botón y por página en el panel (`/admin?s=metricas`)
+- [x] Limpieza: README nuevo, sin `plans/` ni `.vscode/` del sitio viejo, `npm run deploy` sin doble build, `npm run db:backup`
+- [ ] Aviso por mail cuando entra un interesado (con Resend, la misma cuenta que usa BiFrost)
+- [ ] Contacto más simple: botones directos en lugar del formulario que abre WhatsApp
 - [x] `CLAUDE.md` con la arquitectura actual (React + Vite + Worker + D1)

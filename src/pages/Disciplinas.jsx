@@ -3,11 +3,11 @@ import { DISCIPLINAS, FICHAS } from '../data/disciplinas.js';
 import { resumenHorarios } from '../data/horarios.js';
 import { wa } from '../data/site.js';
 import { useContenido } from '../contenido.jsx';
-import { Hero, Cta, useMeta } from '../components/ui.jsx';
+import { Hero, Cta, usePagina } from '../components/ui.jsx';
 import Icono from '../components/Icono.jsx';
 
 export default function Disciplinas() {
-    useMeta('Disciplinas', 'Jiu-Jitsu, Muay Thai, Boxeo, MMA, Grappling y Sparring en Club Center Fight Academy, CABA. Días y horarios de cada disciplina.');
+    usePagina('/disciplinas');
     const { clases } = useContenido();
     return (
         <>
@@ -28,7 +28,7 @@ export default function Disciplinas() {
                                 )}
                                 <div className="ficha-acciones">
                                     {!d.sinReserva && (
-                                        <a href={wa(`Hola, quiero hacer una clase de prueba de ${d.nombre}`)} className="btn btn-primary" target="_blank" rel="noopener">
+                                        <a href={wa(`Hola, quiero hacer una clase de prueba de ${d.nombre}`)} className="btn btn-primary" target="_blank" rel="noopener" data-lugar="disciplina">
                                             <Icono n="whatsapp" /> Reservar prueba
                                         </a>
                                     )}

@@ -1,12 +1,12 @@
-import { useSearchParams } from 'react-router';
+import { Link, useSearchParams } from 'react-router';
 import { DISCIPLINAS, INSCRIBIBLES } from '../data/disciplinas.js';
 import { useContenido } from '../contenido.jsx';
 import { wa } from '../data/site.js';
-import { SectionHeader, useMeta } from '../components/ui.jsx';
+import { SectionHeader, usePagina } from '../components/ui.jsx';
 import Icono from '../components/Icono.jsx';
 
 export default function Inscripcion() {
-    useMeta('Inscripción', 'Inscribite en Club Center Fight Academy. Completá el formulario y te contactamos por WhatsApp.');
+    usePagina('/inscripcion');
     const [params] = useSearchParams();
     const { planes } = useContenido();
 
@@ -29,7 +29,7 @@ export default function Inscripcion() {
 
     return (
         <section className="inscription-section">
-            <SectionHeader label="Empezá hoy" titulo="Inscripción" texto="Completá el formulario y te contactamos por WhatsApp para coordinar tu inicio" />
+            <SectionHeader principal label="Empezá hoy" titulo="Inscripción" texto="Completá el formulario y te contactamos por WhatsApp para coordinar tu inicio" />
             <div className="inscription-container">
                 <form className="inscription-form" onSubmit={enviar}>
                     {/* Trampa para bots: invisible para personas */}
@@ -61,6 +61,7 @@ export default function Inscripcion() {
                         </select>
                     </div>
                     <button type="submit" className="btn btn-primary"><Icono n="whatsapp" /> Completar inscripción</button>
+                    <p className="form-legal">Usamos tus datos solo para contactarte. <Link to="/privacidad">Política de privacidad</Link></p>
                 </form>
             </div>
         </section>

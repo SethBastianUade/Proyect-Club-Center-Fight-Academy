@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { wa } from '../data/site.js';
+import { MARCA, TITULO_INICIO, PAGINAS } from '../data/paginas.js';
 import Icono from './Icono.jsx';
 
 export function Hero({ badge, titulo, resaltado, subtitulo, fondo = 'hero-disciplinas' }) {
@@ -14,11 +15,13 @@ export function Hero({ badge, titulo, resaltado, subtitulo, fondo = 'hero-discip
     );
 }
 
-export function SectionHeader({ label, titulo, texto }) {
+// principal: en páginas sin Hero el encabezado de la sección es el título de la página (h1)
+export function SectionHeader({ label, titulo, texto, principal = false }) {
+    const H = principal ? 'h1' : 'h2';
     return (
         <div className="section-header">
             <span className="section-label">{label}</span>
-            <h2>{titulo}</h2>
+            <H>{titulo}</H>
             {texto && <p>{texto}</p>}
         </div>
     );
@@ -26,7 +29,7 @@ export function SectionHeader({ label, titulo, texto }) {
 
 export function Cta({ titulo, texto, mensaje, boton = '¡Contactanos ahora!' }) {
     return (
-        <section className="cta-section">
+        <section className="cta-section" data-lugar="cta">
             <div className="cta-content">
                 <h2>{titulo}</h2>
                 <p>{texto}</p>
@@ -38,12 +41,12 @@ export function Cta({ titulo, texto, mensaje, boton = '¡Contactanos ahora!' }) 
     );
 }
 
-// Pisa el <title>/description estáticos de index.html (que quedan para previews sin JS, ej. WhatsApp)
-const DEFAULT_DESC = document.querySelector('meta[name="description"]')?.content;
-
+// Pisa el <title>/description del HTML al navegar entre páginas (el Worker ya los escribe bien en la carga inicial)
 export function useMeta(titulo, descripcion) {
     useEffect(() => {
-        document.title = titulo ? `${titulo} | Club Center Fight Academy` : 'Club Center Fight Academy - Academia Profesional de Artes Marciales';
-        document.querySelector('meta[name="description"]')?.setAttribute('content', descripcion || DEFAULT_DESC);
+        document.title = titulo ? `${titulo} | ${MARCA}` : TITULO_INICIO;
+        document.querySelector('meta[name="description"]')?.setAttribute('content', descripcion || PAGINAS['/'].descripcion);
     }, [titulo, descripcion]);
 }
+
+export const usePagina = (ruta) => useMeta(PAGINAS[ruta].titulo, PAGINAS[ruta].descripcion);

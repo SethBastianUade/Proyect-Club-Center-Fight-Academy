@@ -3,7 +3,7 @@ import { wa, DIRECCION, MAPA } from '../data/site.js';
 import { precio } from '../data/planes.js';
 import { DISCIPLINAS, PRINCIPALES } from '../data/disciplinas.js';
 import { proximos } from '../data/eventos.js';
-import { SectionHeader, Cta, useMeta } from '../components/ui.jsx';
+import { SectionHeader, Cta, usePagina } from '../components/ui.jsx';
 import { OPINIONES, GOOGLE_RESENAS } from '../data/opiniones.js';
 import EventoCard from '../components/EventoCard.jsx';
 import ClaseCard from '../components/ClaseCard.jsx';
@@ -16,7 +16,7 @@ const PRUEBA = wa('Hola, quiero hacer una clase de prueba');
 const STATS = [['200+', 'Alumnos activos'], ['4', 'Disciplinas'], ['2020', 'Entrenando desde'], ['50+', 'Torneos disputados']];
 
 export default function Inicio() {
-    useMeta();
+    usePagina('/');
     const contenido = useContenido();
     const eventos = proximos(contenido.eventos).slice(0, 3);
     const proximas = proximasClases(contenido.clases, 3);
@@ -26,7 +26,10 @@ export default function Inicio() {
     return (
         <>
             <section className="hero-banner">
-                <img src="/Fotos/bannerD.webp" alt="" className="hero-banner-bg" fetchPriority="high" />
+                <img
+                    src="/Fotos/bannerD.webp" srcSet="/Fotos/bannerD-800.webp 800w, /Fotos/bannerD.webp 1600w" sizes="100vw"
+                    alt="" className="hero-banner-bg" fetchPriority="high"
+                />
                 <div className="hero-banner-inner">
                     <div className="hero-pill fade-in-1">
                         <span>Gratis</span> Primera clase de prueba sin cargo
@@ -35,7 +38,7 @@ export default function Inicio() {
                     <p className="hero-banner-desc fade-in-3">
                         Jiu-Jitsu, Muay Thai, Boxeo y MMA en el corazón de CABA. Profesores certificados y clases para todos los niveles, desde tu primer día hasta tu primera pelea.
                     </p>
-                    <div className="hero-banner-actions fade-in-4">
+                    <div className="hero-banner-actions fade-in-4" data-lugar="hero">
                         <a href={PRUEBA} className="hb-btn hb-btn-primary" target="_blank" rel="noopener">
                             <Icono n="whatsapp" /> Reservar clase de prueba
                         </a>

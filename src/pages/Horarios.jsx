@@ -2,7 +2,7 @@ import { useSearchParams } from 'react-router';
 import { DIAS, hoy } from '../data/horarios.js';
 import { useContenido } from '../contenido.jsx';
 import { DISCIPLINAS } from '../data/disciplinas.js';
-import { Hero, Cta, useMeta } from '../components/ui.jsx';
+import { Hero, Cta, usePagina } from '../components/ui.jsx';
 import ClaseCard from '../components/ClaseCard.jsx';
 
 const HOY = hoy();
@@ -10,7 +10,7 @@ const HOY = hoy();
 const DIA_INICIAL = HOY in DIAS && window.matchMedia('(max-width: 767px)').matches ? HOY : 'todos';
 
 export default function Horarios() {
-    useMeta('Horarios', 'Grilla de horarios de Club Center Fight Academy: Muay Thai, Boxeo, Jiu-Jitsu, MMA, Grappling y Sparring. Reservá tu clase de prueba gratis.');
+    usePagina('/horarios');
     const { clases: todas } = useContenido();
     const discs = Object.keys(DISCIPLINAS).filter((d) => todas.some((c) => c.disc === d));
     const [params, setParams] = useSearchParams();
@@ -57,7 +57,7 @@ export default function Horarios() {
                     <div className="week" style={{ '--cols': dias.length }}>
                         {dias.map((d) => (
                             <div key={d} className={`day${d === HOY ? ' today' : ''}`}>
-                                <h3>{DIAS[d]}{d === HOY && <span>Hoy</span>}</h3>
+                                <h2>{DIAS[d]}{d === HOY && <span>Hoy</span>}</h2>
                                 {clases.filter((c) => c.dia === d).map((c) => <ClaseCard key={c.desde + c.disc} clase={c} />)}
                             </div>
                         ))}

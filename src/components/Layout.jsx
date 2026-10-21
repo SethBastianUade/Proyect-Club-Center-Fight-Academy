@@ -43,6 +43,19 @@ export default function Layout() {
         return () => document.removeEventListener('keydown', onKey);
     }, [menu]);
 
+    // Métricas anónimas: cuenta cada clic a WhatsApp con la página y el lugar del botón (data-lugar).
+    // Va acá y no en main.jsx para no contar los clics del panel /admin
+    useEffect(() => {
+        const onClick = (e) => {
+            const a = e.target.closest?.('a[href^="https://wa.me/"]');
+            if (!a) return;
+            const lugar = a.closest('[data-lugar]')?.dataset.lugar || 'otro';
+            navigator.sendBeacon?.('/api/clic', JSON.stringify({ pagina: location.pathname, lugar }));
+        };
+        document.addEventListener('click', onClick);
+        return () => document.removeEventListener('click', onClick);
+    }, []);
+
     useEffect(() => {
         const onScroll = () => {
             setArriba(window.scrollY > 300);
@@ -57,7 +70,7 @@ export default function Layout() {
             <header className="site-header">
                 <div className="header-inner">
                     <Link to="/" className="brand" aria-label="Club Center Fight Academy, inicio">
-                        <img src="/Fotos/logoClub.png" alt="" width="542" height="510" />
+                        <img src="/Fotos/logo.webp" alt="" width="192" height="181" />
                     </Link>
                     <nav className={`nav-pill${menu ? " open" : ""}`} id="nav-menu" aria-label="Principal">
                         <ul>
@@ -78,7 +91,7 @@ export default function Layout() {
                 </div>
             </header>
 
-            <a href={PRUEBA} className={`mobile-cta${barra ? '' : ' oculta'}`} target="_blank" rel="noopener" aria-hidden={!barra} tabIndex={barra ? undefined : -1}>
+            <a href={PRUEBA} className={`mobile-cta${barra ? '' : ' oculta'}`} data-lugar="barra" target="_blank" rel="noopener" aria-hidden={!barra} tabIndex={barra ? undefined : -1}>
                 <Icono n="whatsapp" /> Reservar clase de prueba gratis
             </a>
 
@@ -88,7 +101,7 @@ export default function Layout() {
                 <div className="footer-container">
                     <div className="footer-grid">
                         <div className="footer-info">
-                            <img src="/Fotos/logoClub.png" alt="Club Center Fight Academy" className="footer-logo" width="542" height="510" loading="lazy" decoding="async" />
+                            <img src="/Fotos/logo.webp" alt="Club Center Fight Academy" className="footer-logo" width="192" height="181" loading="lazy" decoding="async" />
                             <p>Tu camino hacia la excelencia en artes marciales. Formamos campeones dentro y fuera del tatami.</p>
                             <div className="social-links">
                                 <a href={`https://instagram.com/${INSTAGRAM}`} target="_blank" rel="noopener" aria-label="Instagram"><Icono n="instagram" /></a>
@@ -108,12 +121,12 @@ export default function Layout() {
                         </div>
                     </div>
                     <div className="footer-bottom">
-                        <p>&copy; {new Date().getFullYear()} Club Center Fight Academy. Todos los derechos reservados.</p>
+                        <p>&copy; {new Date().getFullYear()} Club Center Fight Academy. Todos los derechos reservados. <Link to="/privacidad">Política de privacidad</Link></p>
                     </div>
                 </div>
             </footer>
 
-            <a href={wa('Hola, quiero consultar sobre las clases')} className="chatbot-floating-btn" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp">
+            <a href={wa('Hola, quiero consultar sobre las clases')} className="chatbot-floating-btn" target="_blank" rel="noopener" data-lugar="flotante" aria-label="Contactar por WhatsApp">
                 <Icono n="whatsapp" />
             </a>
 

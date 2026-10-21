@@ -1,6 +1,6 @@
 import { Link } from 'react-router';
 import { useContenido } from '../contenido.jsx';
-import { Hero, SectionHeader, Cta, useMeta } from '../components/ui.jsx';
+import { Hero, SectionHeader, Cta, usePagina } from '../components/ui.jsx';
 import Icono from '../components/Icono.jsx';
 
 const VALORES = [['handshake', 'Respeto'], ['bolt', 'Disciplina'], ['heart', 'Pasión'], ['users', 'Comunidad'], ['trophy', 'Excelencia']];
@@ -15,8 +15,8 @@ function Competidores() {
                 {competidores.map((p) => (
                     <Link to={`/equipo/${p.slug}`} className="team-card" key={p.slug}>
                         <img
-                            src={p.foto || '/Fotos/logoClub.png'} alt={p.nombre}
-                            width={p.w || 542} height={p.h || 510}
+                            src={p.foto || '/Fotos/logo.webp'} alt={p.nombre}
+                            width={p.w || 192} height={p.h || 181}
                             className={p.foto ? '' : 'no-photo'} loading="lazy" decoding="async"
                         />
                         <h3>{p.nombre}</h3>
@@ -29,7 +29,7 @@ function Competidores() {
 }
 
 export default function Nosotros() {
-    useMeta('Nosotros', 'Conocé la historia, los valores y los competidores de Club Center Fight Academy.');
+    usePagina('/nosotros');
     return (
         <>
             <Hero badge="Quiénes somos" titulo="Club Center" resaltado="Fight Academy" subtitulo="Pasión, valores y excelencia en artes marciales desde CABA" fondo="hero-nosotros" />
@@ -50,7 +50,7 @@ export default function Nosotros() {
                         </ul>
                     </div>
                     <div className="about-img">
-                        <img src="/Fotos/nosotros1.webp" alt="Historia Club Center Fight Academy" width="1200" height="900" loading="lazy" decoding="async" />
+                        <img src="/Fotos/nosotros1.webp" srcSet="/Fotos/nosotros1-800.webp 800w, /Fotos/nosotros1.webp 1200w" sizes="(min-width: 768px) 55vw, 100vw" alt="Alumnos entrenando en Club Center Fight Academy" width="1200" height="900" loading="lazy" decoding="async" />
                     </div>
                 </div>
             </section>

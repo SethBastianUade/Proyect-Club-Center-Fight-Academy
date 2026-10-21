@@ -1,3 +1,4 @@
+import { lazy, Suspense } from 'react';
 import { Routes, Route } from 'react-router';
 import Layout from './components/Layout.jsx';
 import Inicio from './pages/Inicio.jsx';
@@ -11,13 +12,16 @@ import Perfil from './pages/Perfil.jsx';
 import Contacto from './pages/Contacto.jsx';
 import Inscripcion from './pages/Inscripcion.jsx';
 import NoEncontrado from './pages/NoEncontrado.jsx';
-import Admin from './pages/admin/Admin.jsx';
+import Privacidad from './pages/Privacidad.jsx';
+
+// El panel va en un archivo aparte: los visitantes del sitio no descargan su código
+const Admin = lazy(() => import('./pages/admin/Admin.jsx'));
 
 export default function App() {
     return (
         <Routes>
-            {/* Panel interno, sin el layout del sitio. Lo protege Cloudflare Access */}
-            <Route path="admin" element={<Admin />} />
+            {/* Panel interno, sin el layout del sitio y con su propio login */}
+            <Route path="admin" element={<Suspense fallback={null}><Admin /></Suspense>} />
             <Route element={<Layout />}>
                 <Route index element={<Inicio />} />
                 <Route path="disciplinas" element={<Disciplinas />} />
@@ -29,6 +33,7 @@ export default function App() {
                 <Route path="equipo/:slug" element={<Perfil />} />
                 <Route path="contacto" element={<Contacto />} />
                 <Route path="inscripcion" element={<Inscripcion />} />
+                <Route path="privacidad" element={<Privacidad />} />
                 <Route path="*" element={<NoEncontrado />} />
             </Route>
         </Routes>

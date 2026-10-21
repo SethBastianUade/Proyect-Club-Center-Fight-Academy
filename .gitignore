@@ -1,5 +1,4 @@
-# Ignorar agentes de claude
-README.md
+# Agentes
 skills-lock.json
 .agents
 # Sitio vanilla anterior (backup local)
@@ -10,3 +9,5 @@ node_modules/
 dist/
 .wrangler/
 .dev.vars
+# Backups de la base (datos personales)
+backups/

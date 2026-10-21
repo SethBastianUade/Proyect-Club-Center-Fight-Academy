@@ -5,9 +5,10 @@ import { api } from './api.js';
 import { SECCIONES } from './secciones.js';
 import Leads from './Leads.jsx';
 import Editor from './Editor.jsx';
+import Metricas from './Metricas.jsx';
 
 // Panel interno del club (/admin). La sección activa queda en la URL: /admin?s=horarios
-const MENU = [['interesados', 'Interesados'], ...Object.entries(SECCIONES).map(([k, s]) => [k, s.titulo])];
+const MENU = [['interesados', 'Interesados'], ['metricas', 'Métricas'], ...Object.entries(SECCIONES).map(([k, s]) => [k, s.titulo])];
 
 function Login({ onEntrar }) {
     const [error, setError] = useState(null);
@@ -30,7 +31,7 @@ function Login({ onEntrar }) {
     return (
         <div className="admin admin-login">
             <form className="inscription-form" onSubmit={entrar}>
-                <img src="/Fotos/logoClub.png" alt="Club Center Fight Academy" width="542" height="510" />
+                <img src="/Fotos/logo.webp" alt="Club Center Fight Academy" width="192" height="181" />
                 <h1>Panel del club</h1>
                 <div className="form-group">
                     <label htmlFor="password">Contraseña</label>
@@ -46,7 +47,7 @@ function Login({ onEntrar }) {
 export default function Admin() {
     useMeta('Panel');
     const [params, setParams] = useSearchParams();
-    const s = SECCIONES[params.get('s')] ? params.get('s') : 'interesados';
+    const s = MENU.some(([k]) => k === params.get('s')) ? params.get('s') : 'interesados';
     const [sesion, setSesion] = useState(true);
     const [error, setError] = useState(null);
 
@@ -62,7 +63,7 @@ export default function Admin() {
     return (
         <div className="admin">
             <header className="admin-header">
-                <Link to="/" className="brand" aria-label="Volver al sitio"><img src="/Fotos/logoClub.png" alt="" width="542" height="510" /></Link>
+                <Link to="/" className="brand" aria-label="Volver al sitio"><img src="/Fotos/logo.webp" alt="" width="192" height="181" /></Link>
                 <h1>Panel</h1>
                 <button className="chip admin-salir" onClick={salir}>Salir</button>
             </header>
@@ -84,8 +85,8 @@ export default function Admin() {
                 </p>
             )}
 
-            {s === 'interesados'
-                ? <Leads onError={onError} />
+            {s === 'interesados' ? <Leads onError={onError} />
+                : s === 'metricas' ? <Metricas onError={onError} />
                 : <Editor key={s} seccion={SECCIONES[s]} onError={onError} />}
         </div>
     );

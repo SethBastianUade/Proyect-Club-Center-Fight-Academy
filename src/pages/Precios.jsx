@@ -2,14 +2,14 @@ import { Link } from 'react-router';
 import { FILAS, precio } from '../data/planes.js';
 import { useContenido } from '../contenido.jsx';
 import { wa } from '../data/site.js';
-import { Hero, Cta, useMeta } from '../components/ui.jsx';
+import { Hero, Cta, usePagina } from '../components/ui.jsx';
 import Icono from '../components/Icono.jsx';
 
 const celda = (v) => (v === true ? <Icono n="check" label="Incluido" /> : v === false ? <Icono n="minus" label="No incluido" className="no" /> : v);
 
 export default function Precios() {
     const { planes } = useContenido();
-    useMeta('Precios y planes', 'Planes y precios de Club Center Fight Academy. Elegí el plan que mejor se adapta a tu rutina. Primera clase sin cargo.');
+    usePagina('/precios');
     return (
         <>
             <Hero badge="Planes" titulo="Elegí tu" resaltado="plan" subtitulo="Primera clase de prueba sin cargo en cualquier plan" fondo="hero-nosotros" />
@@ -33,7 +33,7 @@ export default function Precios() {
                                 })}
                             </ul>
                             <Link to={`/inscripcion?plan=${p.id}`} className="btn btn-primary">Inscribirme</Link>
-                            <a href={wa(`Hola, quiero info sobre el plan ${p.nombre}`)} className="plan-ask" target="_blank" rel="noopener">
+                            <a href={wa(`Hola, quiero info sobre el plan ${p.nombre}`)} className="plan-ask" target="_blank" rel="noopener" data-lugar="plan">
                                 <Icono n="whatsapp" /> Consultar
                             </a>
                         </div>
