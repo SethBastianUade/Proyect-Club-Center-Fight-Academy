@@ -48,10 +48,10 @@ function real(env) {
 
 const TODAS = ['muaythai', 'boxeo', 'bjj', 'mma', 'grappling', 'sparring'];
 const SOCIOS = {
-    11111111: { id: 'demo-1', nombre: 'Juan Pérez', password: 'prueba', plan: { id: 'pase-libre-total', nombre: 'Pase libre total', clasesPorMes: null }, cuota: { estado: 'AL_DIA', vence: '2026-11-30' }, usadas: 6, actividades: TODAS },
-    22222222: { id: 'demo-2', nombre: 'Ana Gómez', password: 'prueba', plan: { id: 'mar-jue', nombre: 'Martes y jueves', clasesPorMes: 8 }, cuota: { estado: 'VENCIDA', vence: '2026-10-10' }, usadas: 3, actividades: ['muaythai'] },
-    33333333: { id: 'demo-3', nombre: 'Pedro Ruiz', password: 'prueba', plan: { id: 'mar-jue', nombre: 'Martes y jueves', clasesPorMes: 8 }, cuota: { estado: 'AL_DIA', vence: '2026-11-15' }, usadas: 8, actividades: ['boxeo'] },
-    44444444: { id: 'demo-4', nombre: 'Lucía Díaz', password: null, codigo: 'ABC123', plan: { id: 'lun-mie-vie', nombre: 'Lunes, miércoles y viernes', clasesPorMes: 12 }, cuota: { estado: 'AL_DIA', vence: '2026-11-20' }, usadas: 2, actividades: ['bjj', 'grappling', 'sparring'] },
+    11111111: { id: 'demo-1', nombre: 'Juan Pérez', password: 'prueba', plan: { id: 'pase-libre-total', nombre: 'Pase libre total', clasesPorSemana: null }, cuota: { estado: 'AL_DIA', vence: '2026-11-30' }, usadas: 6, actividades: TODAS },
+    22222222: { id: 'demo-2', nombre: 'Ana Gómez', password: 'prueba', plan: { id: 'mar-jue', nombre: 'Martes y jueves', clasesPorSemana: 2 }, cuota: { estado: 'VENCIDA', vence: '2026-10-10' }, usadas: 3, actividades: ['muaythai'] },
+    33333333: { id: 'demo-3', nombre: 'Pedro Ruiz', password: 'prueba', plan: { id: 'mar-jue', nombre: 'Martes y jueves', clasesPorSemana: 2 }, cuota: { estado: 'AL_DIA', vence: '2026-11-15' }, usadas: 8, actividades: ['boxeo'] },
+    44444444: { id: 'demo-4', nombre: 'Lucía Díaz', password: null, codigo: 'ABC123', plan: { id: 'lun-mie-vie', nombre: 'Lunes, miércoles y viernes', clasesPorSemana: 3 }, cuota: { estado: 'AL_DIA', vence: '2026-11-20' }, usadas: 2, actividades: ['bjj', 'grappling', 'sparring'] },
 };
 const porId = (id) => Object.values(SOCIOS).find((s) => s.id === id);
 const asistencias = new Set(); // "socioId|fecha|desde|actividad"
@@ -79,10 +79,10 @@ const simulado = {
     async estado(socioId) {
         const s = porId(socioId);
         if (!s) return error(404, 'SOCIO_NO_ENCONTRADO', 'No encontramos tu cuenta. Avisá en recepción.');
-        const restantes = s.plan.clasesPorMes == null ? null : Math.max(0, s.plan.clasesPorMes - s.usadas);
+        const restantes = s.plan.clasesPorSemana == null ? null : Math.max(0, s.plan.clasesPorSemana - s.usadas);
         return {
             ok: true,
-            data: { nombre: s.nombre, plan: s.plan, cuota: s.cuota, clasesUsadasMes: s.usadas, clasesRestantesMes: restantes, actividades: s.actividades },
+            data: { nombre: s.nombre, plan: s.plan, cuota: s.cuota, clasesUsadasSemana: s.usadas, clasesRestantesSemana: restantes, actividades: s.actividades },
         };
     },
 
@@ -90,8 +90,8 @@ const simulado = {
         const s = porId(socioId);
         if (!s) return error(404, 'SOCIO_NO_ENCONTRADO', 'No encontramos tu cuenta. Avisá en recepción.');
         if (s.cuota.estado === 'VENCIDA') return error(422, 'CUOTA_VENCIDA', `Tu cuota venció el ${fechaCorta(s.cuota.vence)}. Pasá por recepción.`);
-        if (s.plan.clasesPorMes != null && s.usadas >= s.plan.clasesPorMes) {
-            return error(422, 'SIN_CLASES_DISPONIBLES', `Ya usaste las ${s.plan.clasesPorMes} clases de tu plan este mes. Pasá por recepción.`);
+        if (s.plan.clasesPorSemana != null && s.usadas >= s.plan.clasesPorSemana) {
+            return error(422, 'SIN_CLASES_DISPONIBLES', `Ya usaste las ${s.plan.clasesPorSemana} clases de tu plan esta semana. Pasá por recepción.`);
         }
         if (a.actividad && !s.actividades.includes(a.actividad)) return error(422, 'ACTIVIDAD_NO_INCLUIDA', 'Esta actividad no está incluida en tu plan. Pasá por recepción.');
         const clave = `${s.id}|${a.fechaHora.slice(0, 10)}|${a.clase?.desde ?? 'libre'}|${a.actividad ?? ''}`;
@@ -99,12 +99,12 @@ const simulado = {
 
         asistencias.add(clave);
         s.usadas++;
-        const restantes = s.plan.clasesPorMes == null ? null : s.plan.clasesPorMes - s.usadas;
+        const restantes = s.plan.clasesPorSemana == null ? null : s.plan.clasesPorSemana - s.usadas;
         return {
             ok: true,
             data: {
                 asistenciaId: String(asistencias.size),
-                mensaje: `Check-in registrado.${restantes != null ? ` Te quedan ${restantes} clases este mes.` : ''}`,
+                mensaje: `Check-in registrado.${restantes != null ? ` Te quedan ${restantes} clases esta semana.` : ''}`,
             },
         };
     },

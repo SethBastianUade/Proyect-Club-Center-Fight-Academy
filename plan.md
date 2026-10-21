@@ -61,7 +61,18 @@ escanea QR de recepción
 
 La web usa los horarios del CMS (tabla `clases`): toma la clase que empieza en los próximos 30 minutos o empezó hace menos de 15. Si hay más de una posible, el socio elige. Si no hay ninguna (entrenamiento libre), se registra sin clase.
 
-## 4. Contrato de la API que necesita la web (propuesta)
+## 4. Contrato de la API que necesita la web
+
+> **Implementado en BiFrost (2026-10-20, plan 035 de BiFrost).** Diferencias con la propuesta original de abajo:
+> - **Base:** `https://bifrost-software.com.ar/api/integrations/club` (va en `BIFROST_URL`).
+> - **Token por negocio:** se genera en BiFrost (Abonos y actividades → Check-in desde la web), se muestra una sola vez y va en el secret `BIFROST_TOKEN`. No hay `X-Business-Id`. Token inválido: `401 TOKEN_INVALIDO`; negocio sin CRM: `403 INTEGRACION_INACTIVA`.
+> - **Cupo semanal, no mensual:** `estado` devuelve `plan.clasesPorSemana`, `clasesUsadasSemana` y `clasesRestantesSemana` (null = libre), semana de lunes a domingo.
+> - **El QR lo genera y valida BiFrost:** `POST /socios/{id}/asistencias` lleva `codigoQr` (el `c` del link). Si no coincide: `403 QR_INVALIDO`. Con BiFrost real la web ya no usa `CHECKIN_CODIGO` (queda solo para el modo simulado). El QR se imprime desde BiFrost.
+> - **Hora:** BiFrost registra con su propia hora; `fechaHora` se ignora (la del celular se puede adelantar).
+> - **Cuota vencida:** bloquea desde el día siguiente al vencimiento.
+> - **Contraseña:** mínimo 6 caracteres. Código de activación: 6 caracteres, un solo uso, vence a los 7 días. 5 intentos fallidos bloquean la cuenta 15 minutos.
+> - `GET /socios/{id}/asistencias` y `POST /prospectos` no están implementados.
+
 
 Base: `https://<backend-bifrost>/api/integrations/club` (nombre a definir con el estado actual de BiFrost).
 
@@ -150,12 +161,12 @@ La web usa estas claves (`src/data/disciplinas.js`). BiFrost puede tener las suy
 
 ### BiFrost
 
-- [ ] Módulo de gimnasio: socio (DNI, datos de contacto), membresía (plan, vencimiento, clases por mes), asistencia (fecha, actividad, origen).
-- [ ] Reglas de check-in: cuota vencida, clases del plan agotadas, actividad no incluida, check-in duplicado. Igual que hoy en Mis Actividades (ver preguntas abiertas).
-- [ ] Credenciales de socios: contraseña con hash, código de activación de un solo uso generado por recepción, límite de intentos.
-- [ ] Endpoints de la sección 4 con autenticación por token de servicio.
+- [x] Módulo de gimnasio: socio (DNI, datos de contacto), membresía (abono, vencimiento, clases por semana), asistencia (fecha, actividad, origen).
+- [x] Reglas de check-in: cuota vencida, clases del plan agotadas, actividad no incluida, check-in duplicado.
+- [x] Credenciales de socios: contraseña con hash, código de activación de un solo uso generado por recepción, límite de intentos.
+- [x] Endpoints de la sección 4 con autenticación por token de servicio. (Falta deployarlo.)
 - [ ] Migración de socios y vencimientos desde Mis Actividades.
-- [ ] Backend publicado con HTTPS y URL fija.
+- [x] Backend publicado con HTTPS y URL fija (`bifrost-software.com.ar`).
 
 ### Web (este repo)
 

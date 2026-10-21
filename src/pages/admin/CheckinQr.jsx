@@ -3,7 +3,8 @@ import QRCode from 'qrcode';
 import { api } from './api.js';
 
 // QR de recepción para el check-in de socios (plan.md). Se imprime y se pega en recepción.
-// El link lleva el código secreto CHECKIN_CODIGO: si se filtra, se cambia el secret y se reimprime.
+// Con BiFrost real el QR se genera e imprime desde BiFrost (Abonos y actividades → Check-in desde la web).
+// Acá solo queda el de prueba, con el código CHECKIN_CODIGO del modo simulado.
 export default function CheckinQr({ onError }) {
     const [info, setInfo] = useState(null);
     const [svg, setSvg] = useState(null);
@@ -22,11 +23,11 @@ export default function CheckinQr({ onError }) {
             <div className="checkin-qr-estado">
                 {!info.disponible && (
                     <p className="admin-error">
-                        El check-in todavía no está activo: falta {!info.url ? 'cargar el código del QR (secret CHECKIN_CODIGO)' : 'conectar BiFrost'}.
-                        Ver <code>plan.md</code>.
+                        El check-in todavía no está activo: falta conectar BiFrost (BIFROST_URL y el secret BIFROST_TOKEN). Ver <code>plan.md</code>.
                     </p>
                 )}
                 {info.modo === 'simulado' && <p className="admin-error">Modo de prueba: BiFrost simulado. No usar con socios reales.</p>}
+                {info.modo === 'real' && <p>El QR de recepción se imprime desde BiFrost: <strong>Abonos y actividades → Check-in desde la web</strong>.</p>}
             </div>
 
             {svg && (

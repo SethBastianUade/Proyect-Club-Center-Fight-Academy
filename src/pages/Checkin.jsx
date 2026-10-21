@@ -165,8 +165,8 @@ export default function Checkin() {
                         Cuota {vencida ? 'vencida' : 'al día'}
                         {socio.cuota?.vence && <span>{vencida ? 'venció' : 'vence'} el {fechaCorta(socio.cuota.vence)}</span>}
                     </li>
-                    <li className={socio.clasesRestantesMes === 0 ? 'mal' : 'bien'}>
-                        {socio.clasesRestantesMes == null ? 'Clases libres' : `${socio.clasesRestantesMes} clases disponibles`}
+                    <li className={socio.clasesRestantesSemana === 0 ? 'mal' : 'bien'}>
+                        {socio.clasesRestantesSemana == null ? 'Clases libres' : `${socio.clasesRestantesSemana} clases disponibles esta semana`}
                         <span>{socio.plan?.nombre}</span>
                     </li>
                 </ul>

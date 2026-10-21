@@ -4,7 +4,8 @@
 // GET  /api/socio/checkin  → socio (estado en BiFrost) + clases que se pueden registrar ahora
 // POST /api/socio/checkin  → registra la asistencia en BiFrost
 //
-// Necesita: SOCIO_SECRET y CHECKIN_CODIGO (secrets) y BiFrost (BIFROST_URL o BIFROST_MOCK=1). Sin eso responde 503.
+// Necesita: SOCIO_SECRET y BiFrost (BIFROST_URL o BIFROST_MOCK=1). Sin eso responde 503.
+// El código del QR lo genera y valida BiFrost; CHECKIN_CODIGO solo hace falta con BiFrost simulado.
 
 import { json, txt } from './util.js';
 import * as bifrost from './bifrost.js';
@@ -31,7 +32,7 @@ async function firma(env, texto) {
 }
 
 const NO_DISPONIBLE = { codigo: 'NO_DISPONIBLE', mensaje: 'El check-in online todavía no está disponible. Avisá en recepción.' };
-export const disponible = (env) => Boolean(env.SOCIO_SECRET && env.CHECKIN_CODIGO && bifrost.modo(env));
+export const disponible = (env) => Boolean(env.SOCIO_SECRET && bifrost.modo(env) && (bifrost.modo(env) === 'real' || env.CHECKIN_CODIGO));
 
 // ---------- Sesión: cookie "<socioId>.<vencimiento>.<firma>" ----------
 
@@ -124,7 +125,9 @@ async function checkin(socioId, request, env) {
     let d;
     try { d = await request.json(); } catch { return json({ codigo: 'DATOS_INVALIDOS', mensaje: 'Datos inválidos.' }, 400); }
 
-    if (typeof d.codigo !== 'string' || !iguales(d.codigo, env.CHECKIN_CODIGO)) {
+    // Con BiFrost real el QR lo valida BiFrost (devuelve QR_INVALIDO); el simulado no sabe de QR.
+    const sinQr = typeof d.codigo !== 'string' || !d.codigo;
+    if (sinQr || (bifrost.modo(env) === 'simulado' && !iguales(d.codigo, env.CHECKIN_CODIGO))) {
         return json({ codigo: 'CODIGO_QR_INVALIDO', mensaje: 'Escaneá el QR que está en recepción para hacer el check-in.' }, 403);
     }
 
@@ -151,14 +154,16 @@ async function checkin(socioId, request, env) {
         clase: clase && { dia: clase.dia, desde: clase.desde, hasta: clase.hasta },
         origen: 'WEB',
         ubicacionVerificada,
+        codigoQr: d.codigo.slice(0, 64),
     });
     if (!r.ok) return json({ codigo: r.codigo, mensaje: r.mensaje }, r.status);
     return json({ ok: true, mensaje: r.data.mensaje, clase, ubicacionVerificada });
 }
 
 // Para el panel: link del QR de recepción y en qué modo está la integración
+// Con BiFrost real el QR se imprime desde BiFrost (lleva el código que BiFrost valida).
 export const infoQr = (url, env) => ({
     disponible: disponible(env),
     modo: bifrost.modo(env),
-    url: env.CHECKIN_CODIGO ? `${url.origin}/checkin?c=${encodeURIComponent(env.CHECKIN_CODIGO)}` : null,
+    url: bifrost.modo(env) !== 'real' && env.CHECKIN_CODIGO ? `${url.origin}/checkin?c=${encodeURIComponent(env.CHECKIN_CODIGO)}` : null,
 });
