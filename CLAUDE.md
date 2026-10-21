@@ -22,7 +22,16 @@ npm run db:migrate        # aplica migrations/ a la D1 de producción
 npm run db:backup         # exporta la D1 de producción a backups/ (gitignored: datos personales)
 ```
 
-For local `/admin`, `.dev.vars` (gitignored) sets `ADMIN_PASSWORD=local-dev`; it also enables the mocked BiFrost for `/checkin?c=club` (`BIFROST_MOCK=1`, `SOCIO_SECRET`, `CHECKIN_CODIGO=club`). In production the password is a Worker secret: `npx wrangler secret put ADMIN_PASSWORD`.
+Local `/admin` and `/checkin` need a `.dev.vars` file (gitignored, so it doesn't travel between machines; recreate it on a fresh clone):
+
+```
+ADMIN_PASSWORD=local-dev
+BIFROST_MOCK=1
+SOCIO_SECRET=cualquier-texto-largo-para-desarrollo
+CHECKIN_CODIGO=club
+```
+
+With it, the panel password is `local-dev` and the mocked BiFrost answers `/checkin?c=club` (test members and passwords are listed in the comment above `SOCIOS` in `worker/bifrost.js`). In production these are Worker secrets (`npx wrangler secret put <NOMBRE>`, list in `wrangler.jsonc`).
 
 There are no tests, linter or formatter configured.
 
@@ -41,6 +50,6 @@ There are no tests, linter or formatter configured.
 - **Icons:** `<Icono n="whatsapp" />` from `components/Icono.jsx` renders Font Awesome icons as inline SVG (class `.icono`). Only icons registered in its `ICONOS` map are bundled — add new ones there. There is no Font Awesome CSS, so `<i className="fa-...">` won't render.
 - **SEO:** `index.html` holds the static Open Graph tags and a fallback `SportsActivityLocation` JSON-LD (`#ld-negocio`); in production `worker/paginas.js` replaces it with opening hours and price range computed from D1 (address/phone there must match `site.js`). The Worker also serves `sitemap.xml` (`PAGINAS` plus event and competitor slugs).
 - **Click metrics:** `Layout.jsx` sends a `sendBeacon` to `POST /api/clic` for every click on a `wa.me` link, with the path and the nearest `data-lugar` (hero, barra, clase, plan…), stored as daily counters in the `clics` table (`worker/metricas.js`). New WhatsApp buttons need a `data-lugar`, and new places must be added to `LUGARES` in both `worker/metricas.js` and `src/pages/admin/Metricas.jsx`.
-- **Member check-in (`/checkin`, see `plan.md`):** standalone lazy page outside `Layout`, reached from the reception QR (`/checkin?c=<CHECKIN_CODIGO>`). `worker/socios.js` handles the member session (`__Host-socio` cookie signed with `SOCIO_SECRET`, 90 days), presence (QR code + distance to `CLUB_LAT`/`CLUB_LNG`), class detection from the D1 schedule, and forwards everything to BiFrost through `worker/bifrost.js`. BiFrost is the source of truth for members, fees and attendance; this site stores none of it. `worker/bifrost.js` has a real client (`BIFROST_URL` + `BIFROST_TOKEN`) and an in-memory mock enabled only by `BIFROST_MOCK=1` in `.dev.vars` (test members are listed in that file); with neither, the check-in answers 503 "no disponible". The reception QR is generated in the panel (`/admin?s=checkin`, `qrcode` package, printable).
+- **Member check-in (`/checkin`, see `plan.md`):** standalone lazy page outside `Layout`, reached from the reception QR (`/checkin?c=<CHECKIN_CODIGO>`). `worker/socios.js` handles the member session (`__Host-socio` cookie signed with `SOCIO_SECRET`, 90 days), presence (QR code + distance to `CLUB_LAT`/`CLUB_LNG`), class detection from the D1 schedule, and forwards everything to BiFrost through `worker/bifrost.js`. BiFrost is the source of truth for members, fees and attendance; this site stores none of it. `worker/bifrost.js` has a real client (`BIFROST_URL` + `BIFROST_TOKEN`) and an in-memory mock enabled only by `BIFROST_MOCK=1` in `.dev.vars` (test members are hardcoded in `SOCIOS` inside `worker/bifrost.js`); with neither, the check-in answers 503 "no disponible". The reception QR is generated in the panel (`/admin?s=checkin`, `qrcode` package, printable).
 - **Privacy:** `/privacidad` (Ley 25.326) lists what personal data is stored; update it when collecting new data (e.g. member login, see `plan.md`).
 - **Static assets:** images are in `public/Fotos/` (referenced as `/Fotos/...`), mostly `.webp`, with `-800` variants for mobile (`srcSet` / media queries). Use `logo.webp` (192 px) in the UI, not `logoClub.png` (kept only for the JSON-LD). Competitors carry `w`/`h` for `<img>` dimensions (the panel fills them on upload).
