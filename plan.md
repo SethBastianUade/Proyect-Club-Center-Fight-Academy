@@ -159,15 +159,18 @@ La web usa estas claves (`src/data/disciplinas.js`). BiFrost puede tener las suy
 
 ### Web (este repo)
 
-- [ ] Worker: cliente de BiFrost (`worker/bifrost.js`) con `BIFROST_URL` en `wrangler.jsonc` y `BIFROST_TOKEN` como secret.
-- [ ] Modo mock: si `BIFROST_URL` no está configurada, respuestas simuladas (socios de prueba con cuota al día, vencida y sin clases) para desarrollar sin depender de BiFrost.
-- [ ] Sesión de socio: cookie firmada con HMAC, separada de la del panel (`__Host-socio`), ~90 días; límite de intentos de login como en `login_fallidos`.
-- [ ] Página `/checkin`: login / activación, permiso de ubicación, clase detectada, resultado grande y claro.
-- [ ] Código del QR (`CHECKIN_CODIGO` como secret) y un QR imprimible desde el panel.
+- [x] Worker: cliente de BiFrost (`worker/bifrost.js`) con `BIFROST_URL` en `wrangler.jsonc` y `BIFROST_TOKEN` como secret.
+- [x] Modo simulado: con `BIFROST_MOCK=1` (solo en `.dev.vars`, nunca en producción) responde con socios de prueba (al día, cuota vencida, sin clases, sin activar). Sin `BIFROST_URL` ni mock, `/checkin` muestra "no disponible".
+- [x] Sesión de socio: cookie firmada con HMAC (`SOCIO_SECRET`), separada de la del panel (`__Host-socio`), 90 días; límite de intentos de login con `login_fallidos`.
+- [x] Página `/checkin`: login / activación, permiso de ubicación, clase detectada, resultado grande y claro (`src/pages/Checkin.jsx`, `worker/socios.js`).
+- [x] Código del QR (`CHECKIN_CODIGO` como secret) y QR imprimible desde el panel (`/admin?s=checkin`).
+- [x] Coordenadas del club en `wrangler.jsonc` (`CLUB_LAT`/`CLUB_LNG`, de OpenStreetMap).
 - [ ] Prueba piloto en el club con pocos socios antes de abrirlo a todos.
 - [ ] Más adelante: `/mi-cuenta` (cuota, vencimiento, clases restantes, graduación, asistencias) y QR rotativo si hace falta.
 
 ## 6. Etapas
+
+> **Estado:** la etapa 2 está hecha. Para probarla en local: `npm run dev:api` y abrir `http://localhost:8787/checkin?c=club` con los socios de prueba de `worker/bifrost.js` (ej. DNI 11111111, contraseña `prueba`).
 
 1. **Contrato** — revisar este documento contra el BiFrost actual y cerrar las preguntas abiertas.
 2. **Web contra el mock** — `/checkin` completo con datos simulados. No depende de BiFrost.

@@ -54,19 +54,22 @@ Estado al 2026-10-20. Sitio en React + Vite, deploy en Cloudflare (`clubcenter.k
 
 > Plan detallado en [`plan.md`](plan.md): socios, cuotas y asistencias viven en **BiFrost** (reemplazo de Mis Actividades); la web hace el check-in y "Mi cuenta" consultándolo.
 
-### 7. Área de alumno — ⏳ pendiente
-- [ ] Login de alumnos
-- [ ] Cuota al día o vencida
+### 7. Check-in desde la web — 🚧 en curso
+- [ ] Contrato de API revisado contra el BiFrost actual y preguntas abiertas de `plan.md` respondidas
+- [x] Página `/checkin` (login de socio con DNI, activación, clase detectada por horario, ubicación) contra BiFrost **simulado**
+- [x] QR de recepción imprimible desde el panel (`/admin?s=checkin`)
+- [ ] Módulo de gimnasio en BiFrost (socios, membresías, asistencias, reglas) + migración desde Mis Actividades
+- [ ] Conectar la web al BiFrost real (`BIFROST_URL` + secrets `BIFROST_TOKEN`, `SOCIO_SECRET`, `CHECKIN_CODIGO`) y prueba piloto en el club
+- [ ] Sumar el check-in a la política de privacidad antes de abrirlo a los socios
+
+### 8. Mi cuenta — ⏳ pendiente (necesita el 7)
+- [ ] Cuota al día o vencida, vencimiento y clases restantes del mes
 - [ ] Graduación o cinturón actual
 - [ ] Historial de asistencia
 
-### 8. Check-in con QR — ⏳ pendiente (necesita el 7)
-- [ ] QR por alumno o en recepción
-- [ ] Registro de asistencia
-
 ### 9. Pago online con Mercado Pago — ⏳ pendiente (necesita el 7)
-- [ ] Link de pago o checkout
-- [ ] Webhook a un Worker que marca la cuota como pagada
+- [ ] Integración en **BiFrost**, que es quien registra los pagos
+- [ ] Botón "Pagar cuota" en Mi cuenta que lleva al checkout que genera BiFrost
 
 ## Otras cosas hechas
 - [x] Todos los WhatsApp van a recepción (+54 9 11 3159-8373), con mensaje precargado
@@ -91,5 +94,5 @@ Estado al 2026-10-20. Sitio en React + Vite, deploy en Cloudflare (`clubcenter.k
 - [x] Limpieza: README nuevo, sin `plans/` ni `.vscode/` del sitio viejo, `npm run deploy` sin doble build, `npm run db:backup`
 - [x] Cierres de página: la caja grande queda solo en el inicio ("Tu primera clase es gratis"); el resto termina con una línea que lleva al paso siguiente
 - [ ] Aviso por mail cuando entra un interesado (con Resend, la misma cuenta que usa BiFrost)
-- [ ] Contacto más simple: botones directos en lugar del formulario que abre WhatsApp
+- [x] ~~Contacto más simple~~: descartado, el formulario de Contacto queda como está
 - [x] `CLAUDE.md` con la arquitectura actual (React + Vite + Worker + D1)

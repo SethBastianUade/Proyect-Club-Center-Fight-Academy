@@ -18,6 +18,17 @@
   },
   "d1_databases": [
     { "binding": "DB", "database_name": "ccfa", "database_id": "248df70e-9aaf-47d8-9b2b-b93ef5683403" }
-  ]
-  // Contraseña del panel /admin (secret, no va acá): npx wrangler secret put ADMIN_PASSWORD
+  ],
+  "vars": {
+    // Check-in de socios (plan.md). Vacía = todavía no hay BiFrost: /checkin responde "no disponible"
+    "BIFROST_URL": "",
+    // Solis 1213, CABA (OpenStreetMap): para verificar que el socio esté en el club al hacer check-in
+    "CLUB_LAT": "-34.6229137",
+    "CLUB_LNG": "-58.3899370"
+  }
+  // Secrets (no van acá; npx wrangler secret put <NOMBRE>):
+  //   ADMIN_PASSWORD  contraseña del panel /admin
+  //   SOCIO_SECRET    firma de las sesiones de socios (cualquier texto largo y aleatorio)
+  //   CHECKIN_CODIGO  código que va en el QR de recepción
+  //   BIFROST_TOKEN   token de servicio para llamar a BiFrost
 }

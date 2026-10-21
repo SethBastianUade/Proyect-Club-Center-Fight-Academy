@@ -6,9 +6,10 @@ import { SECCIONES } from './secciones.js';
 import Leads from './Leads.jsx';
 import Editor from './Editor.jsx';
 import Metricas from './Metricas.jsx';
+import CheckinQr from './CheckinQr.jsx';
 
 // Panel interno del club (/admin). La sección activa queda en la URL: /admin?s=horarios
-const MENU = [['interesados', 'Interesados'], ['metricas', 'Métricas'], ...Object.entries(SECCIONES).map(([k, s]) => [k, s.titulo])];
+const MENU = [['interesados', 'Interesados'], ['metricas', 'Métricas'], ...Object.entries(SECCIONES).map(([k, s]) => [k, s.titulo]), ['checkin', 'Check-in']];
 
 function Login({ onEntrar }) {
     const [error, setError] = useState(null);
@@ -87,6 +88,7 @@ export default function Admin() {
 
             {s === 'interesados' ? <Leads onError={onError} />
                 : s === 'metricas' ? <Metricas onError={onError} />
+                : s === 'checkin' ? <CheckinQr onError={onError} />
                 : <Editor key={s} seccion={SECCIONES[s]} onError={onError} />}
         </div>
     );

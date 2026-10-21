@@ -16,12 +16,15 @@ import Privacidad from './pages/Privacidad.jsx';
 
 // El panel va en un archivo aparte: los visitantes del sitio no descargan su código
 const Admin = lazy(() => import('./pages/admin/Admin.jsx'));
+// Check-in de socios: también aparte, solo lo usan los socios en recepción
+const Checkin = lazy(() => import('./pages/Checkin.jsx'));
 
 export default function App() {
     return (
         <Routes>
             {/* Panel interno, sin el layout del sitio y con su propio login */}
             <Route path="admin" element={<Suspense fallback={null}><Admin /></Suspense>} />
+            <Route path="checkin" element={<Suspense fallback={null}><Checkin /></Suspense>} />
             <Route element={<Layout />}>
                 <Route index element={<Inicio />} />
                 <Route path="disciplinas" element={<Disciplinas />} />

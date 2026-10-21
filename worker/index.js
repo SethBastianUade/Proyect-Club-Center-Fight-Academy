@@ -12,12 +12,15 @@
 // GET|POST /api/admin/contenido/:tabla, PUT|DELETE /api/admin/contenido/:tabla/:clave → panel: editar contenido
 // POST /api/admin/fotos               → panel: sube una foto
 // GET  /api/admin/metricas?dias=30     → panel: clics por lugar y página, y cantidad de interesados
+// GET  /api/admin/checkin              → panel: link del QR de recepción y estado de la integración con BiFrost
+// /api/socio/*                         → check-in de socios (socios.js)
 // El resto de /api/admin/* exige la cookie de sesión. La contraseña es el secret ADMIN_PASSWORD.
 
 import { json, txt } from './util.js';
 import { leerContenido, editarContenido, subirFoto, servirFoto } from './contenido.js';
 import { pagina, sitemap } from './paginas.js';
 import { sumarClic, verMetricas } from './metricas.js';
+import { rutaSocio, infoQr } from './socios.js';
 
 export const ESTADOS = ['nuevo', 'contactado', 'prueba', 'inscripto', 'descartado'];
 
@@ -41,6 +44,7 @@ export default {
         if (foto && request.method === 'GET') return servirFoto(Number(foto[1]), request, env, ctx);
         if (pathname === '/api/leads' && request.method === 'POST') return crearLead(request, env);
         if (pathname === '/api/clic' && request.method === 'POST') return sumarClic(request, env);
+        if (pathname.startsWith('/api/socio/')) return rutaSocio(pathname, request, env);
 
         if (pathname === '/api/admin/login' && request.method === 'POST') return login(request, env);
         if (pathname === '/api/admin/logout' && request.method === 'POST') return json({ ok: true }, 200, cookie('', 0));
@@ -56,6 +60,7 @@ export default {
             if (c) return editarContenido(c[1], c[2], request, env);
             if (pathname === '/api/admin/fotos' && request.method === 'POST') return subirFoto(request, env);
             if (pathname === '/api/admin/metricas' && request.method === 'GET') return verMetricas(url, env);
+            if (pathname === '/api/admin/checkin' && request.method === 'GET') return json(infoQr(url, env));
         }
 
         return json({ error: 'No encontrado' }, 404);

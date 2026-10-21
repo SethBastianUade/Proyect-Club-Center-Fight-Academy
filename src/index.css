@@ -1061,3 +1061,55 @@ main section.legal { max-width: 760px; margin: 0 auto; padding-top: calc(var(--h
 
 /* Flyer en la página del evento */
 .event-flyer { width: 100%; max-width: 520px; height: auto; margin-bottom: 1.5rem; border-radius: var(--radius-lg); border: 1px solid var(--ring); }
+
+/* ---------- Check-in de socios (/checkin) ---------- */
+.checkin { display: grid; justify-items: center; align-content: start; gap: 1.5rem; min-height: 100svh; max-width: 440px; margin: 0 auto; padding: 1.5rem var(--gutter) 3rem; }
+.checkin-logo img { width: 64px; height: auto; border-radius: 50%; }
+.checkin > * { width: 100%; }
+.checkin-logo { width: auto; }
+.checkin h1 { font-size: 2.4rem; line-height: 1.05; }
+.checkin-form { gap: 1rem; }
+.checkin-ayuda { color: var(--text-300); font-size: 0.9rem; }
+.checkin-link { justify-self: center; border: 0; background: none; color: var(--text-200); font-size: 0.9rem; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+.checkin-panel { display: grid; gap: 1.25rem; }
+.checkin-saludo { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; }
+.checkin-estado { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; }
+.checkin-estado li { display: grid; gap: 0.15rem; padding: 0.9rem 1rem; border-radius: var(--radius); border: 1px solid var(--ring); background: var(--bg-100); color: var(--text-100); font-weight: 600; font-size: 0.95rem; }
+.checkin-estado li span { color: var(--text-300); font-weight: 400; font-size: 0.8rem; }
+.checkin-estado li.bien { border-color: rgba(37, 211, 102, 0.35); }
+.checkin-estado li.mal { border-color: rgba(248, 113, 113, 0.5); background: rgba(248, 113, 113, 0.08); }
+.checkin-clases { display: grid; gap: 0.5rem; }
+.checkin-clases h2 { font-family: var(--sans); font-size: 1rem; font-weight: 600; }
+.checkin-opcion { --c: var(--accent); position: relative; display: flex; align-items: center; gap: 0.75rem; padding: 0.9rem 1rem 0.9rem 1.25rem; overflow: hidden; border-radius: var(--radius); border: 1px solid var(--ring); background: var(--bg-100); cursor: pointer; }
+.checkin-opcion::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--c); }
+.checkin-opcion.on { border-color: var(--ring-strong); background: var(--bg-200); }
+.checkin-opcion input { width: auto; accent-color: var(--accent); }
+.checkin-opcion strong { color: var(--text-100); }
+.checkin-opcion span { margin-left: auto; color: var(--text-300); font-size: 0.85rem; white-space: nowrap; }
+.checkin-boton { width: 100%; padding: 1.15rem; font-size: 1.1rem; }
+.checkin-boton:disabled { opacity: 0.5; cursor: not-allowed; }
+.checkin-aviso { justify-self: center; padding: 0.3rem 0.8rem; border-radius: 50px; border: 1px dashed var(--ring-strong); color: var(--text-300); font-size: 0.75rem; }
+.checkin-resultado { display: grid; justify-items: center; gap: 0.75rem; padding: 2rem 1.5rem; border-radius: var(--radius-lg); border: 1px solid var(--ring); background: var(--bg-100); text-align: center; }
+.checkin-resultado p { color: var(--text-200); }
+.checkin-icono { display: grid; place-items: center; width: 72px; height: 72px; border-radius: 50%; font-size: 2rem; color: #fff; }
+.checkin-resultado.ok { border-color: rgba(37, 211, 102, 0.4); }
+.checkin-resultado.ok .checkin-icono { background: #16a34a; }
+.checkin-resultado.error { border-color: rgba(248, 113, 113, 0.5); }
+.checkin-resultado.error .checkin-icono { background: #b91c1c; }
+.checkin-clase { color: var(--text-100) !important; font-weight: 600; font-size: 1.1rem; }
+
+/* QR de recepción (panel). Al imprimir sale solo el QR */
+.qr-imprimible { display: grid; justify-items: center; gap: 0.5rem; max-width: 360px; margin: 0 auto 1rem; padding: 1.75rem; border-radius: var(--radius-lg); background: #fff; color: #09090b; text-align: center; }
+.qr-imprimible h2 { color: #09090b; font-size: 2.4rem; }
+.qr-imprimible p { color: #3f3f46; }
+.qr-codigo { width: 100%; max-width: 280px; }
+.qr-codigo svg { display: block; width: 100%; height: auto; }
+.qr-pie { font-weight: 600; }
+.checkin-qr-acciones { justify-content: center; }
+@media print {
+    body { background: #fff; }
+    .admin > *:not(.qr-imprimible) { display: none !important; }
+    .qr-imprimible { max-width: none; margin-top: 2cm; padding: 0; }
+    .qr-codigo { max-width: 12cm; }
+    .qr-imprimible h2 { font-size: 3rem; }
+}

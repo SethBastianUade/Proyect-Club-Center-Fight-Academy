@@ -61,6 +61,7 @@ export async function pagina(request, env) {
 function metaDe(ruta, { eventos, competidores }) {
     if (PAGINAS[ruta]) return PAGINAS[ruta];
     if (ruta === '/admin') return { titulo: 'Panel', privada: true };
+    if (ruta === '/checkin') return { titulo: 'Check-in', privada: true };
     const [, seccion, slug, ...resto] = ruta.split('/');
     if (resto.length) return null;
     if (seccion === 'eventos' && slug) {
