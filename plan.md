@@ -197,7 +197,7 @@ Se guardan datos personales (DNI, teléfono, asistencias, ubicación al momento 
 - [ ] Publicar una **política de privacidad** en la web (qué se guarda, para qué, quién es responsable, cómo pedir la baja).
 - [ ] Aviso y aceptación al activar la cuenta.
 - [ ] Guardar solo si la ubicación estaba dentro del radio (`ubicacionVerificada`), no las coordenadas.
-- [ ] Si hay socios menores, definir el consentimiento del adulto responsable.
+- [x] ~~Si hay socios menores, definir el consentimiento del adulto responsable.~~ No aplica: las clases son solo para mayores de 16 años.
 
 ## 8. Preguntas abiertas
 
@@ -205,5 +205,5 @@ Se guardan datos personales (DNI, teléfono, asistencias, ubicación al momento 
 2. ¿Las contraseñas de los socios las maneja BiFrost? (recomendado)
 3. ¿Qué reglas aplica hoy Mis Actividades al check-in? ¿Bloquea con cuota vencida? ¿Cuenta las clases del plan? ¿Hay tolerancia de días después del vencimiento?
 4. ¿Cómo identifica BiFrost al negocio en llamadas entre servicios (token por negocio o `X-Business-Id`)?
-5. ¿Qué sistema de graduación usa cada disciplina? ¿Hay socios menores?
+5. ¿Qué sistema de graduación usa cada disciplina? (Socios menores: no hay, las clases son para mayores de 16 años.)
 6. ¿Los interesados de la web se mandan a BiFrost como prospectos?

@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project
 
-Marketing site for Club Center Fight Academy (martial arts gym in CABA, Argentina). React 19 + Vite SPA plus a Cloudflare Worker with D1, deployed as the Worker `clubcenter-web` (`clubcenter.kreta.com.ar`). Everything must stay on Cloudflare's free tier (no Access, no R2: both require a credit card). All UI copy, identifiers, comments and commit messages are in Spanish (rioplatense: "inscribite", "reservá") — keep it that way.
+Marketing site for Club Center Fight Academy (martial arts gym in CABA, Argentina). React 19 + Vite SPA plus a Cloudflare Worker with D1, deployed as the Worker `clubcenter-web` (`clubcenter.kreta.com.ar`). Everything must stay on Cloudflare's free tier (no Access, no R2: both require a credit card). All UI copy, identifiers, comments and commit messages are in Spanish (rioplatense: "inscribite", "reservá") — keep it that way. All classes are for people over 16: copy must never say "todas las edades" or target kids (each discipline description in `src/data/disciplinas.js` ends with "Para mayores de 16 años.").
 
 The previous vanilla HTML/CSS/JS site lives only in the gitignored `legacy/` folder. `TODO.md` is the up-to-date feature status and roadmap; `plan.md` is the plan for member login / self check-in, integrated with BiFrost (the club's own POS/CRM, replacing "Mis Actividades"), which is the source of truth for members, fees and attendance.
 

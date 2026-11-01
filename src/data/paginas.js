@@ -7,15 +7,15 @@ export const TITULO_INICIO = `${MARCA} - Academia Profesional de Artes Marciales
 export const PAGINAS = {
     '/': {
         titulo: null,
-        descripcion: 'Jiu-Jitsu, Muay Thai, Boxeo y MMA en Solis 1213, CABA. Clases para todos los niveles y primera clase de prueba sin cargo.',
+        descripcion: 'Jiu-Jitsu, Muay Thai, Boxeo y MMA en Solis 1213, CABA. Clases para mayores de 16 años, de todos los niveles, y primera clase de prueba sin cargo.',
     },
     '/disciplinas': {
         titulo: 'Disciplinas',
-        descripcion: 'Jiu-Jitsu, Muay Thai, Boxeo, MMA, Grappling y Sparring en Club Center Fight Academy, CABA. Días y horarios de cada disciplina.',
+        descripcion: 'Jiu-Jitsu, Muay Thai, Boxeo, MMA, Grappling y Sparring en Club Center Fight Academy, CABA. Días y horarios de cada disciplina, para mayores de 16 años.',
     },
     '/horarios': {
         titulo: 'Horarios',
-        descripcion: 'Grilla de horarios de Club Center Fight Academy: Muay Thai, Boxeo, Jiu-Jitsu, MMA, Grappling y Sparring. Reservá tu clase de prueba gratis.',
+        descripcion: 'Grilla de horarios de Club Center Fight Academy: Muay Thai, Boxeo, Jiu-Jitsu, MMA, Grappling y Sparring, para mayores de 16 años. Reservá tu clase de prueba gratis.',
     },
     '/precios': {
         titulo: 'Precios y planes',
@@ -35,7 +35,7 @@ export const PAGINAS = {
     },
     '/inscripcion': {
         titulo: 'Inscripción',
-        descripcion: 'Inscribite en Club Center Fight Academy. Completá el formulario y te contactamos por WhatsApp.',
+        descripcion: 'Inscribite en Club Center Fight Academy (mayores de 16 años). Completá el formulario y te contactamos por WhatsApp.',
     },
     '/privacidad': {
         titulo: 'Política de privacidad',
