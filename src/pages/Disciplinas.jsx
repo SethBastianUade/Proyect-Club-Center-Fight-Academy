@@ -13,7 +13,7 @@ export default function Disciplinas() {
     const minimo = desde(planes);
     return (
         <>
-            <Hero badge="Lo que entrenamos" titulo="Nuestras" resaltado="disciplinas" subtitulo="Todas las clases son para todos los niveles" />
+            <Hero badge="Lo que entrenamos" titulo="Nuestras" resaltado="disciplinas" subtitulo="Clases para mayores de 16 años, de todos los niveles" />
             <section className="disciplines-section">
                 <div className="fichas">
                     {FICHAS.map((id) => {

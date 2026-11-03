@@ -25,16 +25,13 @@ export const DISCIPLINAS = {
         corta: 'Lucha cuerpo a cuerpo sin golpes: derribos, control y sumisiones. Para mayores de 16 años.',
         larga: 'Lucha cuerpo a cuerpo sin golpes: derribos, control y sumisiones. El complemento ideal para el Jiu-Jitsu y el MMA. Para mayores de 16 años.',
     },
-    // sinReserva: no se reserva clase de prueba, se viene directo
-    sparring: {
-        nombre: 'Sparring', color: '#F08A12', sinReserva: true,
-        corta: 'Los sábados, combates controlados para poner en práctica lo entrenado en la semana. Para mayores de 16 años.',
-        larga: 'Los sábados, combates controlados para poner en práctica lo entrenado en la semana. No hace falta reservar: vení directo. Para mayores de 16 años.',
-    },
+    // El sparring no es una disciplina: es la práctica de los sábados. Está acá solo para la grilla de horarios
+    // (color y "Sin reserva": no se reserva clase de prueba, se viene directo)
+    sparring: { nombre: 'Sparring', color: '#F08A12', sinReserva: true },
 };
 
 // En el inicio
 export const PRINCIPALES = ['bjj', 'muaythai', 'boxeo', 'mma'];
-// En /disciplinas y en el formulario de inscripción (el sparring no se elige: es parte del entrenamiento)
-export const FICHAS = [...PRINCIPALES, 'grappling', 'sparring'];
-export const INSCRIBIBLES = FICHAS.filter((id) => !DISCIPLINAS[id].sinReserva);
+// En /disciplinas y en el formulario de inscripción
+export const FICHAS = [...PRINCIPALES, 'grappling'];
+export const INSCRIBIBLES = FICHAS;

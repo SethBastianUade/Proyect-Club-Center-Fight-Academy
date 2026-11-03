@@ -15,7 +15,7 @@ export default function Inscripcion() {
         const f = Object.fromEntries(new FormData(e.currentTarget));
         const plan = planes.find((p) => p.id === f.plan)?.nombre;
         const texto = [
-            'Hola! Quiero inscribirme en Club Center Fight Academy.', '',
+            '¡Hola! Quiero inscribirme en Club Center Fight Academy.', '',
             `Nombre: ${f.nombre}`, `Teléfono: ${f.telefono}`, ...(f.email ? [`Email: ${f.email}`] : []),
             `Disciplina: ${DISCIPLINAS[f.disciplina].nombre}`, `Plan: ${plan ?? 'todavía no sé, quiero que me asesoren'}`, '',
             '¿Me pasan info para comenzar?',

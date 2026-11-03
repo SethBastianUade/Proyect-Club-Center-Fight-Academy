@@ -3,7 +3,7 @@ export const OPINIONES = [
     { autor: 'Maximo Leguizamon', texto: 'El mejor lugar para entrenar Muay Thai.' },
     { autor: 'Juan Petrus', texto: 'Excelente calidad y atención, totalmente recomendable.' },
     { autor: 'Alan Forte', texto: 'Lindo lugar para entrenar muay thai, excelente el profesor.' },
-    { autor: 'Juan Regule', texto: 'Genial para pasar con amigos y hacer actividad fisica.' },
+    { autor: 'Juan Regule', texto: 'Genial para pasar con amigos y hacer actividad física.' },
     { autor: 'Hernan Galder', texto: 'Excelente lugar para aprender.' },
     { autor: 'Glaucus Sprint', texto: 'Muy buen gimnasio!' },
     { autor: 'Paul Villegas', texto: 'Excelente dojo' },

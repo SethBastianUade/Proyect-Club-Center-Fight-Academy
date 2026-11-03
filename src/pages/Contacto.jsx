@@ -9,7 +9,7 @@ export default function Contacto() {
     const enviar = (e) => {
         e.preventDefault();
         const f = e.currentTarget;
-        const texto = `Hola! Mi nombre es ${f.nombre.value.trim()}. Quiero consultar: ${f.mensaje.value.trim()}`;
+        const texto = `¡Hola! Mi nombre es ${f.nombre.value.trim()}. Quiero consultar: ${f.mensaje.value.trim()}`;
         window.location.href = wa(texto);
     };
 

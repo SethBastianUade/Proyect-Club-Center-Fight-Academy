@@ -13,7 +13,7 @@ import { useContenido } from '../contenido.jsx';
 
 const PRUEBA = wa('Hola, quiero hacer una clase de prueba');
 
-const STATS = [['200+', 'Alumnos activos'], ['4', 'Disciplinas'], ['2020', 'Entrenando desde'], ['50+', 'Torneos disputados']];
+const STATS = [['200+', 'Alumnos activos'], ['5', 'Disciplinas'], ['2020', 'Entrenando desde'], ['50+', 'Torneos disputados']];
 
 export default function Inicio() {
     usePagina('/');

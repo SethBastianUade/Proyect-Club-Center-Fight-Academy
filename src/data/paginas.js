@@ -11,11 +11,11 @@ export const PAGINAS = {
     },
     '/disciplinas': {
         titulo: 'Disciplinas',
-        descripcion: 'Jiu-Jitsu, Muay Thai, Boxeo, MMA, Grappling y Sparring en Club Center Fight Academy, CABA. Días y horarios de cada disciplina, para mayores de 16 años.',
+        descripcion: 'Jiu-Jitsu, Muay Thai, Boxeo, MMA y Grappling en Club Center Fight Academy, CABA. Días y horarios de cada disciplina, para mayores de 16 años.',
     },
     '/horarios': {
         titulo: 'Horarios',
-        descripcion: 'Grilla de horarios de Club Center Fight Academy: Muay Thai, Boxeo, Jiu-Jitsu, MMA, Grappling y Sparring, para mayores de 16 años. Reservá tu clase de prueba gratis.',
+        descripcion: 'Grilla de horarios de Club Center Fight Academy: Muay Thai, Boxeo, Jiu-Jitsu, MMA, Grappling y sparring los sábados, para mayores de 16 años. Reservá tu clase de prueba gratis.',
     },
     '/precios': {
         titulo: 'Precios y planes',
